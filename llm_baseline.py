@@ -4,8 +4,8 @@ kronk exposes an OpenAI-compatible API, so this works with any such server.
 Run it once per candidate model, then open the results file and score each answer 1-5.
 
 Usage:
-    python llm_baseline.py --base-url http://localhost:8080/v1
-    python llm_baseline.py --base-url http://localhost:8080/v1 --model qwen3-8b
+    python llm_baseline.py --base-url http://localhost:11435/v1
+    python llm_baseline.py --base-url http://localhost:11435/v1 --model google/gemma-4-12b-it-qat-q4_0
 (or set LLM_BASE_URL / LLM_MODEL environment variables)
 """
 import argparse
@@ -44,15 +44,14 @@ def pick_model(base_url: str) -> str:
     r = requests.get(f"{base_url}/models", timeout=30)
     r.raise_for_status()
     models = [m["id"] for m in r.json().get("data", [])]
-    if not models:
-        raise SystemExit("Server returned no models; pass --model explicitly.")
-    print("Models on server:", models)
-    return models[0]
+    # kronk also serves models from other projects, so never guess - make the user choose.
+    listing = "\n  ".join(models) or "(none)"
+    raise SystemExit(f"Please choose a model with --model. Models on the server:\n  {listing}")
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:8080/v1"))
+    p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:11435/v1"))
     p.add_argument("--model", default=os.getenv("LLM_MODEL"))
     p.add_argument("--prompts", default="prompts_uz.txt")
     p.add_argument("--system", default=DEFAULT_SYSTEM)

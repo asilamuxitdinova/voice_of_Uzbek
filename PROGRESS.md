@@ -13,7 +13,10 @@ Raw outputs stay in `results/`. This file is the summary.
 | Driver / CUDA | 595.91.07 / 13.2 |
 | Python (server venv) | 3.14 |
 | PyTorch | cu128 wheels |
-| Inference server | kronk (built on yzma / llama.cpp), OpenAI-compatible API |
+| Inference server | kronk (built on yzma / llama.cpp), runs in `tmux` session `kronk` |
+| kronk API | **`http://localhost:11435/v1`** (OpenAI-compatible; the default in the scripts). kronk also listens on 9000 and 11445 (not the API). All bound to 127.0.0.1 |
+| kronk model IDs | `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, Qwen2.5-7B (exact ID: check `/v1/models`) |
+| Models registered in kronk | via hard links (`ln`) from `~/models` into `~/.kronk/models/...`, so no extra disk space is used |
 | Repo on server | `~/voice_of_Uzbek` |
 
 **GGUF models already on the server (`~/models`):**
@@ -43,14 +46,30 @@ Raw outputs stay in `results/`. This file is the summary.
 
 | Date | Model | Samples | WER | CER | Speed | Notes |
 |---|---|---|---|---|---|---|
-| 2026-11-26 | openai/whisper-large-v3-turbo | 100 (100 unique sentences) | **147.3%** | **103.2%** | 0.92 s/sample | Unusable. WER >100% means hallucination/repetition loops or the wrong script/language (Cyrillic/Russian). Root cause still to be confirmed from the HYP lines |
+| 2026-11-26 | openai/whisper-large-v3-turbo | 100 (100 unique sentences) | **147.3%** | **103.2%** | 0.92 s/sample | Raw score, unusable. See the analysis below |
+| 2026-11-26 | same output, converted Cyrillic→Latin | 100 | 132.4% | 48.7% | – | Script fixed. Average still inflated by a few hallucination loops |
+| 2026-11-26 | same, **median per sentence** | 100 | **89%** | **27%** | – | The "typical sentence" picture |
 
-**Conclusion so far:** stock Whisper cannot do Uzbek, so **Phase 2 (ASR fine-tuning) is mandatory.**
+**What the HYP lines show (analysis of `results/asr_openai_whisper-large-v3-turbo.txt`):**
+
+| Failure type | Count / 100 | Example |
+|---|---|---|
+| Writes in **Kazakh-style Cyrillic** (ұ, қ, ғ, ң, і, ә) instead of Uzbek Latin | 86 | REF `qayta qurish sa'y harakatlarini` → HYP `кайта құруш сайхаракатларын` |
+| **Hallucination loops / wrong alphabet** (e.g. Ethiopic `ጡ ጡ ጡ …`) | ~5 (14 with non-Latin/Cyrillic text) | single sentences with WER 450%, 1564%, 2018% |
+| Latin, but wrong spelling and word boundaries | the rest | REF `biroq hali ham qushlar` → HYP `uraq hálxam kusar` |
+
+**Interpretation:**
+- Whisper **hears the sounds fairly well**: the median CER after script conversion is 27%, and the hypothesis word count matches the reference (median ratio 1.0).
+- But it **doesn't know Uzbek spelling**. It writes Uzbek the way Kazakh is written, so almost every word gets one or two letters wrong, and the WER stays around 90%.
+- 5% of the clips trigger runaway hallucination loops that inflate the average.
+- This is good news for Phase 2. Fine-tuning mainly has to teach **spelling and script**, not hearing, and that usually improves quickly.
+
+**Conclusion:** stock Whisper cannot do Uzbek, so **Phase 2 (ASR fine-tuning) is mandatory**, and the outlook is promising.
 
 **Next:**
-- [ ] Inspect the REF/HYP lines to find the failure type (repetition vs. Cyrillic/Russian)
-- [ ] Re-score with Cyrillic→Latin conversion and anti-repetition settings
-- [ ] Test alternatives: Meta MMS (`uzb-script_latin` adapter), community Uzbek Whisper fine-tunes
+- [x] Inspect the REF/HYP lines to find the failure type → Kazakh-style Cyrillic + ~5% loops
+- [x] Re-score with Cyrillic→Latin conversion → median CER 27%
+- [ ] (optional) Test alternatives as a Phase 2 starting point: Meta MMS (`uzb-script_latin` adapter), community Uzbek Whisper fine-tunes
 
 ### 1.2 LLM: Uzbek prompts via kronk
 
@@ -85,7 +104,8 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Pipeline = ASR → LLM (kronk) → TTS | Each part can be fine-tuned separately on the L4 |
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
-| 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147% |
+| 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-26 | Server pushes results via an SSH deploy key (this repo only) | GitHub rejects passwords; a deploy key limits access if the cloud VM is compromised |
 
 ---
 

@@ -46,12 +46,12 @@ The first run downloads Whisper (~1.6 GB) and the FLEURS Uzbek test audio (~520 
 Optionally compare a smaller model: `python asr_baseline.py --model openai/whisper-small`
 
 ### 1.2 LLM (kronk)
-1. Download 2–3 candidate GGUF models (Q4_K_M) and load one in kronk, for example a Qwen3 8B instruct, a Gemma 3 12B instruct, and an Uzbek fine-tune if one exists (search Hugging Face for `behbudiy`).
-2. Run the script with **your kronk address** (replace the port):
+1. Make sure kronk is running (`tmux attach -t kronk`). Candidates are already on the server: `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, and Qwen2.5-7B-Instruct.
+2. Run the script once per model:
    ```bash
-   python llm_baseline.py --base-url http://localhost:8080/v1
+   python llm_baseline.py --model google/gemma-4-12b-it-qat-q4_0
    ```
-   If kronk serves several models, add `--model <name>`.
+   kronk listens on port 11435 (the default). `--model` is required, and running without it prints the model list.
 3. Open `results/llm_<model>.md` and fill in a score of 1–5 for each answer.
 4. Repeat for each candidate model.
 
@@ -69,7 +69,7 @@ python tts_baseline.py --text "Salom, bugun qanday yordam kerak?"
 ### 1.4 End-to-end
 Record a short Uzbek question (a phone voice memo is fine), copy it to the server, then:
 ```bash
-python voice_pipeline.py --audio question.wav --base-url http://localhost:8080/v1
+python voice_pipeline.py --audio question.wav --model <best-model>
 ```
 Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTAL`).
 

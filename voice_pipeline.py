@@ -2,7 +2,7 @@
 
 Record a short Uzbek question as a .wav (phone recorder is fine), copy it to the server, then:
 
-    python voice_pipeline.py --audio question.wav --base-url http://localhost:8080/v1
+    python voice_pipeline.py --audio question.wav --base-url http://localhost:11435/v1
 
 Prints the time each stage takes. Target for a natural conversation: under ~1.5 s total.
 """
@@ -24,7 +24,7 @@ def main():
     p.add_argument("--audio", required=True, help="input .wav/.mp3/.ogg with an Uzbek question")
     p.add_argument("--out", default="results/answer.wav")
     p.add_argument("--asr-model", default="openai/whisper-large-v3-turbo")
-    p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:8080/v1"))
+    p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:11435/v1"))
     p.add_argument("--model", default=os.getenv("LLM_MODEL"))
     args = p.parse_args()
 
