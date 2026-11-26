@@ -1,0 +1,22 @@
+# Uzbek test prompts for llm_baseline.py - one per line, lines starting with # are skipped.
+# Replace / add prompts that look like YOUR real use case.
+Salom! O'zingizni qisqacha tanishtiring.
+Toshkentdan Samarqandga qanday borsa bo'ladi?
+Ertalab nonushtaga nima tayyorlash mumkin? Uchta variant ayting.
+Plov qanday tayyorlanadi? Qisqa qilib tushuntiring.
+Bankdan kredit olish uchun qanday hujjatlar kerak bo'ladi?
+Mening internetim ishlamayapti, nima qilsam bo'ladi?
+Ertaga soat uchda shifokor qabuliga yozilmoqchiman.
+Buyurtmam qachon yetib keladi? Buyurtma raqami 12345.
+Kecha telefon sotib oldim, lekin u yoqilmayapti. Pulimni qaytarib olsam bo'ladimi?
+Kartamdan pul yechildi, lekin to'lov o'tmadi. Nima qilay?
+Taksi chaqirmoqchiman, Chilonzordan Yunusobodga.
+240 000 so'mlik mahsulot 15 foiz chegirma bilan qancha turadi?
+Navro'z bayrami haqida qisqacha gapirib bering.
+Bolalar uchun uch-to'rt gapdan iborat qiziqarli ertak aytib bering.
+Ushbu jumlani ingliz tiliga tarjima qiling: Bugun havo juda issiq.
+Menga bir haftalik sport mashg'ulotlari rejasini tuzib bering.
+Salom, kartamdagi balansni bilmoqchi edim, srochno kerak.
+Ассалому алайкум, менга ёрдам бера оласизми?
+Operator bilan gaplashmoqchiman.
+Rahmat, yordamingiz uchun katta rahmat! Xayr.

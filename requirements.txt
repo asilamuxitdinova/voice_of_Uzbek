@@ -1,0 +1,11 @@
+# torch / torchaudio are installed by setup.sh from the CUDA index
+transformers
+datasets<4        # FLEURS still uses a loading script; datasets 4.x dropped those
+accelerate
+peft
+evaluate
+jiwer
+soundfile
+librosa
+huggingface_hub
+requests

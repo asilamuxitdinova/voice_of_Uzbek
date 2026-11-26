@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+
+# big files - never commit models or datasets
+*.gguf
+*.safetensors
+*.bin
+models/
+data/
+checkpoints/
+
+# generated audio (text results in results/ can be committed to share them)
+*.wav
+*.mp3
+*.ogg
