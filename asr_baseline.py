@@ -27,11 +27,49 @@ def norm(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def load_fleurs(split: str, n: int, lang: str = "uz_uz"):
+    """Download FLEURS files directly from the Hub (no `datasets` library needed).
+
+    Returns a list of (wav_path, transcription). Rows in the TSV are grouped by
+    sentence (several speakers read the same one), so we take every k-th row to
+    get n samples spread over as many different sentences as possible.
+    """
+    import csv
+    import tarfile
+    from huggingface_hub import hf_hub_download
+
+    repo = dict(repo_id="google/fleurs", repo_type="dataset")
+    tsv = hf_hub_download(filename=f"data/{lang}/{split}.tsv", **repo)
+    with open(tsv, encoding="utf-8") as f:
+        rows = [r for r in csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE) if len(r) >= 4]
+    step = max(1, len(rows) // n)
+    rows = rows[::step][:n]
+
+    out_dir = os.path.join("data", f"fleurs_{lang}_{split}")
+    os.makedirs(out_dir, exist_ok=True)
+    wanted = {r[1] for r in rows}
+    missing = {w for w in wanted if not os.path.exists(os.path.join(out_dir, w))}
+    if missing:
+        tar_path = hf_hub_download(filename=f"data/{lang}/audio/{split}.tar.gz", **repo)
+        with tarfile.open(tar_path, "r:gz") as tar:
+            for m in tar:
+                name = os.path.basename(m.name)
+                if m.isfile() and name in missing:
+                    with tar.extractfile(m) as src, open(os.path.join(out_dir, name), "wb") as dst:
+                        dst.write(src.read())
+
+    samples = [(os.path.join(out_dir, r[1]), r[3]) for r in rows]
+    samples = [s for s in samples if os.path.exists(s[0])]
+    if not samples:
+        raise SystemExit("No FLEURS audio found after download - check the error above.")
+    return samples
+
+
 def load_asr(model_name: str):
     return pipeline(
         "automatic-speech-recognition",
         model=model_name,
-        torch_dtype=torch.float16,
+        dtype=torch.float16,
         device="cuda:0",
     )
 
@@ -60,17 +98,16 @@ def main():
         print("TEXT:", transcribe(asr, array, sr))
         return
 
-    from datasets import load_dataset
-    print("Loading FLEURS uz_uz test split (first run downloads it) ...")
-    ds = load_dataset("google/fleurs", "uz_uz", split="test", trust_remote_code=True)
-    ds = ds.select(range(min(args.n, len(ds))))
+    print("Loading FLEURS uz_uz test split (first run downloads ~520 MB) ...")
+    ds = load_fleurs("test", args.n)
 
+    import librosa
     refs, hyps = [], []
     t0 = time.time()
-    for i, ex in enumerate(ds, 1):
-        a = ex["audio"]
-        hyps.append(norm(transcribe(asr, a["array"], a["sampling_rate"])))
-        refs.append(norm(ex["transcription"]))
+    for i, (wav_path, ref) in enumerate(ds, 1):
+        array, sr = librosa.load(wav_path, sr=16000, mono=True)
+        hyps.append(norm(transcribe(asr, array, sr)))
+        refs.append(norm(ref))
         if i % 20 == 0:
             print(f"  {i}/{len(ds)} done")
     elapsed = time.time() - t0

@@ -42,7 +42,7 @@ For `hf auth login`, create a token at https://huggingface.co/settings/tokens (r
 ```bash
 python asr_baseline.py
 ```
-The first run downloads Whisper (~1.6 GB) and FLEURS Uzbek. The result is a **WER %** (lower is better) and is saved to `results/asr_*.txt`.
+The first run downloads Whisper (~1.6 GB) and the FLEURS Uzbek test audio (~520 MB). The result is a **WER %** (lower is better) and is saved to `results/asr_*.txt`.
 Optionally compare a smaller model: `python asr_baseline.py --model openai/whisper-small`
 
 ### 1.2 LLM (kronk)
@@ -90,6 +90,6 @@ Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTA
 
 ## Troubleshooting
 - **`CUDA is NOT available`**: run `nvidia-smi`. If it works, reinstall torch: `pip install --force-reinstall torch torchaudio --index-url https://download.pytorch.org/whl/cu128`
-- **FLEURS fails to load**: make sure `datasets<4` is installed (`pip show datasets`)
+- **FLEURS fails to download**: check `hf auth login` and internet access. Files are cached in `~/.cache/huggingface`, and the extracted audio goes to `data/`
 - **`Connection refused` in llm_baseline.py**: kronk isn't running, or the port in `--base-url` is wrong
 - **Out of GPU memory**: stop other processes (`nvidia-smi`), or use a smaller LLM quantization
