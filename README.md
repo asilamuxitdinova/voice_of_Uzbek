@@ -15,7 +15,7 @@ This repo currently covers **Phase 0 (setup)** and **Phase 1 (baseline)**. The b
 | `translit.py` | Uzbek Latin → Cyrillic converter (used by TTS) |
 | `prompts_uz.txt` | 20 Uzbek test prompts. Edit them to match your real use case |
 
-All outputs go to `results/`.
+All outputs go to `results/`. **All numbers, findings and decisions are summarized in [PROGRESS.md](PROGRESS.md).**
 
 ---
 
