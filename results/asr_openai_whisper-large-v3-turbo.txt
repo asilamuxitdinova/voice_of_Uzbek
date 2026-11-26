@@ -1,0 +1,306 @@
+model: openai/whisper-large-v3-turbo
+samples: 100
+WER: 147.3%
+CER: 103.2%
+avg seconds per sample: 0.92
+
+REF: qayta qurish sa'y harakatlarini erkin tanqid qilish vashington ichidagi shaxslarga qayta qurish bitimlarini taqdim qilishga qaratilgan
+HYP: кайта құруш сайхаракатларын еркен таңқыт қылыш вашингтон ішедагі шахсыларге қайта құруш бітімларын тақтым қылышке қара тілген
+
+REF: faqatgina jinsiy hujayralardagi mutatsiyalar bolalarga o'tishi mumkin boshqa har qanday yerdagi mutatsiyalar hujayraning nobud bo'lishi yoki saratonga sabab bo'lishi mumkin
+HYP: факаткина джинси хужайралардаги мутациялар болалар култуш мүмкан бошқа харқандай ердаги мутациялар хужайраны нобут бұлшу я кесаратон я сапап бұлш мүмкан
+
+REF: shuningdek u suvga tushgan har qanday narsaga hamla qilgan hattoki t rex kabi bahaybat dinozavrlar ham unga bas kela olmagan
+HYP: ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ ጡ
+
+REF: o'simliklar tabiiy muhitda eng yaxshi ko'rinishga ega bo'ladi shuning uchun bittagina namuna olish istagidan tiyiling
+HYP: усімликлар таби мұғдда еңяқшы қорнышкин эгэ болады үшінің жәнбиттәгіна мұны ұлшы үстагидаң тейлэ
+
+REF: internetdan urush muhiti kursi deb izlash hoynahoy mahalliy kompaniya manzilini chiqarib beradi
+HYP: интернеттан ұрыш мұхты күрсы деп излаж хойнағол махали компания мазалыны шығарып берады
+
+REF: u dastlab greyt yarmutdagi jeyms paget shifoxonasiga yotqizildi
+HYP: удаслап грейд ярмуттаги джемис багет шваханасыге аят қызылды
+
+REF: biroq hali ham qushlar bilan bog'liq dinozavrlarga o'xshash ko'plab narsalar bor
+HYP: uraq hálxam kusar bulan balaqdini zavular yoxshashqo bulan arsalar bor
+
+REF: og'ir soliqlarga ega mamlakatlarga boruvchi sayohatchilar ba'zi hollarda ayniqsa spirtli ichimliklar va tamaki mahsulotlari kabilardan anchagina pul tejab qolishlari mumkin
+HYP: ауғыр саулықлар икен мангеларгар болғушы саяхатшылар баса хауларды айнықсы спиртлы ишимникалар ватамаки мақсурлары габаларды айншыгин пул диджаб қалушылары мүмкін
+
+REF: u januniy afrikadagi asosiy diqqatga sazovor manzillardan biridir hamda janubiy afrika milliy parklarining sanparks flagmani sanaladi
+HYP: у жәнефи африкадаги асосида қатке сазаулға мансүрлерден бір дарханды жәнефи африка миллипаркалардың сам спаркс флагманы саналады
+
+REF: mosazavrlar o'z davrining eng dahshatli yirtqichi bo'lgan shu sababli u boshqa mosazavrlardan boshqa hech narsadan qo'rqmagan
+HYP: моззавырлар ұлзавыны еңдақшадлы ертқичі болген шулсабабли ұбашқа моззавырлардан башқа хеч нәрсады қорықмайген
+
+REF: inshootlarga chizish yoki qirib grafiti tushirish orqali joyning ko'rkini buzmang
+HYP: иншалотләргі чызыше ке қырып граффити түшруш арқара джойнинг қоркені бузынай
+
+REF: sherlar to'dalar deb nomlanuvchi katta guruhlarda yashaydigan eng ijtimoiy mushuklardir
+HYP: сиррлар додаларды маумлану чекаттай курухларды ящайдеган ең истимойумы шкаладыр
+
+REF: bu bizga poyezd avtomashina va ko'plab boshqa transport vositalarini keltirdi
+HYP: бұлбізгі пойыз автомашинала көпіла башқа транспорт уасейталарына келтірді
+
+REF: chang'i uchish marshrutini piyoda yurish marshruti sifatida tasavvur qiling
+HYP: чанғы үшуш маршруудын биодыйруш маршрууды сфатыдады савыр қалин
+
+REF: yunonistondagi bilim pasayishi bilan g'arb o'zining grek falsafiy va ilmiy negizlaridan uzilib qoldi
+HYP: yunnanстандығи білімпасай үшбаны ғаріп ұзының грек фолзофи ға үлми негізілердің ұзылып құлды
+
+REF: boshqa tomondan muzli va qorli sharoitlar ko'pchilik mamlakatlarda oddiy holatdir va yo'l harakati yil davomida deyarli uzluksiz davom etadi
+HYP: башқатамана музнева қарли шарайдар көпши маликаларды ауттай халаттыр лаюул харикат елдауым диялы бүзниксыздауым етады
+
+REF: plitvits ko'llari milliy bog'i qalin o'rmonlarga ega unda asosan qora qayin qoraqarag'ay archa daraxtlari mavjud va unda alp va o'rta yer dengizi hududi o'simliklari bor
+HYP: плитвиц куллары милибауғы калын орманларгы игя ұнда асаусан қорақайын қорақарағай арча дарақтылар маужуд ва ұнда альпва ортайыр денгезі құдуды усімликлары бор
+
+REF: kecha martelli to'qqiz nafar a'zodan tarkib topgan yangi muvaqqat saylov kengashi cep oldida qasamyod keltirdi
+HYP: кеча мартелли тоқыз нафар азодандар китаткен янги муақыт сайлау кеңгеші сеп алдыда хасамиот келтірді
+
+REF: misr o'liklar vodiysidagi giza platosi yoki giza qabristoni bir qancha piramidalar ularning eng yirigi buyuk piramida bir nechta kichik qabrlar bir qancha ibodatxonalar va buyuk sfinksni o'z ichiga oladi
+HYP: мысыр урик тарбау тезе гиза бола тазуя кекеза қабырыстауның бірқанча пирамидада уланын ең ереге би пирамидада бұданште кече қабырда бірқанча ебода тұханалар ба би ксфинкс нозыжеге олады
+
+REF: mau harakati tomonidan tashkillashtirilgan mustaqillik uchun kurash vaqtida shahardagi tinch namoyish oliy yo'lboshchi tupua tamasese lealofi iii ning o'ldirilishiga olib keldi
+HYP: мау харакәті томаныдан ташкелластырылген мұстақеллик үшін күрэш вақытыдан шахардаги тінч намогиш оли елбошші тупо тамасесе леалови бучінең өлдірлішіге алып келді
+
+REF: ayrim hududlarda suv qaynashi uchun bir daqiqa yetarli bo'ladi boshqalarida bir necha daqiqa kerak bo'ladi
+HYP: айрым худутларда су қайнашу чумбыр дقيға етарды болады бошқаларда бір нечі дقيға керек болады
+
+REF: faa da'vo qilishicha nextgen samolyotlarga qisqa yo'nalishda uchish va har yili millionlab gallon yonilg'ini tejash hamda uglerod chiqindilarini kamaytirish imkonini beruvchi tizimdir
+HYP: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+
+REF: ayrim yo'nalishlarda yirikroq kompaniyalar o'z samolyotlariga ega ammo boshqa yo'nalishlar va kichik firmalar uchun muammo mavjud edi
+HYP: айрым юнайлышаларды ерекулак компаниялар ол самалютлерге ама башқу юнайлышалар байкажек фирмалар үшу муамма маучу деді
+
+REF: goma yetarli darajada xavfsiz bo'lsada gomadan tashqariga har qanday tashriflar shimoliy kivu viloyatida doimiy uchrab turuvchi mushtlashuvlar holatini tushunish uchun o'rganib chiqilishi kerak
+HYP: гома етарли даржеда хапсыз болсады гомадан ташқарге харханда тәшрифлә шымали киеву олайады дайум жарап тұру чумыштаршулар холадан чуныш чум үрганып шығылар шығар ерек
+
+REF: arxipelag va ko'llarda sizga yaxta shart bo'lmaydi
+HYP: архипелаг вакулларда сізгі яхта шарт болмайды
+
+REF: spektrning boshqa uchida bir inson jamoa shu paytgacha qilgan barcha narsalarni o'zgartirish va uni o'zlarinikini qilish kerak deb hisoblovchi tanib bo'lmaydigan shaxsga aylanadi
+HYP: спектрный бошқа учиди бир инсон джамоо шпайткеча қаленбарча нарсаланын өзгартрышвауны өздарынн киқлыш керек дабықсаблаучы таны болмайдеген шахски айланады
+
+REF: qobiqning qalinligi oyning yerdan ko'rinadigan tomonida 70 km orqa tomonida esa 100 km
+HYP: qобықнин қалінлігі ойнин ердан куранадиган томауны да етміш километр орқы томауны да есі юз километр
+
+REF: hodisa yuz berganidan so'ng gibson shifoxonaga yetkazilgan biroq ko'p o'tmay olamdan o'tgan
+HYP: хадысә үйзі бергеннан зуңгипсон шва ханаги еткі әзілгеннан бұрақ көп отмай аламдан өткен
+
+REF: sun'iy yo'ldosh koinotga raketa yordamida yuborildi olimlar fazoda teleskoplardan foydalanadilar chunki yer atmosferasi ayrim yorug'lik va ko'rishlarimizga putur yetkazadi
+HYP: суни йолдаш кайнатгя ракита ордамды юборылды өлімлар фазода телескоплардан файдаланадылар чүнкі ер атмосферасы айрым яруғлик ва көрушыларымызге пүтур етказады
+
+REF: oy yuzasi toshlar hamda changdan tashkil topgan oyning tashqi qatlami qobiq deyiladi
+HYP: ау юзасу тауштарханы чэнгдан ташкел тапкен ойдың ташқы қатламы қобық дейлади
+
+REF: giza shahridagi buyuk piramida bugun ham mavjud bo'lgan yetti mo'jizaning biridir
+HYP: гиза шахрыдаги бьют пирамида бүгін хан маучуд болген етті муciзалиң бірідыр
+
+REF: bolalar e'tiborsizlikdan tortib zo'ravonlik va hatto tovlamachilikka qadar turli sabablarga ko'ra homiylik parvarishiga topshiriladi
+HYP: боладар иті барсуліктан татып зоро байлик ба хатта таула мачилікке қадар тулгий сабавларгэ кура хамирик бара байрышігі тап шырылады
+
+REF: aqsh muhandislar korpusi 6 duymli yog'ingarchilik oldin zararlangan to'g'onlarni buzishi mumkin deya taxmin qildi
+HYP: ақш мұхэндиселар корпусы ұлты дүйімлі яуғингаршылык ұлдын зарарланген тоғалларының бүзуші мүмкін де тақмын қылды
+
+REF: gubernator idorasi jarohatlanganlarning o'n to'qqiz nafari politsiya xodimlari bo'lganini ma'lum qildi
+HYP: губернатор ыдарасы жарахатлангенлар не онтоқызнафары полиция қадымлары бөлгенлыгені малым қылды
+
+REF: ommaviy ravishda avtomobilga ega bo'lish yo'llardagi halokatlarning ko'payishiga ham olib keladi bu esa sog'liqni saqlash sohasida shikastlangan tanalarni tuzatish uchun yangi usullarning ixtiro qilinishiga yetaklaydi
+HYP: omaviravishda avtomobili eke bolish yullardegi xalauketlaniin koupayashke xam alip keladib bu esa salqlash saqlashashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkashkash
+
+REF: yuqori kengliklarga yoki tog' dovonlari bo'ylab mashina haydamoqchi bo'lgan har qanday kishi qor muz yoki muzlash haroratini hisobga olishi kerak
+HYP: yuqarı кеңниклерге яку тағдавалар буйля машина қайдамақшы болгана харқанды екші қор муыз яку музлар шығаруратына қысаткарлышы керек
+
+REF: barcha narsalar hisobga olingan holda agar ajdodlarimiz o'zlarining oqsil muammolarini bugungi kunda savanna shimpanzelariga o'xshash usulda hal qilgan bo'lsalar ajablanmasligimiz kerak
+HYP: баркша насилар қысап каулинген халда әгер айшоттарамыз ұзларының ұқсул муамаларына бүгінгі күнда завана шимпанзияларге оқша шусулда халқы бүген бұлзарар ғачаптанмасылдамыз керек
+
+REF: kecha ertalab turkiyaning gaziantep shahridagi politsiya shtab kvartirasi yaqinida mashinada bomba portlatilishi natijasida ikki politsiya xodimi halok bo'ldi va yigirmadan ortiq kishi jarohatlandi
+HYP: кичи иртара түркияның газдиян деп шайхардыгі полиция штаб квартирасы яқана машинады буумба порталдарушина дежасты ике полиция қодама хала куболдова егірмадан ортық кіші жара ухаталанды
+
+REF: hamkasb kurashchilar ham lunaga hurmat bajo keltirishdi
+HYP: ឡ
+
+REF: cho'l qumlarining xavfi sababli 1990 yili u xavf ostida bo'lgan butunjahon madaniy merosi obyektlari ro'yxatiga kiritildi
+HYP: чул құмларіни хаві сабабі ле бірми доқұзүз тұқсанын жиелі ұ хав осыда болген бұтынжа хон мадани ми роз абиктлары рухадігі кіртілді
+
+REF: uning hashamat markazi sifatidagi mashhurligi taxminan milodiy 400 yilda boshlangan va taxminan milodiy 1100 yilga qadar davom etgan
+HYP: унинха шамад марказа сфата дагимаш қорлигі тахминан мелодий тура үзеншелда башлаңганова тахминан мелодий бірмен бір үзеншелда қадар давам еткен
+
+REF: xizmatdan masofaviy va ovozli xabarlar kerak bo'lgan kemachilik kompaniyalari jumladan sayr qilish kemalarida foydalanishadi
+HYP: qızmatan masofa viva ovosdae xabalalaar keraak bologen kemachilik campanyalara jomadaan sayarqış kemachilik campanyalara taphidala nishada
+
+REF: bu kristallarning tuzilishi infraqizil spektroskopiya ftir orqali solishtirilganda ta'sirga uchragan hayvonlarning siydigidan topilgan kristallarniki bilan bir xil bo'ladi
+HYP: бұл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үйл үй
+
+REF: ai kuchli ilmiy fantastika mazmuniga ega bo'lsa da ai xulq atvor mashinada o'rganish va aqlli moslashish bilan shug'ullanadigan kompyuter fanlarining juda muhim sohasini tashkil qiladi
+HYP: ai күшлі ілми фантастика мазмуниген игә булсады ai хулқатвор машинады органиш ва ақыллы маусыласшыш білан шоғурланадыген компьютер фаналарының жүдамұхум сахасына тәшкіл қалады
+
+REF: piramida tovushi va chiroqlar shousi bolalar uchun hududdagi eng qiziqarli narsalardan biri
+HYP: пирамида товыши ва чрурақлар шоусы болалар үшун худуттаги ең қызықарлы нарсалардан бірі
+
+REF: blog yuritish hamkorlikka ilhomlantiruvchi va talabalarni an'anaviy o'qish kunidan tashqari bilimlarini kengaytirishga rag'batlantiradigan vositadir
+HYP: бұлы гүрітуш хамкорлыке ылхомландыруча ва талабаларына ананави уқыш күнідан ташқары білімларына кеңгетірішке рағбатландыра деген воз тадыр
+
+REF: issiq shokolad belgiya talablariga mos meva sharbatlari qimmat bo'lsa da a'lo
+HYP: иссық шоколад бельгия талапларига мос мива шарбатлары қыммат болса да ало
+
+REF: kalsiy hamda kaliy singari elementlar metall sanaladi albatta kumush hamda oltin singari metallar ham mavjud
+HYP: qalsi həmda qalsi singar elementlar metal sanalady albatta qumurs həmda altan singar metallar həm maujud
+
+REF: biz uylarimiz va kiyim kechaklarimizni o'simliklardan qilamiz biz iste'mol qiladigan oziq ovqatlarning aksariyati o'simliklardir o'simliklarsiz mavjudotlar omon qololmaydi
+HYP: біз үйларымыз ва киім кечекларымызны ұсімликлардан қыламыз біз істимал қаладгі ұза ауқатлардың ақсариаті ұсімликлардыр ұсімликларсыз мавжулеттар омон қол олмайды
+
+REF: makkaning shimolidagi tog'lardan birining ustida joylashgan mazkur g'or dunyoning qolgan qismidan butunlay ajratilgan
+HYP: маккани шмолыдаги тоғлардан бірінең үстіда жалашкен мазкур ұғыр дүнианин қолген қысымдан бүтінлай ажыратылген
+
+REF: 1963 yili to'g'on qurilganidan keyin butun daryo bo'ylab cho'kindilarni tarqatuvchi mavsumiy suv toshqinlar to'xtadi
+HYP: бірмиң тоқыз ес алтмыш үшінші елі тоған құрылганыдан кейін бүтін дария бойлап тюкінділардың тарқату үші мавсуми су ташқынлары тоқтады
+
+REF: yigirmanchi asrdagi tadqiqotlar genetik o'zgarishning ikki havzasi yashirin va ochiq ifodalangan havzalari mavjudligini ko'rsatdi
+HYP: игирманджи асырдаги татқи қотылар генетик өзгарышның икі хавзасы яшарын и аучық фотолаген хавзалары маучудлігіні көрсатты
+
+REF: bu oy dengizi ostida yupqaroq va tog'li yerlarda qalinroqdir
+HYP: бо айдиңгизасты ұйып қарақ ба дауылы ерлерді қараңырақтыр
+
+REF: mazkur kasallikni cho'chqalar tashiydi keyinchalik chivinlar orqali insonlarga o'tadi
+HYP: маскүр кәсәліктің чучқалар тәшиди кейнджай шевелар орқалы инсаларгі ұтады
+
+REF: shuni yodda tutingki garchi asosiy sahnadagi musiqa tugagan bo'lsa ham festivalning yarim tungacha musiqa ijrosi davom etiladigan bo'limlari bo'lishi mumkin
+HYP: шүні одда түтіңкі гәрші асоси сахнадагі музыка түгеген болсаған фестивалин ярым түнгәчі музыка жұрасы давом итілардіген бульымлары болушы мүмкүн
+
+REF: 802 11n standarti 2 4 gs va 5 0 gs chastotalarining ikkalasida ham ishlaydi
+HYP: 8 1 1 1 1 1 2 4 4 5 4 5 4 5 4 5 4 5 4 5 4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+
+REF: vahshiy bolalar tashlab ketilishi yoki qochib ketishidan avval jiddiy zo'ravonlik yoki jarohatlarni boshdan kechirgan bo'lishlari mumkin
+HYP: baxşi bolilar təsləp ketilişi yoki qoçub ketilişidən əvvəl ciddi zorawanlik yoki jarahatlarını boşdan keçirgan bolusları mümkün
+
+REF: folklendning rasmiy valyutasi folklend funti fkp bo'lib uning qiymati bir britaniya funtiga gbp teng qilib belgilangan
+HYP: folkwenntің ræsme warioudahsa folkwennt funkti ffkb bolip onei qiymati bir britannia funkti gvpt қылbililangya
+
+REF: ularning gullab yashnagan davrida yengil ifloslanish bugungidek muammo hisoblanmagani tufayli ular odatda shaharlarda yoki kampuslarda joylashgan bo'lib ularga yetib borish hozirgi davrda qurilganlaridan ko'ra osonroq
+HYP: оларнің гүллер кешнеген давда генгел ифиласланыш генгелдік маумақ сабдамагенат файли олар аудатта шахарлардага кейік кампусларда жайлашкан болып олар кетіп барыш қазіргі давда құрылгерлердің көра аздорроқ
+
+REF: tun davomida 150 dan 200 ga qadar nusxalar tayyorlandi ular hozirda danlep yon zambaraklari deb ataladi
+HYP: тұндавамды брузелииден икигүзге хадар нұсқалар тайорланды олар қазурда данлы бьон замбарагалары да батарлады
+
+REF: bmtning mazkur kasallik bo'yicha mutaxassisi deniel lantan epidemiyaga tinchlikparvar kuchlar sabab bo'lgan bo'lishi mumkinligini ta'kidladi
+HYP: бі міті нин мазкур касалик буйчам тахасисы дэниэл лантаан эпидемиягі тіншілік парабар күшілар саба бөлген бөліші мүмкінлігіні тәкітілады
+
+REF: barselonaning rasmiy tillari katalan hamda ispan tillaridir taxminan yarm aholi katalan tilida so'zlashishni afzal ko'radi ko'pchiligi uni tushunadi hamda deyarli hamma ispan tilini biladi
+HYP: барселонаның рәсметрләрі каталант хамдық испан тіләрді тахминан ярым ақурлы каталантынлы созылайшын авзар қорады көпчері ұны түшнәрді хамды диярли хамма испан тіліні біләді
+
+REF: anxel 2006 tutash muhitlar yondashuvini tashkilotlarga yuqori darajadagi samaradorlikka erishishga ko'maklashishda foydalanilayotgan metod sifatida tushuntiradi
+HYP: анхел икеминалты туташ мұқытлар яндашу оны ташкидаутларге юқары дараджедаги замарадорлийке ирішіге кумакеда штафайданалайадган метод сфатыда түшін түрады
+
+REF: virtual ko'mak dasturiy ta'minot ichiga o'rnatilgan va ular talaba o'zi hal qilishi qiyin bo'lgan jarayonlar haqida savol berish yordam berish tushuntirish uchun mo'ljallangan
+HYP: виртуал комуната сурида ми наути джекомнатуген ойлар тарап оза халықшы қиим болген жария ойлар хақты сауал беріш жолдан беруш үшіндыру үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін үшін
+
+REF: qo'shinlar yetib kelishidan avval gaitida 1800 yillardan buyon mazkur kasallik bilan bog'liq muammolar kuzatilmagan
+HYP: qушынлар етіп келешеді авваль ғайетіда бір миңсәк үйзінші еллардан биян мазгур кәсарли екбілан бағылық мамолар күзатілмеген
+
+REF: aslida hatto agar kimdir uning mavjudligini bilganida ham uni topish umuman oson emas g'orning ichiga kirish bu butunlay yakkalanishdir
+HYP: асылда хатта агэр кимдар уни мавжудлигині бульганы да хам уны тапыш умаман аусон имаз горнин ичгекириш бубутуллай яккаланышдар
+
+REF: ayollar oilaviy holatidan qat'i nazar barcha ayol sayyohlarga o'zlarini turmush qurgan deb aytish tavsiya etiladi
+HYP: айолар ойлови холададан қат и назар барча айол сайоқларге ұзларыны тұрмыш құрган деп айтыш тавсия итилады
+
+REF: materiya koinotdagi hamma narsani tashkil qiladi atomlar deb atalgan mayda zarralar esa materiyani hosil qiladi
+HYP: материя коинатаги хаммынастан тәшкей қалды атомнады батальгия майды зарарлады иса материяны қосыл қалды
+
+REF: yaqin joyda mariya ko'proq bo'lishi mumkin chunki qobiq yupqa lavaning yuzaga chiqishi osonroq bo'lgan
+HYP: яқан жайда мария купрақ өліш мүмкін чүнге қабы құйып қа лаван юзаге шықшы алсаурал бөлге
+
+REF: oilali ikki nafar voyaga yetgan farzandi bor duvall voqeaga aloqador bo'lgan millerda katta taassurot qoldirmagan
+HYP: ой ләле икинафар ой кеткен парзанды бар дуал оқиғе алақадар болган миллерді кетіда сурат қолдырмаген
+
+REF: topilma qushlardagi patlar evolyutsiyasi to'g'risida ham tushuncha beradi
+HYP: топылма құшлардаги патлер эволюциасты ғұрысты хам түшінші берады
+
+REF: erkaklarga rad javob qilishda qat'iy bo'ling va o'z aytganingizda turishdan qo'rqmang madaniy farqlar borligi yoki yo'qligidan qat'iy nazar bu uni oddiy holatga aylantirmaydi
+HYP: еркекулергі раджоуа қылшта қат и болең уа ұсайты кәнеңгізді тұрушта қорқмай маданни фарқлар болды келгі үй құлигдан қат инасыр буыны отиы қойладге айландырмайды
+
+REF: odamlarga marosimni ko'rishlariga imkon berish uchun rimning turli joylarida bir nechta katta ekranli televizorlar o'rnatilgan edi
+HYP: adamlarga marasimni kuruslarga imqan beris uçun rimning turli joylarda birneşte katti ekranli televizorlar ornadilgen iddi
+
+REF: demak hoynahoy bu yozuv shunchaki yorliq sifatida qo'shilgan
+HYP: demàk қайнақай бу yazу шунджәк ярлық сфатыда қошылген
+
+REF: shu tarzda qalam paydo bo'lganida ko'pchilik uchun yaxshi do'st edi
+HYP: шутаза қалампай доба бульганда көпчілік үшіне ақшы тұлыс эді
+
+REF: temir yo'llar shpallari juda erta o'ylab topildi lekin agar ularning ustida temir ham bo'lsa temir yo'llar yanada foydali bo'lishini sekin astalik bilan anglab yetdilar
+HYP: темір еллар шпаллар жүдейртойла табытылеги әңгерпланын ұсты темір хамбылсы темір еллар янов айдарий болды үшін сегинас сариктон әңинабиеткілар
+
+REF: hammaga tanish safari atamasi afrikaning ajoyib hayvonot olami xususan savannani tomosha qilish uchun quruqlik bo'ylab sayohatga taalluqli
+HYP: ឡ
+
+REF: kundalini yoga bilan kundalini quvvati ma'rifat quvvati yoga pozalari nafas mashqlari mantralar hamda vizualizatsiyalar yordamida uyg'otiladi
+HYP: кундалини йога блан кундалини квадраты марфат квадраты йога бузалары нафас машықлары мантралары хамда визуализациялар ордамды ұйғатылады
+
+REF: yakshanba oqshomida aqsh prezidenti donald tramp matbuot kotibi orqali bergan bayonotida aqsh qo'shinlari suriyadan chiqib ketishini e'lon qildi
+HYP: якшанба ұқшаумыда ақш президенті доналд трамп матбот көтібі орқалы берген байонадыда ақш қушынлары сурядан шықып кетшіні элон қылды
+
+REF: kuchli shamollar do'l haddan ortiq yog'ingarchilik hamda o'rmon yong'inlari momaqaldiroq dovullar suv toshqinlari va siklonlar singari og'ir ob havo turlari hamda oqibatlaridir
+HYP: күшли шамоллар дул хаттан ортық иоғынгерчили хамда урман иоңғымлары номақалдыроқ довулар су тошқылары ласикулулар сіңгер оғыр обхавадурлары хамда оқыбатларыдар
+
+REF: umuman olganda menejerlar sobiq hamkasblariga yetakchilik qilishni boshlaganida ikki xil fe'l atvor paydo bo'lishi mumkin spektrning bir uchi yigitlardan biri yoki qizlardan biri bo'lib qolishga urinishdir
+HYP: умуман олгенда менеджерлар собақ хангасовдар едякчилий қылышынан башлагенда икі хыл фил атмар пайдау болуш мүмкін спектрның бұры жигитлерданы біра йо ка қызларданы біра болып қылышге орынышдыр
+
+REF: birgina tajriba vaksinasi eboladan o'lish xavfini kamaytira olishga qodir ko'rinsa ham shu vaqtga qadar mavjud infeksiyani davolash uchun mos keladigan aniq birorta dori vositasi ko'rsatilmagan
+HYP: біргина таджириба вакцинасы эболадан өліш хафының кәмайтыра олішке қодыр көрінзағам шувақке қадар мәлжуд инфекцияны давалаш үшін моз келадіген анық бұрорта дорого ситасы көрсатылмаген
+
+REF: natijada ijrochilar sahnada kannabis o'ramalarini chekishdi va teatrning o'z tomoshabinlarni qo'shilishga undadi
+HYP: nætijadə icralicilər sahnada qannabis oranmalarını çeqiştiba teatrının os tamaşa billarının qoşulışıga ұndad
+
+REF: bir bomba general gubernatorning idorasi tashqarisida portladi
+HYP: бір бомба генерал губернаторның идорасы та шығарыс да портылады
+
+REF: bu qutb yog'dularini ko'rish uchun yaxshi imkoniyat taklif etadi chunki osmon sutka davomida ozmi ko'pmi qorong'i bo'ladi
+HYP: бұқытып яғддоларды құрышчын яқшы имгана тәклип етады чөнгі осма сутка давамда осма копма қарамға болады
+
+REF: 1537 yili asunson tashkil topganidan beri paragvay o'zining tub xususiyatlari va o'ziga xosligining katta qismini saqlab qolishga muvaffaq bo'ldi
+HYP: бірмеңбиш ес ұттыз етінші елі асунсон ташкел топкиандан бері парагвай өзіни тұп қсусетларовы өзіге хосілігенен кәтті қысымын сақлап қалышке мувафақ болды
+
+REF: yovvoyi tabiatga kelganda madagaskar so'zsiz eng katta va o'ziga xos alohida materikdir
+HYP: yovoi tabiatka kelganda madagaskar susus ingatta wa uzgoxos alohada materiktir
+
+REF: muhammad bu dunyo hayotidan tashqarida bo'lgan masalalarga chuqur qiziqqan u tafakkur yuritish uchun nur yorug'lik tog'idagi hiro nomi bilan tanilgan g'orga tez tez borib turgan
+HYP: мұхаммад бұл дуния хаятадан ташқарды болген мансарларге шықыр қызыққан утафакір юртыш үшу нұр яруғликтағыдеге хиро намыбына таңілген ғарге тез тез барып түрген
+
+REF: biroq sardor viketini yo'qotganidan keyin hindiston uzatmalarni yakunlash uchun 7 ta viket yo'qotishlar bilan faqatgina 36 ta ranni amalga oshirdi
+HYP: броқ сардор вигетіні уқаткяндан кейін хиндостон ұзатмалардың якунлаш үчін етіта вигет уқатшылар білан фақаткені ұттүз алтыта ранна амальге ашырды
+
+REF: qotishmalar asosan ikki yoki undan ko'p metallning qorishmasidir davriy jadvalda ko'p elementlar borligini esdan chiqarmang
+HYP: qo tshumalara asosan iki yuakki unan kub metalli niin kub mastar dafri jadualde kub elementlar borligin eztanyin chygarmaii
+
+REF: yanada shimolroqdagi katta hududlarning aholisi juda siyrak ayrim yerlar esa qariyb kimsasiz sahrodir
+HYP: янада шумал роқтаге гетта хұдуддланың ақаласы жудасы ирак айрым ерләреса қариб кимсасы сахрадыр
+
+REF: natijada to'siqni yengib o'tish uchun birgalikda ishlaydigan tashkilot jarayoni mijoz ehtiyojiga xizmat qiluvchi yangi innovatsion jarayonlarni boshlab berishi mumkin
+HYP: nəticədə tozuqlun yengi buduşu cümhur gəndikdə işlədiyin təşkilat carayana mücaziz extiyaciga xismat qorucu yengi innovasiyon carayalana başla birişi mümkün
+
+REF: aerosmith gastroldagi qolgan chiqishlarini bekor qildi
+HYP: айрылысымезгаз тұрулдаги қолиян шықышларына бекар қалды
+
+REF: agarda qishloq yo'llarida haydashga odatlanmagan bo'lsangiz o'zingizga hushyor bo'ling tik qiyaliklar tor so'qmoqlar hamda keskin past balandlar ancha ko'p
+HYP: агарда қышлақ йолларда хайда шық аудатыламаген бұл сәңгіз өзіңізге құшуар бұрын тик қияликлар тар соқмақлар хамда кескен пас баландар анча көп
+
+REF: bekor qilish tartib qoidalari turlicha lekin mart oyi oxiridagi koronavirusga asoslangan bekor qilish tartib qoidalari olimpiada o'yinlari rejalashtirilgan vaqt 2020 yilning iyul oyiga qadar davom etmaydi
+HYP: бейкор қылыштар тип қойдалары төрле жалеген март ойы оқырдаги коронавирусгі адсосланген бейкор қылыштар тип қойдалары олимпиада ойылары жалаштырылген вақыт кемеги громадженін июль ойыға қадар давам етмайды
+
+REF: politsiya boshlig'i chandra shekxar solanki so'zlariga ko'ra ayblanuvchi sudga yuzi berkitilgan holda kelgan
+HYP: полиция бауашлығы чандра шик харсалған кесосдарге кора айблануушы судке юзіп еркітілген халды келге
+
+REF: ikkala quruq kukunni bir birga aralashtiring so'ngra toza nam qo'l bilan ularni to'pga bosing
+HYP: икала құрық күкүнні бір бірге аралаштырын соңра таза нам қол білан ұларны тупке басын
+
+REF: lakkxa singx chappan bhog bhajanni ham taqdim etdi qo'shiqchi raju xandelval unga jo'r bo'ldi
+HYP: лакха синх чаптан бхок бхажанны хам тактым итта кушхча раджу ханделвал үңгә джур болды
+
+REF: o'tgan hafta meti apple kompaniyasi jiddiy emas deb atagan haddan ortiq qizib ketish bilan bog'liq 34 ta qo'shimcha holat to'g'risida xabar berganini e'lon qildi
+HYP: уткен хафта ми ти apple компаниясы джиндей имаз деп атаген хатта арты қызып кетиш білан болы ұт сторта қошымча хала туғрыста хабар бергеніна илан қылды
+
+REF: ushbu nazariyalar ma'lum odamlar qilishni istagan ishlarini qilishlariga nima undashini va muhitlaridagi qanday omilar ma'lum narsalarni qilishlaru yoki qilmasliklariga ta'sir qilishini ko'rib chiqadi
+HYP: ушбұ назариялар малым аудамлар қылышын ұстаген ишланы қылышыларғы ныма ондашыны ал мұхтылардың кеқандай оумылар малым нарсланы қылышылар ұяке қылмас декларғы тазыр қылышын қорып шығады
+
