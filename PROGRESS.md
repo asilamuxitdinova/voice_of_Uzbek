@@ -19,6 +19,8 @@ Raw outputs stay in `results/`. This file is the summary.
 | Models registered in kronk | via hard links (`ln`) from `~/models` into `~/.kronk/models/...`, so no extra disk space is used |
 | Repo on server | `~/voice_of_Uzbek` |
 | Disk (2026-11-27) | 193 GB total, 124 GB used, **70 GB free**. Not enough for the ~66 GB+ Phase 2 training data plus checkpoints, so ask for more or train on a compressed subset |
+| Disk analysis (2026-11-27, `results/disk_report.txt`) | /home 111 GB: `~/models` 52 GB (Gemma/Qwen GGUFs, hard-linked into kronk, so counted once), caches 17 GB (uv 12, pip 4.1, go-build 1.3), HF cache 12 GB, 4 venvs ~25 GB (this project 7.6, plus comp_vision, adaptive_mfa, go-json-tuner), comp_vision data/outputs ~7 GB. **Two models stored twice** (separate copies in kronk): Qwen2.5-Coder-7B (4.7 GB) and gojson-1.5b (1.0 GB) |
+| Cleanup plan | `disk_cleanup.sh` (dry run by default, `--yes` to apply): caches + de-duplicating the two models = **~23 GB, lossless** → ~93 GB free. Optional, needs a decision: old HF downloads (whisper-turbo 1.6 GB, navai small/medium, call-center ~3 GB each), Qwen2.5-Coder-14B (9 GB, other project?), unused venvs of finished projects. Keep the Gemma GGUFs until the LLM is chosen |
 
 **GGUF models already on the server (`~/models`):**
 
@@ -77,7 +79,8 @@ Raw outputs stay in `results/`. This file is the summary.
 - [x] Added `ai-sage/GigaAM-Multilingual` (`large_ctc` 600M and `@ctc` 220M) to `asr_baseline.py` and `asr_compare.sh` (2026-11-27). Remote code reviewed and pinned (large_ctc `3905cd5`, ctc `2f8a571`). Audio over 25 s is split at quiet points (pyannote not needed)
 - [x] Run GigaAM on FLEURS → **winner**, see 1.1d
 - [x] Run `Kotib/uzbek_stt_v1` on FLEURS → **6.3% fair WER, best so far**
-- [ ] Run all 4 models on own voice messages (`PATTERN='audio_*' SET=my_voice bash run_test_set.sh`), then on `test_set/`
+- [~] Kotib on own voice messages (`PATTERN='audio_*' SET=my_voice bash run_test_set.sh Kotib/uzbek_stt_v1`): ⚠️ **hallucination loop** on `audio_2026-11-27_14-02-35.ogg` (14.8 s). After the real text, it repeated `sog' bo'linglar.` ~45 times, and took 14.5 s for 14.8 s of audio. The audio really does contain `sog' bo'ling` 3–4 times (the call-center model transcribed it correctly), and Kotib got stuck in that repetition. This is a known Whisper failure. CTC models like GigaAM can't loop this way. Possible fixes if Kotib stays: `repetition_penalty` / `no_repeat_ngram_size`, a compression-ratio check with a retry, or a hard max-length limit
+- [ ] Then run on `test_set/`
 - [ ] Run GigaAM on own recordings: `python asr_baseline.py --model ai-sage/GigaAM-Multilingual --audio-dir test_audios`
 - [ ] Add `.txt` references (what was actually said) to `test_audios/` so own-recording WER can be measured
 
