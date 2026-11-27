@@ -69,8 +69,28 @@ Raw outputs stay in `results/`. This file is the summary.
 **Next:**
 - [x] Inspect the REF/HYP lines to find the failure type → Kazakh-style Cyrillic + ~5% loops
 - [x] Re-score with Cyrillic→Latin conversion → median CER 27%
-- [ ] Test ready-made Uzbek Whisper fine-tunes with `bash asr_compare.sh`: navai-uz medium/small, Abduqayum call-center medium
+- [x] Test ready-made Uzbek Whisper fine-tunes with `bash asr_compare.sh` → results below
 - [ ] Also test the best one on your own recordings (FLEURS may be in navai-uz's training data)
+
+### 1.1b ASR: ready-made Uzbek Whisper fine-tunes (same 100 FLEURS test clips)
+
+| Date | Model | WER | CER | Median sentence WER | Perfect sentences | Speed | Notes |
+|---|---|---|---|---|---|---|---|
+| 2026-11-27 | **navai-uz/whisper-medium-uzbek** | **14.1%** | **4.8%** | 10% | 27/100 | 2.04 s/sample | 🏆 Best. ⚠️ Trained with FLEURS data, so the score may be flattering |
+| 2026-11-27 | navai-uz/whisper-small-uzbek | 17.0% | 5.4% | 14% | 21/100 | 1.11 s/sample | Nearly as good at ~2× the speed |
+| 2026-11-27 | Abduqayum/whisper-uzbek-medium-callcenter | 19.5% | 6.1% | 17% | 15/100 | 2.03 s/sample | **Not** trained on FLEURS, so this is an honest out-of-domain score. Trained on phone speech, while FLEURS is clean read speech |
+| 2026-11-26 | openai/whisper-large-v3-turbo (stock) | 147.3% | 103.2% | 89% (after translit) | – | 0.92 s/sample | Reference |
+
+**What the remaining errors look like:**
+- No Cyrillic output and no hallucination loops in any of the three models.
+- Most errors are **suffix variations** (`harakatlarini` → `harakatlarni`, `ichimliklar` → `ichimliklari`) and **foreign names** (`jeyms paget` → `james paket`, `greyt yarmutdagi` → `great yarmarkadagi`, `t rex`).
+- Very few errors come from apostrophes or word splitting (1–2 and 6–7 per model).
+- Some "errors" are mistakes in the FLEURS reference itself: the REF says `januniy`, and navai-medium wrote the correct `janubiy`.
+- The call-center model often writes `h` as `x` (`hujayra` → `xo'jayra`), probably a spelling habit from its training transcripts.
+
+**Speed note:** the medium models are ~2× slower than turbo (24 decoder layers vs 4). FLEURS clips are ~10–12 s long, so 2 s is a real-time factor of ~0.2. A typical 3–5 s voice-agent question would take ~0.6–1 s. If that's too slow, convert to CTranslate2 (faster-whisper) later, which is typically 2–4× faster. kronk was also using the GPU during this test.
+
+**Conclusion:** ASR went from unusable (147%) to good (14–20%) **without any training**. Phase 2 changes from "must fine-tune" to **"start from navai-uz/whisper-medium-uzbek (or small) and fine-tune on our own domain recordings"**. The deciding test is now **your own recordings**, especially if the agent will take phone calls, where the call-center model may win.
 
 ### 1.2 LLM: Uzbek prompts via kronk
 
@@ -78,10 +98,10 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 
 | Date | Model | Avg score | Avg time/answer | tok/s | Common problems (flags) |
 |---|---|---|---|---|---|
-| | gemma-4-12b-it-qat-q4_0 | | | | |
-| | gemma-4-E4B_q4_0-it | | | | |
-| | gemma-4-26B_q4_0-it | | | | |
-| | Qwen2.5-7B-Instruct-Q4_K_M | | | | |
+| 2026-11-27 | gemma-4-12b-it-qat-q4_0 | _not scored yet_ | 11.0 s | 27.3 | |
+| 2026-11-27 | gemma-4-E4B_q4_0-it | _not scored yet_ | 4.9 s | 53.1 | |
+| 2026-11-27 | gemma-4-26B_q4_0-it | _not scored yet_ | 6.6 s | 45.0 | Faster than the 12B despite its size, probably a mixture-of-experts model (only part of it runs per token) |
+| 2026-11-27 | Qwen2.5-7B-Instruct-Q4_K_M | _not scored yet_ | 2.8 s | 35.0 | Short answers, hence the low time |
 | | uzlm/alloma-8B-Instruct Q4_K_M (`--apst`) | | | | |
 | | uzlm/alloma-8B-Instruct Q4_K_M (no APST) | | | | |
 
@@ -125,6 +145,7 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-27 | ASR starting point: navai-uz/whisper-medium-uzbek (14.1% WER), with whisper-small (17.0%, 2× faster) as the low-latency option | Best FLEURS scores; final pick after testing on our own recordings |
 | 2026-11-27 | Test uzlm alloma (LLM) and sayro (TTS) plus Uzbek Whisper fine-tunes in Phase 1 | Already Uzbek-trained; winners become the starting point for fine-tuning |
 | 2026-11-27 | Convert alloma to GGUF ourselves (`convert_alloma.sh`) instead of using the third-party GGUF | Its custom tokenizer needs a llama.cpp patch (unknown vocab hash → treat as Llama-3 `llama-bpe`), and we can't verify how the third-party file was made |
 | 2026-11-27 | sayro-tts runs in a separate `.venv-tts` | `qwen-tts` pins transformers==4.57.3; keeps the main venv stable |

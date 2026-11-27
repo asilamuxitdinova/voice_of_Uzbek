@@ -10,18 +10,17 @@ import argparse
 import os
 import time
 
-import librosa
 import requests
 import soundfile as sf
 
-from asr_baseline import load_asr, transcribe
+from asr_baseline import load_asr, load_audio, transcribe
 from llm_baseline import DEFAULT_SYSTEM, from_apst, pick_model, to_apst
 from tts_baseline import UzbekTTS
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--audio", required=True, help="input .wav/.mp3/.ogg with an Uzbek question")
+    p.add_argument("--audio", required=True, help="Uzbek question as audio (.wav/.m4a/.mp3/.ogg/...)")
     p.add_argument("--out", default="results/answer.wav")
     p.add_argument("--asr-model", default="openai/whisper-large-v3-turbo")
     p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:11435/v1"))
@@ -36,7 +35,7 @@ def main():
     print("Loading ASR and TTS models (one-time) ...")
     asr = load_asr(args.asr_model)
     tts = UzbekTTS()
-    array, sr = librosa.load(args.audio, sr=16000, mono=True)
+    array, sr = load_audio(args.audio)
 
     # warm-up so the timings below reflect steady state, not first-call overhead
     transcribe(asr, array[: sr], sr)

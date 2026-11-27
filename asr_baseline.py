@@ -6,7 +6,7 @@ Usage:
     python asr_baseline.py                       # 100 FLEURS samples, whisper-large-v3-turbo
     python asr_baseline.py --n 300               # more samples = more reliable number
     python asr_baseline.py --model openai/whisper-small
-    python asr_baseline.py --audio my_recording.wav   # just transcribe your own file
+    python asr_baseline.py --audio question.m4a      # transcribe your own file (any format)
 """
 import argparse
 import os
@@ -16,6 +16,38 @@ import time
 import torch
 import jiwer
 from transformers import pipeline
+
+
+def load_audio(path: str, sr: int = 16000):
+    """Load any audio file as mono float32 at `sr` Hz.
+
+    wav/flac/ogg/mp3 are read directly; anything else (phone .m4a/.aac/.opus, video files)
+    is decoded with ffmpeg. Returns (array, sr).
+    """
+    import subprocess
+
+    import numpy as np
+
+    if not os.path.isfile(path):
+        raise SystemExit(f"Audio file not found: {os.path.abspath(path)}\n"
+                         f"Copy it to the server first (scp ...), or pass the full path.")
+    try:
+        import librosa
+        array, _ = librosa.load(path, sr=sr, mono=True)
+        return array, sr
+    except Exception:
+        pass  # format not supported by libsndfile -> fall back to ffmpeg
+    try:
+        raw = subprocess.run(
+            ["ffmpeg", "-nostdin", "-loglevel", "error", "-i", path,
+             "-f", "f32le", "-ac", "1", "-ar", str(sr), "-"],
+            check=True, capture_output=True,
+        ).stdout
+    except FileNotFoundError:
+        raise SystemExit("ffmpeg is not installed: sudo apt install -y ffmpeg")
+    except subprocess.CalledProcessError as e:
+        raise SystemExit(f"ffmpeg could not decode {path}:\n{e.stderr.decode(errors='replace')}")
+    return np.frombuffer(raw, dtype=np.float32).copy(), sr
 
 
 def norm(text: str) -> str:
@@ -93,19 +125,17 @@ def main():
     asr = load_asr(args.model)
 
     if args.audio:
-        import librosa
-        array, sr = librosa.load(args.audio, sr=16000, mono=True)
+        array, sr = load_audio(args.audio)
         print("TEXT:", transcribe(asr, array, sr))
         return
 
     print("Loading FLEURS uz_uz test split (first run downloads ~520 MB) ...")
     ds = load_fleurs("test", args.n)
 
-    import librosa
     refs, hyps = [], []
     t0 = time.time()
     for i, (wav_path, ref) in enumerate(ds, 1):
-        array, sr = librosa.load(wav_path, sr=16000, mono=True)
+        array, sr = load_audio(wav_path)
         hyps.append(norm(transcribe(asr, array, sr)))
         refs.append(norm(ref))
         if i % 20 == 0:
