@@ -1,0 +1,36 @@
+model: ai-sage/GigaAM-Multilingual
+beams: 1
+folder: test_audios
+files: 7 (0 with reference .txt)
+speed: 3.6s for 83.0s of audio (real-time factor 0.04)
+
+Fill in MEANING OK for each file: yes = the request would still be understood correctly.
+
+FILE: audio_2026-11-27_13-06-57.ogg  (16.3s audio, 1.18s)
+HYP: o    a qimay yaxshi uribsizmi ni gaplar olariida tinchlikmi
+MEANING OK: __
+
+FILE: audio_2026-11-27_13-29-09.ogg  (12.4s audio, 0.41s)
+HYP: hozir qilayotgan ishlarim yaxshi ketyapti keyin shu biroz bunaqa devonacha ishlar qilib keyin nimalar qilib ishlasak agar yaxshi bo'ladi
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-31.ogg  (5.5s audio, 0.38s)
+HYP: ha mazza qilib dam olib yuribsizlarmi sohilning bo'yida
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-35.ogg  (14.8s audio, 0.39s)
+HYP: yaxshi rahmat asilar yaxshi yurdimiz sog' salomatmiz alhamdulillah aylanyapmiz ko'ryapmiz o'qishga boryapmiz sog'indim sizni
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-39.ogg  (3.7s audio, 0.43s)
+HYP: siz bilan o'tirib gaplashib yurganlarimizni sog'indim
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-43.ogg  (11.1s audio, 0.38s)
+HYP: boraman xudo xohlasa borganda yana maza qilib ishlaymiz siz bilan maza qilib gaplashib o'tirardimda sog'indim shu kunlarni
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-50.ogg  (19.1s audio, 0.44s)
+HYP: ayo'q yo'q bo'ldi snla anaqa o'shanga anaqa bo'ldimda hijolat bo'ldim bo'ldi ikkalamizni o'rtamizda bo'lgani ham yaxshi bir tomondan topilmagani ham xayrli bo'lgan anaqa shuncha berdingizku qo'yavering boshqa bolalardan so'rab o'tirmang
+MEANING OK: __
+

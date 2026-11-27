@@ -1,0 +1,1022 @@
+model: Abduqayum/whisper-uzbek-medium-callcenter
+beams: 5
+folder: test_set
+files: 20 (0 with reference .txt)
+speed: 966.8s for 3251.7s of audio (real-time factor 0.30)
+
+Fill in MEANING OK for each file: yes = the request would still be understood correctly.
+
+FILE: test1.mp3  (143.5s audio, 46.82s)
+HYP: Alo, assalomu alaykum. Assalomu alaykum, yaxshimisiz aka, siz o'zingizmisiz? Bo'ladilar, bu yoqqa eshitaman. Aka, bonus beruvdi-da. olti yuz to'qson ming. olti yuz to'qson ming? Xo'p, xo'p. Ha, shu ikki yuz to'qson ikki ming tushyapti-da shu yerga. Shu darajada ko'p olardimi? Yo'q, yo'q, yo'q. olti yuz toqson tushmadi-da.
+Xo'p, bitta ko'rib beraman-ku.
+Xo'p.
+Bo'ldi.
+Bo'ldi.
+Bo'lmayapti-da mana bu yerda.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog' bo'linglar.
+Sog'ushganmi u?
+Ha.
+Qarang aka, mana bu tex paydo berishgan nomerini bilasizmi?
+Yetti bir?
+yetmish pullik.
+yetmish pullik.
+ikki yuz uch.
+ikki yuz uch.
+Hozir bir minut hozir.
+o'ttiz besh sakson to'rt.
+Aha, Yandexda o'zladingiz-a?
+Ha, siz ularga telefon qilib so'rab ko'ring, men bu yoqdan tex podderjka yozib beraman.
+Eee, bu to'g'ri kelmaydi-da, to'g'rimi? Qarang, menimcha o'n ikki ta pulmi bor.
+O'zi nima nimaga olardi?
+Yo'q, yo'q, unaqa katta aytish kerak emas. Men bu yoqdan yozib beraman, aka.
+Bo'ldi, bo'ldi, aka, shu iltimos.
+Qarang, anaqa ko'tarishi bilan, telefon ko'tarishi bilan, gde-to o'n sekunddan keyin ikki bilan to'rtni bossangiz, pryamoy operator bo'linglar. Ha, yigirma so'm-a? Ikki bilan, yo'q, ikki, birinchi ikki, keyin to'rt bossangiz. Ha, ha, bo'ldi aka. Xo'p, xo'p, xo'p, rahmat.
+MEANING OK: __
+
+FILE: test10.mp3  (79.4s audio, 14.30s)
+HYP: Alyo.
+Alyo, yaxshimisiz? Assalomu alaykum.
+Assalomu alaykum.
+Oka, anaqa, men Guzovoyga o'zgartirmoqchi edim mashinamni.
+Aha.
+Nima bo'lgan edim, ne?
+Bo'ldi, bo'ldi.
+Naxshi bo'ladi-ku o'shani.
+Xo'p.
+Qarang, bizga ulangan nomeringiz necha?
+to'qson to'rt lik.
+Xo'p.
+to'qqiz yuz qirq to'rt.
+Aha.
+oltmish to'qqiz, to'qqiz yuz to'qqiz.
+Azizxo'ja ismingiz?
+Ha, Azizxo'ja aka.
+Xo'p.
+Rangi qanaqa bor shunaqa? Oqmi?
+Yo'q, oq emas, anaqa, anavi
+rang, ko'k bor-ku bular-da, ko'k.
+Ko'k.
+Darovmi?
+Ko'k, ko'kim tirrang yana, svetli ko'k.
+Alo.
+MEANING OK: __
+
+FILE: test11.mp3  (134.9s audio, 38.07s)
+HYP: Alo, assalomu alaykum.
+Vaalaykum assalom. Yaxshimisizlar, xush kelibsizlarmi?
+Ha, rahmat, eshitaman.
+Bitta so'ramoqchisizmi anavi...
+bonus bermayapti-ku.
+Ha, mana bu xavfsali bonusni aytyapsizmi?
+Ha?
+Xavfsali bonusni aytyapsizmi?
+Yo'q, anavi...
+ko'k rangdek-chi?
+yetti yarim, sakkiz yarimdan o'n bir gacha berayotgan bonusni.
+Chartaga tushiriladigan-chi?
+Ha, ha.
+Bermayapti o'shanda, nega?
+Men bu xiyoniy TV zonada yurishni aytyapsizmi?
+Ha, o'shanda, o'sha yerdan, o'sha yerdan oldim klient.
+yigirma to'qqiz ming klient oldim.
+oltmish ikki ming ko'rsatib turdilar.
+Nechta qilib bermadim?
+Tushunarli, shu bonusda.
+Yo'q.
+Yo'q bo'ldi.
+Qaysi zakazingiz?
+Ha?
+Qaysi zakazingiz? E'tiboringizni ko'rib bering.
+Feruzadan
+manaqaga oldim.
+Voy voy voy ekan.
+Maktubvqulga oldim.
+Hozir bundan oldingiz zakazimni.
+A bundan oldingizmi?
+Hozir.
+yigirma to'qqiz yuz ming atayapsizmi?
+Ha, ha.
+Yigirma to'qqiz yuz ming atayapsizmi?
+Ha, ha.
+Ikkiyavering, zonadan oldim. Ko'k zonadan oldim.
+Qolgan oltmish ikki ming ko'rsatib, qolganini tashlab berish kerak, bir ton ham bermadi-yu.
+Ha, bu yoqda lekin hozir bonus ko'rishmayapti.
+Nimaga?
+Ha, men unda hozir podderjkaga yozib yuboraman-da, ko'rib berishadi.
+Ha, yo'q, shuni yozib bering, ko'rib berishsin.
+Mana hammasi ikkita zakazingiz-a shunda?
+Ha?
+Ikkita zakazingizni tashlab berishmaganmi?
+Bu bilan darg'iz-a?
+Ha, buni shunday, ertalab avtolotni ham tashlab berishmadi.
+Ha, bo'ldi, hozir yozib yuboraman.
+Xo'p.
+Mhm, xo'p.
+Yetib yuborasizmi?
+Ha, aytib yuboraman.
+Xo'p, rahmat.
+MEANING OK: __
+
+FILE: test12.mp3  (52.2s audio, 11.28s)
+HYP: Alo, assalomu alaykum.
+Vaalaykum assalom.
+Ber o'zlarini, sizlar beringlar.
+Bundan keyin boshqadan telefon qilsangiz ularga tushasiz.
+Xo'p.
+Mhm, xo'p.
+Yoshganlari nomeri bo'lsa beringlar.
+A hozir.
+Alo.
+A hozir, ko'rib beraman.
+Yoshganlarar nomeri bo'lsa beringlar.
+Mhm, hozir.
+A yozib olasizmi?
+Aha.
+To'qsonli?
+To'qsonli?
+to'qqiz yuz bir
+to'qqiz yuz bir
+ellik ikki, oltmish yetti.
+ellik ikki?
+oltmish yetti.
+oltmish yetti.
+Rahmat.
+Mhm, xo'p.
+MEANING OK: __
+
+FILE: test13.mp3  (120.8s audio, 38.09s)
+HYP: Xo'p, assalomu alaykum.
+Vaalaykum, qolishlar.
+Eruzami?
+Da, da, da, Eruz.
+Nima gap, tushundim.
+Charchamayapsizmi?
+Ha, rahmat. Haqiqatdan aytganimdek, anavi programmasiga qo'sh yengillik kiritibdi-da.
+Anavi, hm, parislar parametri bor-ku. O'shani bosdi, hozir nastroykadan chiqardik oldin.
+O'zgardi u kishi.
+Ha, ha, Hozir bu yoqdan qilib qo'yibdi-da. Da, da, da, ancha o'zgardi. Ha, o'shanga anavi yuk kishi, bitta yuk kishi deganimizni qo'shilmayapti-da. Qanaqa qilib qo'shsam bo'ladi uni? O'ng taraf, o'ng taraf ushlab turib, o'ng tarafga. Yukki nimasini? Bitta yuk kishi bor-ku, tarixni yoqib qo'yish kerak edi-da. Ha, ha, ha, ha. O'shani qanaqa narsalarni topa olmadim, bu taraf qizilda turibdi-da pastida. Ha, bo'ldi, qarang, bo'lmasam uni olib tashlagan bo'lishi mumkin. Uni bitta podderzhkaga yozing, o'shani o'sha joyini screenshot qiling-da. Mana bunaqa, mana bunaqa narsa yo'qolib qolibdi. Menga bitta qo'shib beringlar, yo bo'lmasam qo'shilgan bo'lsa, olib tashlanglar deb yozib yuborsangiz, do'sti hozir pryamoy moskovskiy qilib qo'ygan-da. Gruzoy bilan dostavkani to'g'risi biz yozamiz-ku yo telefon qilamiz, anaqa qilyapti. Iloji bo'lsa voditellar o'zi deyapti-da. Ha, yo'g'e. A bo'lmasam iloji boricha deyapti endi. Skrin qilib, ha, skrin qilib tashlayman-da. Menda parika o'chib qolibdi, o'shani yoqib bering deb aytaman-da. Ha, bir xil funksiyalarni o'chirib qo'yyapti o'zi u yoqda. O'chirib qo'yyapti-da, orada turib turib, yana qo'shib qo'yyapti. Ha, shunaqa..
+Xo'p.
+Ketdik.
+Bo'ldi, bo'ldi.
+Mhm.
+Bo'ldi, xo'p.
+Mana anaqa qilamiz.
+Xo'p bo'ladi.
+Bu yerda edi o'sha yerda.
+Charchamang.
+Bo'ldi, bemalol.
+Mhm.
+MEANING OK: __
+
+FILE: test14.mp3  (233.7s audio, 71.52s)
+HYP: Alo.
+Assalomu alaykum.
+Sog' bo'ling, aka.
+Iskandar kerak edi.
+Ha, Iskandar aka.
+Bu telefoningiz yoqyapsiz demanglar, to'qqiz yuz bir lik telefon ishlamayaptimi?
+Yo'q, yo'q, aka, men...
+Yangi nomeringizni bering, yozib qo'yaylik buni.
+Bo'ldi, bo'ldi, ustoz aka. o'ttiz uch lik.
+Ha, aka.
+Bo'ldi.
+o'ttiz uchlik.
+Ha, aka.
+Ha, aka.
+o'ttiz uchlik.
+bir yuz o'n.
+bir yuz o'n.
+bir yuz to'qqiz, ellik to'qqiz.
+bir yuz o'n.
+ikki ming ellik to'qqiz.
+o'sha Telegramga yozib qo'ysangiz bo'ldi, aka.
+Kimman?
+Telegramga yozsangiz bo'ldi.
+Hozir bot o'chib qolganda, telefon bo'lyapti.
+Ofis, telefonni ko'taryapmiz faqat.
+Xo'p, xo'p, xo'p.
+O'shanga mabodo anavi telegramga anaqa qilsak.
+Zooms aka o'zingizni olasizmi?
+Yozib qo'yaylik.
+Nimami aka?
+Siz chaqirayotgan abonent boshqa
+Bitta maslahat qilayotgan edgan edim.
+Ha, aytavering aka, hozir. Mana shu.
+Firma nomeridagi mashina bor-u.
+Aha.
+Bularni qanaqa qilish kerak?
+Qarang, qarang.
+Unga litsenziya olishingiz kerak.
+Xo'p, litsenziyani hozir men sizga misol, firmani shartnoma qilish kerakmi? Shartni nomigami?
+Yo'q, bilmayman men. Qanaqa tashlash ma'lumot qilib beradigan. Yo'q, shunaqa o'zlarindagi bollardan bilsangiz, hozir men anaqasini tashlayman-da. O'sha nima ham, litsenziya ham ertaga chiqadimi keyin anaqa bo'lib? Mana, qarang, men sizga sayt nomerini beraman. O'shanga telefon qiling, meni ayting, qilib beradi. to'qson to'qqiz deydi. Sayt? Ha, sayt. O'zingiz ham ukam. Hozir men yozib olaylik, qanaqa yuritganini beraylik-a? Yo'q, men qarang, Johnson o'n sakkiz mashina, ikki ming yigirma olti. Qanaqaga qo'yiladi buni? Nimaga qo'yadi? Uni bilmadim, uni ko'rish kerak-da. Hozir sayt kesingiz bir beradi bir to'la.
+Qaysi ofisda u saytingiz?
+Bedorada o'zimizniki.
+to'qson to'qqiz lik.
+to'qson to'qqiz lik.
+to'rt yuz oltmish to'qqiz.
+to'rt yuz oltmish to'qqiz.
+qirq to'rt oltmish to'qqiz.
+qirq to'rt?
+qirq to'rt.
+Eshitiladi oxiri.
+qirq to'rt oltmish to'qqiz.
+qirq to'rt oltmish to'qqiz.
+Eshitilmadi oxiri.
+qirq to'rt oltmish to'qqiz aka.
+oltmish to'qqiz.
+Ha, ayting telefon qiling, bo'ldi, mana shunaqa, mana shunaqa, ishganlar berdi. O'shanga shunaqa litsenziya qilish kerak. Nima kerak bo'lsa hammasini pulcha beraman deb ayting, bo'ldi. O'sha tushuntiradi yoki payt.
+Keyin meniki telefonimni yangilni yangilovdim, mana bunaqa programmani tortsam, hamma yo'g'im turibdi-yu. Anaqa kelish telefon deyapti, telefon orqali kirsam, SMS keladi, tersam ochmayapti. Kelish haligi bot desa, botda men anaqa qilolmayapman. Ofisga kelsangiz qilib beramiz. Men borayman endi, ertami, indinmi borsam. Da, ofisga kelmasangiz bo'lmaydi aka. Ofisda qilib beramiz. Men o'ylayman endi, ertami, indinmi, borgan. Da, ofisga kelmasangiz bo'lmaydi aka. Ofisni qilib beramiz-da, u anavi-da, sal ko'proq o'shanga. Bo'ldi-ku, telefoningiz o'zingizniki ishlayapti-a? Ha, aka, ishlaydi, ishlaydi. Mabodo ko'tara olmay qolsam, hurmatli deb o'ylamang. Telegramga yozib yuborasiz shef. Chunki... U yerda o'sha ana o'tirishlikda telegramma bormi? Ha, litsenziya straxovaniya deb yozilgan telegram chiqadi aka. O'shanga bemalol yozib yuborasiz shef. Shaxsiy nomeringizni bermaysizmi? Ha, o'sha shaxsiy nomerim-ku. Xo'p. O'sha ham telefon, ham telegram, men o'zimni shaxsiy nomerim aka, u obshak emas.
+Xo'p.
+Bo'pti aka.
+Xo'p.
+Xo'p.
+MEANING OK: __
+
+FILE: test15.mp3  (142.8s audio, 38.67s)
+HYP: Assalomu alaykum.
+Alo, assalomu alaykum.
+Yaxshimisiz, charchamayapsizmi, eshitaman hozir?
+Rahmat, Xudo xohlasa. Mana shu anaqani qilayotganimda, hozir dastavka bilan shug'ullanmoqchiman.
+Xo'p.
+Kechadan beri negadir menga narxli klient bermayapti, faqat klassiklar kirib beryapti.
+I klassda kamda, judaayam kam qilgan.
+Nasib qilinadi, bunga-da faqat plastik qilyapti.
+Oka, shu bilan, naqd bilan karta turibdi-da. Endi prosta, endi shunaqa bo'lib qolayotgan bo'lishi mumkin-da anavi.
+Faqat... Yo'q, mana bugun ham shunaqa, mana hozir ham anaqadan boshladi. O'zi anaqa plastikliklar juda kam bo'lardi oxirgigi kunda. Hozir kecha ham faqat plastik anaqa berdi. Bugun ham mana plastikni beryapti. Prosta mana naqdim o'chib qolganmi shunaqada, o'shani anaqaga yozib bera olmaysizlarmi aka, men yozsam tushunmayapti-da meni ular. Shu tushuntirib yozib bera olasiz anaqaga, texnologiyaga. Bo'ldi, yozishib qo'yaman hozir, faqat naqd ber... faqarta bera oshiradi.
+Shuni tushuntirib yozib beraman, yozdim, ular meni tushunmayapti-ku men.
+Bu programmani o'zi qilib beradi, o'zi beradi deyiladi-ku.
+Fanatga, platformaga qilib beradi bo'lsa, kamda to'g'risi ketganda klient.
+Juda kam.
+Bo'ldi yozishib qo'ydim aka.
+Nimalardir bo'lishi mumkinmi o'zi?
+Yo'g'e, u Yandexdan bo'ladi-da o'zi faqat. O'sha hozir yozib qo'ydim, ko'rib beringlar, faqat karta beryapti deb.
+Bu aniq nimadir qollganda bu, tasavvur qilmasdan kechadan anaqaman, yana shu yozsam tushunmayapti ular meni.
+Bo'ldi aka, aytib qo'ydim hozir.
+Xo'p, u javob qanchada keladi sizga aka, men javobini bilmayman.gan edim.
+Endi ular yozishiga qaratdi aka, u aniq emas-da.
+Tushundim. Rahmat. Xush kelib o'zi hali ham bir-ikki soat o'zi telefon xabar olaman, maylimi?
+Bo'ldi, xo'p aka.
+Xo'p, rahmat.
+Salomat.
+MEANING OK: __
+
+FILE: test16.mp3  (108.6s audio, 32.51s)
+HYP: Assalomu alaykum.
+Ha, assalomu alaykum aka.
+Yaxshimisiz, charchamayapsizmi, ishlaysizmi?
+Yaxshimisizmi? Rahmat. Keyin saqlashim bor. Sizlarda ishlayman o'zi.
+Mhm.
+Aaa, Devoitni yuvonar qoluvdim.
+Xo'p.
+Komfortniy...
+Ana unga litsenziya qilyapman.
+Ana unga litsenziya qilyapman. Bunga qilishsa shartmi shartmi aka?
+Yo'q, shartmi?
+Ha.
+Shart shart aka.
+Ha.
+Uni sekin deydi-a?
+O'zi, o'zi sekin. ellik mingga biz qilib beramiz, agar qilishni bilmaydigan odamlarga.
+Ha, ha, ellik mingga shunaqa berasizlar-a?
+Da, bugun chiqadi-da licheskiy.
+Bu nima-nima tashlash kerak?
+Tex pasport, prava, pasport i telefon raqamini tashlorsangiz, SMS boradi, shundoq kopiratsiya tashlorsangiz, qolganini o'zim qilaman.
+Ha, bo'ldi. Tex pasport, pasport.
+Tex pasport, pasport, prava.
+Ha, tex pasport orqa oldini, pravani oldini i telefon raqami bo'ldi.
+Ha, bo'ldi, bo'ldi hozir.
+Azizga o'zi xohlayman-da.
+Bo'ldi, bo'ldi aka.
+Narsa menga telegramdan shunaqa yozib yuboring.
+Yozib yubordim, yozib yubordim. Aka mana Tifa deb yozib yubordim.
+Ha, bo'ldi, bo'ldi.
+I anaqani kartaga tashlab yuboramanmi, nimaga tashlab yuboradi?
+Ha, kartaga tashlab yuboraman.
+O'sha kartani ham tashlab yubordingizmi?
+Bo'ldi, xo'p, aka.
+Hozir men Habibga to'xtayman-da, hozir avtobusga urishmayman. Mana bu TTSda endi bu.
+Bizda filiallarimiz ko'p-ku, yo qo'liqdami aka?
+Ha, bo'ldi, bo'ldi. Bo'ldi, anaqa qilib yuborsangiz, tashlab yuborishmayman. Mana shu hozir Habibga to'xtayman, tashlab yuboraman.
+Xo'p, rahmat.
+MEANING OK: __
+
+FILE: test17.mp3  (110.4s audio, 21.67s)
+HYP: Alo, assalomu alaykum.
+Assalomu alaykum.
+Eshitaman.
+Faqat postavka beryapsiz, shuni ko'rib bering.
+Hozir.
+A telefon raqamiga ketaverasizmi?
+to'qson uch.
+Aha.
+Uchta sakkiz.
+Xo'p.
+o'ttiz o'ttiz uch.
+A bu yoqda lekin sizga boshqa tariflar ham qo'shilgan ekan. Start qo'shilgan.
+Yo'q, bu yoqda ham yaxshi ko'rsatyapti, lekin faqat dastlab beryapti, to'xtatmaydi.
+Nimadan bo'lishi mumkin?
+Agar yoqib qo'ygan bo'lsangiz, lekin tushib qoladi startdan ham.
+Ha, hozir.
+Yoqib qo'yganman hammasini. Mana bu yoqda ham ko'rsatyapti startni.
+Lekin faqat dastlab beryapti. Va boya umuman zakaz olmaganim olti yuz ta zakaz otmen qilib yubordim, hamma dostavka o'tdi-da.
+Ha, yoki-da, dostavkani o'chirib turib ishlab ko'rsangiz bo'ladi.
+ aytsangiz.
+Bo'ldi, faqat tavsiya yozib qo'ydim.
+Odamlar uchun qo'yiladi hozir.
+Aha.
+Xo'p, rahmat.
+Xo'p, charchamang.
+MEANING OK: __
+
+FILE: test18.mp3  (58.7s audio, 10.83s)
+HYP: Assalomu alaykum.
+Hali assalomu alaykum.
+Yaxshimisiz, charchamayapsizmi, eshitamiz-a?
+Oka, men pod'yiznoyimni esimdan chiqarib qo'ydim, mana bu.
+Sizlarga ulangan ekanch.
+Ha o'zimni nomerim ekanmi aka?
+Ha, faqat besh kod.
+Anaqa Tifa bu aka, anavi Paynetga kirib.
+Da, da, da.
+. Hali klikda tashlasa bo'lmaydimi? Bo'ladi, bo'ladi. Polichka Tifa deb ochsangiz chiqadi. Bo'ldi, bo'ldi aka, rahmat. Xo'p, bo'ldi, sabab bo'ling.
+MEANING OK: __
+
+FILE: test19.mp3  (165.6s audio, 51.23s)
+HYP: lozdirmaydi. Alo, assalomu alaykum. Va alaykum assalom, aka, yaxshimisiz-a? Rahmat, sog'lig'ingiz yaxshimisiz bizga? Kartamni o'g'limga boshqa kartaga ulab bergin dedim-da o'zimga endi ikkita. Xo'p. U kartamni men tashlab yuborgan edim. Juda anavi dabdala bo'lib ketgani uchun, endi oyning oxirigacha srok tugardi. Haligi ko'rinmay ketgani uchun raqamlari uni tashlab yuborgan edim buni. Misrga. Xo'p, xo'p. Hozir bir yuz ellik ming yesdan o'sha kartaga tushibdi-da. U kartani o'chirib tashladi. Uni hozir o'sha kartangizni yozib, klikmi, payli ilovasiga ulaysiz-da, kartangizni. Keyin u pulni klikdan tashlab oling o'zingizga. Bo'ldi, muammo emas. Tushundingizmi? Hozir bu karta raqamini topishim kerakmi? Ha, karta nomeri toping. Karta nomerni bor-ku, o'sha ulanganman, o'sha bizlarda, bizlarda aka, kartani to'liq nomeri bo'lmaydi. Bizlarda u maxfiy sir uni bizga hech kim bermaydi u kartani. Hozir boshqa o'zini qilib bera olasizmi? Yo'q, yo'q aka, siz kartangizni nomerini biz qayerda topamiz? Siz anaqa qiling, kartangizni qo'shing, bo'ldi, o'sha klikmi, paymi ilovasiga ulay, bo'ldi. O'sha klik-klik, o'sha pul qayerdadir bormi? Klikkami, bir narsaga ulaganmisiz kartangizni?
+Ha, ulaganim o'sha yerda o'zimda yana nima qilsa bo'ladi, uni vazifaniyat qilsa bo'ladimi?
+Ha, bo'ladi, bo'ladi aka, bo'ladi. Bo'lmasa bankka telefon qiling. Bankingizga kartanoblingizni aytadi.
+Bo'ldi, tushundim. Yoki bankka borasiz, kartangizni yangi karta ochadi-da, pulingizni yaqin o'tkazib beradi deydi.
+Tushundim. Bu baholada bitta plastikka yangilab olasiz. Borasiz-da, aytasiz, shunaqa-shunaqa bo'ldi.
+Menga yangi karta ochib ber desangiz, bo'ldi, yangi karta sekin bo'ladi.
+Boshqa, boshqa yangi karta ochib ber dedim-da, Asaka bankdan.
+O'shani Asaka bank eshitsa ham asakamidi? Yo'q, unisi ipoteka edi-da. O'sha ipoteka bankka borasiz. Agar hech kim, hech qarang, hech qanaqasiga hal qila olmasangiz, ipoteka bankka boring, bo'ldi. Hm, hm, hm. Bahorada karta ochasiz-da, aytasiz, shunaqa pulim bor, o'shani mana bu yangi kartamga o'tkazib bersangiz, o'tkazib beradi. Yoki klikka ulab, o'zingizni boshqa kartangizga klikdan tushirib oling. Agar plastik karta kerak emas.
+Hm, tushunarli. Xo'p. Qidirib ko'ring, kartangizni rasmini bir narsasini toping-da o'zingiz qidirib.
+Hm, tushunarli. Xo'p. Xo'p, charchamang. Xo'p. Xo'p.
+MEANING OK: __
+
+FILE: test2.mp3  (171.4s audio, 59.38s)
+HYP: Alo.
+Alo, assalomu alaykum.
+Assalomu alaykum. Labbay oqaysizmi?
+Assalomu alaykum.
+Aka, men hozir klientni oldiga keldim men.
+Xo'p, xo'p.
+Klientni, klientni oldiga kelyapman.
+O'sha klient qo'ygan tochkadan bir ayol kishi to'xtayaptilar-da. Men, men deb minyapti mashinaga.
+Xo'p, xo'p.
+Keyin mindirib oldim-da, ketdim. Men hozir besh kilometrlar yurganimdan keyin, besh-olti kilometrlar yurganimdan keyin, u meni chaqirgan klient, u boshqa ekan. Endi u telefon qilyapti. Nimaga men olib ketmadim, boshqani olib kutib qolmaysiz deb.
+Ha.
+Adashib chiqib qolganmi bular hozir Yandiskiy?
+Adashib chiqib qolgan, ha, bu kishi.
+Hozir nima qildingiz bular mashinadamilar?
+Mashinada o'tiribdi, ha.
+Ha, klient bilan gaplashib ko'ring, kutib turadimi borguncha?
+Yotqiz qoradimi?
+Yo'q.
+U, u birinchi men zakaz qilgan klient yigirma ikki kilometrga belgilaganda, yigirma yetti kilometrga.
+Yo'q, yo'q, tushundim buni. Hozir bitta telefon qilgan klient bilan gaplashib ko'ring, adashib ketqommidi, borguncha kutib turasizmi, otkaz qolasizmi deb so'rab ko'ring.
+Boya otkaz qilmayman deganday qildi-da.
+Bu otkaz qilib beringmi bu yoqdan?
+Ha?
+Men o'zim otkaz qilib beraman bu yoqdan.
+U klientdan siz qayer, shu yerdan mana keting bo'lmasa, xola?
+Bu bilan bilmayman, bilmayman.
+Shuydimmi yo'qmi? Hozir noto'g'ri nasibim yo'q, mana shuncha joy kuyib qolaman-da.
+Shu joyingizni beramiz, g'uboz kishaylik.
+Shu joyingizni olib borib qo'ying.
+Ha, shuni ham g'uboz qo'ying.
+Qarang, men endi hamma xolamni o'zim joyiga olib borib qo'ysam bo'ladi. Pulini beraman deyapti.
+Ular bilan o'zlari bilan endi kelishadi-da, aka uni. Anaqa hisoblamaydi-yu.
+Otkaz qilib bersam, shunday otkaz bo'ladi. Pulni beraman deyapti.
+A ular bilan o'zlari bilan endi kelishadi-da, aka uni. Anaqa hisoblamaydi-yu.
+Otkaz qilib bersam, shundan otkaz bo'ladi.
+Yo'q, hozir qaytishga boya qilsam bo'ladimi yo'qmi?
+Nima qilsangiz bo'ladi?
+Qaytishga menga navigator yo'l ko'rsatmaydi-a?
+Yo'q, yo'q, yo'q, hisoblamaydi-yu.
+Yo'l ko'rsatmaydi ham-a?
+Yo'q, yo'q, yo'q.
+Hm, bo'lmasa hozir shu yerda hozir bir otkaz qilsak ham meni returnimni ta'sir qiladimi aka?
+Yo'q, yo'q, ta'sir qilmaydi.
+Hm, bo'ldi hozir otkaz qilib bering uni aka. Men hozir men u qaytib, hozir uncha unga qancha olib ketadi.
+Ha, bo'ldi.
+Q, mana bu mana bu yerda o'tirgan opani, aka.
+Xo'p.
+Mana bu yerda o'tirgan opani, bu yerda menga qo'yib bera olmay, ismimga bera olmay, ismimga bera olmay.
+Yo'q, bizlarda nomerlari yo'q.
+O'zimizdan qilib beramiz.
+Nomeri yo'qmi?
+Yo'q, yo'q.
+Lokatsiyamiz bo'lganini boya qo'ygan. Bo'ldi Bo'lmasa otkaz qiling, akkauntimiz, klientni.
+Xo'p, xo'p.
+Xo'p, rahmat.
+Xo'p.
+MEANING OK: __
+
+FILE: test20.mp3  (44.6s audio, 11.82s)
+HYP: Alo, assalomu alaykum.
+Alo, assalomu alaykum.
+Yaxshimisiz?
+Yaxshimisiz?
+Yaxshimisiz?
+Alo.
+Alo, yaxshimisiz?
+Yaxshimisiz?
+Ha, ha.
+Mhm, yo'q, bilasizmi, bilolmayman, hurmat yasaman.
+Sepul ishlayapti-ku sizlarda?
+Ha, ha, ishlayapti.
+Mana bu... ishlab chiqish ham ishlayapti, to'g'rimi?
+chiqish nimaga qarab ko'rmadim, endi ko'raman.
+Bo'ldi, bitta qarab ko'ring, agar ishlamasa, shunday kontrol qilib aytib yuboring, yozib yuboring, mana bu yozib yuboring. Menda chiqish ishlamayapti, yo kirish ishlayapti.
+Hozir ko'rasizmi?
+Hozir ko'raman.
+Xo'p.
+MEANING OK: __
+
+FILE: test3.mp3  (291.1s audio, 96.54s)
+HYP: Alo, assalomu alaykum.
+Alo, assalomu alaykum.
+Eshitaman.
+Alo.
+Alo, eshitilyaptimi?
+uch yuz batak safar kimi bu?
+Ha, ha.
+Algoritmdagi o'qishdimi?
+Ha, ha, algoritmdagi.
+Qarang, pozvonimni yozib yuboring, sakkiz yuz yigirma to'qqiz.
+Hozir.
+Aha.
+sakkiz yuz yigirma to'qqiz.
+Nimalig o'n yetti?
+Ha, nima muammo bo'lyapti?
+Eshitilyaptimi?
+Ha, ha, eshitilyapti.
+Men mana multidriviyalardan pul yechsam, o'n minut, o'n besh minut qolib ketyapti. O'shanaqa to'g'irlab beringlar. Avval bittada tushadi-yu.
+O'zi bugun pul yechgan bo'lsangiz, pul yechganingizdan keyin shunaqa vaqt tugashni kutishingiz kerak bo'ladi-da.
+Ha, oldindan hozir ham zakazdaman.
+Nima zakaz tushmayapti bor-ku, men o'zi odam profillarida ishlab yuboraman-da bu yoqda.
+Aha.
+Ha, o'zimni ishlayotgan taksha partiyamda tushundirmaydi-da. Nimaga?
+Tifada unaqa qilyapti.
+Ha yo'q, lekin zakazdan muammo yo'q, hozir zakazdasiz-ku.
+Bilmadim? Yo'q, zakazdaman, tushish qiyin bo'lyapti-da. Bir xilda, bir xil ish ham cho'zilib ketyapti.
+Mana shunaqa hal qilib bering.
+Ha, mana bu Yandex Pro programmasini yengillab yuborishingiz kerak bo'ladi.
+Va har kuni o'chirib o'tkazaman men. Foydasi bo'lmayapti u narsani.
+Ayol ekan zakazdan muammo bo'lmayapti. Hammasi joyidasiz-da.
+Yo'q, men...
+Men endi u narsani podderzhka, mendderzhka yozib berasizmi, uni bir yechim qilib bermasangiz bo'lmaydi lekin.
+Ha, mana bu joylashuvlari hammasi yoqilganmi?
+Hammasi joyida. Zakazda meni o'zi hozir prosta
+ketuvdan hozir
+kerak bilan gaplashib turibdi-ku, o'shanga telefon qila qolinglar o'zi. O'zi menimcha qanaqadir rashidiyam bola o'ylab bergan-da meni. Aha. Ya'ni u bola nima, men shug'ullanib qo'ygan paytim hech bir usti bola ko'tarmadi-da qaysi. Nechchidan nechchigacha ishlaydi o'?
+Ha, u bola yettidan kechqurun ikkigacha ishlaydi.
+Ha, kechqurun.
+Keyin yana bitta muammo bo'lyapti-da hozir.
+Aha.
+Asnovnoy o'n ta, o'n ketma-ket o'n ta, o'n besh ta zakaz qilsam, misol uchun, kuni bo'yi hammasi kantor orqali bo'lyapti-da endi menga unaqa.
+Ha, hozir o'zi ikki-uch kundan beri o'zi hammada shunaqa bo'lyapti, to'g'irlanib ketadi.
+A u sizlarni taksoparkinglardan ham bo'lyapti adashmasam, chunki men aytaman o'zimni taksoparkimda hech bunaqa muammolar bilan duch kelgan bo'lmaydi-da.
+Ha yo'q, lekin o'zi bu Yandexni o'zidan bo'lyapti-da.
+To'g'irlanib ketadi lekin.
+Endi hamma narsa Yandexni o'zidan bo'lmaydi-yu, pulni so'rasan, Yandexdan dedingiz, uni so'rasan, Yandexdan dedingiz.
+Qalb qilib berasizlarmi yo'qmi birinchi yo boshqa taklifotga o'tib ketaveraylikmi?
+A yo'q, lekin to'g'irlanib qolishi kerak. Naqd pul tushmayaptimi sizga umuman?
+Umuman naqd qilmayapti-da. O'zgartiraman desam, o'zgartirib bo'lmayapti. Siz narsa nima, povish degan johdasiz, o'zini o'zgartirib bo'lmaydi.
+Analichi bilan kartaga o'tmayaptimi shunda?
+Ha, ikki million soatlab o'ynayapti-da.
+Hali lekin kasbga tushyapti-da.
+Aytaman, shu yerda...
+Ha, chunki men adam mashinalarni olib, men o'zim ishlayman, boshqa taksiparkda Mironda ishlayman-da men o'zi.
+Aha.
+Do'stlar, hozir telefonim sal buzilib qolganiga yaramay, telefonni ochishga kela qolgan edim.
+Lekin men Mironda ham shu elektro premyerlar qilgan.
+Hech qanaqa muammo bo'lmaydi-da.
+Zakaz bo' ham, mana bu naqd bo'yicha ham. A yoki ofislarimizga kelsangiz to'g'irlab beramiz, lekin mana bu naqd bilan kartaga o'tayotgandida, boshqalarga tushyaptilar ekan. Mana hozir onlayn hal qilsa bo'lmaydimi hozir? rostdan nima, nima qilib berasiz? Hozir telefonda muammo deb oylayapsizmi?
+Ha, ha, telefondan to'g'irlab beramiz.
+Yo'q, o'shani aytib tursangiz, men o'ylab tursangiz, men to'g'irlab yuborardim-da bu odam.
+O'sha algoritm.
+Uzr-da. Nima qilay hozir?
+Unda qarang, hozir Yandex Pruni obnayt qilib yuboring-da, boshqadan o'sha mana bu naqd ellik kartaj joyiga kir kirib o'tkazib yuborsangiz bo'ladi.
+Ana kecha kechqurun o'tkazuvdim-da, men o'chirib tashlab, qaysi yerdan o'tkazib, obnovleniya qilib, turib o'zini ham miyasiga obnovleniya berib.
+Men hozir ham shunaqa qilib o'tkazib yuborsangiz o'tib ketadi lekin.
+O'tib ketadimi?
+Ha, ha.
+O'tmasa sizga telefon qilaman, xo'p?
+Hm, xo'p, telefon qo'ying.
+Xo'p.
+Rahmat.
+Xo'p, charchamang.
+MEANING OK: __
+
+FILE: test4.mp3  (213.3s audio, 81.51s)
+HYP: Assalomu alaykum.
+Assalomu alaykum aka, yaxshimisiz aka, charchamayapsizmi?
+Charchamayapsiz, xudo rahmat bo'ldi.
+Akam, mana bu bir nastroykadammidir, nimadandir, ikki-uch kundan beri zakaz yo'q-da, sovqamiz.
+Kecha kechgacha bir oltita zakaz qilganman-da.
+Ikki anavi oplata pakalib ketishyapti-da.
+ Yo'q, u qarang, to'lov, to'lov turi, u Yandex o'zi kontrolirovat qiladi. Biz bu yerdan hech qanaqasiga ruchnoy to'g'irlab bera olmaymiz. Uni Yandex o'zi qiladi. Yo'q, yo'q, uni zakazni hozir men sizga podderzhkaga bir og'iz yozib beraman lekin. Ha, buni aytganlar kecha ikki o'rtog'im bor edi, ya'ni haligi dastlab turib ishlaydi-da.
+Mhm.
+Gde-to yigirma, yigirma uch ta dastlab qilgan-da.
+Hm.
+Men ishni gde-to aytdim.
+Hozir.
+Hozir yozib beraman.
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+[musiqa]
+Oka, chunki tufayli qilib yozib yubordim.
+Xudo xohlasa, normalniydan katta kishi kerak, oka.
+Xo'p.
+Rahmat aka.
+Bo'ldi, bo'ldi, azizlar.
+Rahmat aka.
+YaxshRahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+Rahmat.
+MEANING OK: __
+
+FILE: test5.mp3  (202.1s audio, 54.23s)
+HYP: Alo, assalomu alaykum.
+Menim mengq, bonus necha oydan beri bermayapti menga?
+Ha, men hozir tex patichka yozib yuboraman unda, chunki sizda hammasi joyida-da.
+Umuman menga bermayapti. Mana oldingi qatti ham, undan oldingi qattalar ham. Umuman mana bu hafta ham mana bermadi.
+Yo'q, nima qilish kerak? O'chirib yo'q. Boshqa harakatga o'tish kerakmi?
+Pipani o'chirib. Shunaqa qilish kerakmi?
+Yo'q, unaqa qilish kerak emas. Mana bu Yandexni o'zi beradi-da bonusni.
+Ha.
+A hozir men yozib yuboraman podderjkaga, ko'rib berishadi.
+Bo'ldi, bo'ldi, bo'ldi. Yozib yuboring keyin ham.
+Kutib turaymi men?
+Ha, yozib yuboraman. O'zi javob kelsa, aytib yuboraman sizga.
+Hozir kutib turaymi hozir telefonda?
+Yo'q, lekin hozir birdaniga javob kelmaydi-yu. o'n besh-yigirma minutlarda javob kelishi mumkin.
+Yo'q, hozir yozguningizga...
+Yozguningizga kutib turayHa, farqi yo'q, vaqtingiz bo'lsa kutib tursangiz bo'ladi.
+Yozdim deb aytib yuboraman-da sizga.
+Ha bo'ldi, yozdim. Yozdim, kirib olay, bilasno speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+Yozib yubordingizmi?
+Ha, ha, yozib yubordim.
+Xo'p, rahmat.
+Mhm, xo'p.
+Charchamang.
+Bu menga keladimi javobi?
+Yo'q, javobi bizga keladi.
+Ha, sizga keladi-a javob sizlarga?
+Ha, ha.
+Keyin menga qanaqa aytasizlarmi nima bo'lgan?
+Ha,, javob kelsa sizga aytib yuboraman yoki shu raqamingizga telegram bo'lsa, telegramdan tashlab qo'yaman.
+Mana shu raqamda bor telegram.
+Ha bo'ldi, unda kelishi bilan tashlab qo'yaman sizga.
+Xo'p, rahmat kattamiz.
+Mhm, xo'p, charchamang.
+Xo'p.
+MEANING OK: __
+
+FILE: test6.mp3  (257.2s audio, 71.46s)
+HYP: Alo, assalomu alaykum.
+Alo, assalomu alaykum.
+Qarang.
+Men boya bitta klient otkaz bo'lganda.
+Boshqa klientim bilan ketganman. Shu bir ko'rib bering-da, otkaz bo'lganmi, bo'lmaganmi? Menda chiqib turibdilar.
+Hozir.
+Karochi, bitta klientga borganman.
+Aha.
+O'sha klientning uyiga borganman, boshqa ayol kishini olgan-da. U ayol kishini olib ketyapman.
+U ayol kishi to'xtatib oldi-da, men endi.
+U ayol kishini olib ketdim, adasiga olib boraman deb ketaversam, keyin bu birinchi klient tilbon qilyapti, meniib ketmay boshqani olib kutib qolmaysiz deb.
+Ha.
+A mana bu Uchtepat tumanidan Savzovod shaharchasiga olganingizmi?
+Shu bilmayman, yigirma ikki kilometrmidi shunday edi-da.
+A bu reja hali otkaz bo'lmagan.
+Shuni bir otkaz qilib bering, opa. Ancha bo'ldi-da, otkaz qiling oyoqqa yonim.
+Ha, bu lekin
+Bir soat
+kart orqali ekanda, hozir otkaz qilinsa lekin
+Nima bo'ladi?
+Hozir otkaz qilinsa, sizga pul tushadi-yu xabaringizga.
+Yana qilsam bo'ladimi?
+Ha, ha. Chunki vaqt ancha bo'lib ketganda, o'shanga ular ham otkaz qilmayapti menimcha.
+Yo'q, men otkaz qilmayapti, chizgisizmi?
+Hm.
+Hozir bu anaqangizga ham ta'sir qilish mumkin-da, reytingiz bilan prioritetingizga. Ularga telefon qilib aytib yuborishingiz kerak-da, iltimos, otkaz qilib yuboring deb aytib yuborsangiz.
+O'zi ayting, men
+siz bir otkaz qilmang-u, opa, lozim qilib.
+Men bora olmayman-da meni degan.
+A hozir otkaz qilinsa, reytingizga ta'sir qilishi mumkin-da.
+Mayli, otkaz qil, reytingga ta'sir qilgan iloji yo'q endi.
+Ha bo'ldi, hozir otkaz qilaman unda.
+U nima bo'ladi endi, uni puli menga tushadimi?
+Hozir ko'raman.
+Ha, endi bekor bo'ldi.
+Yo'q, yo'q, puli tushmadi.
+Tushmadimi?
+Yo'q, yo'q, tushmadi.
+Reytingga ta'sir qildimi endi bu?
+Yo'q, hozir o'sha lekin, ta'sir qilmayapti.
+Eee, boya telefon qilib aytgandim, podiskaga, podiskagani shunga ham chiqdi-da.
+Bu yoqqa qilib, operator bilan gaplashgandim, boshqa bu yoqqa, boshqa operator bilan.
+Aha.
+Atkaz qilaman degan, hozir, hozirgacha qilmagan-da.
+Ha.
+Haarang, hozir hisobingizga to'rt ming besh yuz pul tushdi lekin.
+Ulardan.
+Hm.
+Endi ko'rindi-da.
+Hm. Endi nima bo'ladi u to'rt ming besh yuz qaytarib berishim kerakmi?
+Ha, o'zlari bilan gaplashib, shu qaytarib berishingiz kerak. Bo'lmasa, jaloba yozib yuboradi-da sizga.
+U bilan qanday gaplashaman men hozir?
+A hozir yozib olasizmi mana bu damashish raqam chiqyapti-da, shuni yozib olib gaplashsangiz?
+Jalba yozsam nima qilay? Mayli deb o'tirib ketaveraman, boshqa klient olib ketaveramanmi? O'zi tushunmaydigan odam ekanda u bor-ku. Umuman tushunmayapti-da. Qaytyapti, men manzuga keldim, bir opang to'xtatib oldi meni, men, men deb. Ha. Men dedi, o'chirmaymanydi, men kutaman deylik.
+A hozirligi sizga to'rt yarim ming pul tushdi-da.
+A?
+Agarda mabodo ular aloqaga chiqib qolsa, qaytarib bersangiz bo'ladi.
+chiqmasam nima ketaveraymi?
+Chiqmasami?
+Agar chiqmasa indamay turaverasiz, agar chiqsa tashlab berishingiz kerak bo'ladi-da.
+Bo'ldi, agar chiqsa tashlab beraman.
+Mhm, xo'p.
+Mayli opa, rahmat.
+Xo'p.
+MEANING OK: __
+
+FILE: test7.mp3  (441.8s audio, 131.55s)
+HYP: Alo, assalomu alaykum.
+Assalomu alaykum.
+Zo'r, siz yaxshimisiz?
+Yaxshi, yaxshi. Bu glavniy ofismi bu?
+Da, glavniy ofis.
+Yaxshimisiz? Xohlangiz yaxshimi, tuzukmisiz?
+Yaxshimisiz? Da, bo'ladi.
+Shuhriddinmi?
+Yo'q, eshitaman.
+to'qson to'qqiz lik, nol o'n ikki, ellik yetmish besh.
+o'n to'rt soat.
+o'n to'rt soat.
+Boshlaysizmi?
+to'qson'qqiz:nol, necha edik?
+o'n ikki, ellik yetmish besh.
+Xo'p.
+nol o'n ikki, ellik yetmish besh-a?
+nol o'n ikki.
+Nima xizmat?
+Sog' bo'ling, siz bilan gaplashdim, shakl, to'g'rimi? Xo'p, nima masala bo'yicha edi? Xo'p, nima bo'yicha, komissiya bo'yicha. Xo'p, tak, tak, to'xtang hozir. bir yuz so'm qaytaraman, ikki yuz so'm sizga o'tib ketdi. Ha, bo'ldi, bo'ldi, bo'ldi, eshitmadim-a. Nima qildi?ana yana mendan komissiya, partnyorim,
+nima,
+yana ochilardim men kecha.
+Qarang, soliq o'n ikki ming sakkiz yuz yetmish so'm olyapti, shular yigirma uch ming olyapti. Nimaga?
+Men sizga tayinladim. Menga rasparizni telefonini bering, Sherzodmidi akam?
+Ha.
+G Ha. Gaplasha qolayman. bir% bilgandan keyin bir% olingman. O, bo'lishni olsalaring, choy pulni olsalaring. Ha, biz nima uchun ishlayapmiz? Nalog shunda o'n sakkiz ming yetti yuz oldimi? Yo'q, nalog o'n ikki ming sakkiz yuz yetmish so'm oldi. Xo'p, bizlarniki-chi? Sizlarniki yigirma uch ming to'qqiz yuz o'n besh so'm oldi. Xo'p, qaysi kungi bu? Kecha-kunga. Hozir. O'shani to'g'irlab qo'yinglar, bo'ldi. Xo'p, qarang. ikki ming so'mdan. Xo'p, qarang, bu yerda nalog bilan bizlarni komissiya bir xil turibdi-yu, o'n uch ming turibdi-yu. Yo'q, o'n uch ming turgani yo'q, mana yigirma uch ming turibdi menda. Screenshot qilib yuboring desangiz, screenshot qilib yuboraman. Men ham qilaman har kuni, kechqurun. Bo'ldi, tashlang, men ham sizga skritcher tashlayman. Sizga tashlang. Ha, ko'ring. Qisqasi chiqarib, nima qilyapsiz? yigirma yetmish kuni, hozir mana yigirma yetti-kuni. yigirma yetti-kuni ham o'n ikki ming to'qqiz yuz oltmish besh ovoz qilasiz. Xoliq to'qqiz yuz o'n ikki ming oltmish o'ttiz. Uch yuz so'mga yana slash bo'lib ovoz qilasiz. Ha, bu yerda boshqa narsa ko'rsatyapti. Siz boshqa narsa deyapsiz. yigirma yetti-da. yigirma yetti. Ho'p, yigirma sakkizni ko'rdim. yigirma sakkiz mana yigirma uch ming to'qqiz yuz o'n besh. o'n ikki ming sakkiz yuz yetmish so'm bo'lyapti. Mana olti yuz o'n, ayiramiz, ikki yuz sakson.. Mana uch yuz so'm ko'p olyapmiz yigirma yetti-da. Kamerada bo'lasiz. Bo'ldi, hozir telegramdan bitta tashlang. Shuni menga to'g'rilab beringlar. To'g'rilab beringlar, bo'ldi, men boshqa masalalar bilan klip oqayotganim yo'q-ku. Bo'ldi, bo'ldi.
+Qilayotganimiz yo'q. Bir foizmi, bir foiz olinglar, bo'ldi.
+Xo'p, xo'p, xo'p.
+Hozir men so'ray.
+So'rang, gaplashing. Yo'q bo'ladigan bo'lsang aytinglar, bo'ldi.
+Oka, mana shunday bo'ladi. Yo'q, qolamiz-ku, ketamiz.
+Masalasi yo'q uni.
+Bo'ldi, bo'ldi.
+Biz kechasi kunduz ishlar ekanmizda, bir foizda sizni aldab pulni olar ekansizlar. Alday qilmanglar-da.
+Xo'p.
+Bonusdan, bonusdan kecha pul olibsizlar mana.
+Yo'q, qarang, qarang. Bonusdan pulni biz olmaymiz. Bonusdan pulni Yandex oladi.
+ Yandex olmaydi, mana Yandex ko'rsatyapti-da menga. Mana qarang-da, men yana ham aytyapman. Komissiya servisda bir yuz to'qson to'qqiz ming olyapti Yandex. O'sha boyagi o'n necha foiz olyapti, uch foiz chempionga o'tgan bo'lsam, o'shanda olyapti. I sizlar olyapsizlar. Bir foizmi, bir foizligini olinglar. Qaysiga tashlayman? Menga aytsang, menga bir narsa yozib yuboring, to'lovni ikki yil, yetti, besh, besh martaga tashlab yuboraman hozir. Qarang, men sizni hozir yozolmayman. Siz menga nuqtani bu narsani qo'yib yuboring, bu yerda ko'p odam yozgan. Mana bu yerda nomeringiz ham chiqmayapti hozir. To'xtang hozir. Nimadir yozib yuborsangiz, men nimadir qilib berishim mumkin.
+Hozir men nimadir yozib yuboraman.
+Qo'ymay tursangiz, men o'qib beraman-da.
+Telegramdan screenshotini tashlang, u men ko'ray, qanaqa komissiya, nima bo'lyapti.
+Men o'qib berganingizga qarab turib, hozir nimadir qilib bera olmayman. Men ko'rishim kerak buni. Men podderjkaga yozaman. U dalil bo'lishi kerak menga. Hozir men podderjka telefon qilib turib og'zimga aytmayman-ku. Yo ichkariga kirib og'zimga aytmayman.
+o'n to'rt-o'n to'rtmi?
+Da, o'n to'rt-o'n to'rt.
+Mana qarang, o'n to'rt-o'n to'rtda tashlayapman. Hozir bilsak bo'ladi. Mana. Tashladim, ko'ring. Ko'rdingizmi? Hozir komissiya ko'rdingiz. Komissiya partnyor. Xo'p, tushunarli. To'g'ri aytyapsanmi? Xo'p. Bu qaysi talabi? yigirma sakkiz-a bu-a? Ha, yigirma sakkiz mana, yigirma sakkiz. Bo'ldi, shu ko'rsatiladi. Anavi nimaga qilib o'tirsalaring? Noy puliga o'zi qilib o'tirsalaring. Abu bilan ko'ra ishlamaganman. Qilishlar bilan. Qaradim. Xo'sh. Bu yerda sizni daromadingiz ikki million bir yuz sakson to'rt ming olti yuz sakson olti so'm ko'rsatyapti. Bu yerda bir million uch yuz yigirma ikki ming ko'rsatyapti menda. Yo'q, bu bonus tushdi-da, bonus tushdi. Ha, bonus tushdi. Bonusdan necha foiz komissiya olib qoldi sizdan? Bonusdan sizlar olyapsizlar. Boshqa hech kim aytgani yo'q. Ko'rinib turibdi-yu mana. Yavniy ko'rinib turibdi.
+Hozir mana shuni so'ray.
+Hozir mana shuni so'ray.
+O'tgan safar bittami? Pul beringlar dedim.
+yigirma ming pul ham menga beshta, to'rtta klient, oltita klientga yetadi olib borlishiga. O'shandan yettita. Qolgani menga hozir o'zimga qoladi.
+Bo'ldi, hozir men siz so'rab yuboring, shundan mana shu nomerdanmi?
+Ha, shu nomerdaman.
+Men telefon qilaman sizga.
+MEANING OK: __
+
+FILE: test8.mp3  (53.0s audio, 17.19s)
+HYP: Assalomu alaykum.
+Alo, assalomu alaykum.
+Assalomu alaykum aka.
+Yaxshi ishlayapsizlarmi?
+Rahmat, tarchamayapsizmi aka, sizmisiz?
+Ha, Xudoga shukur, rahmat. Qarang, anavi multidrayxmi, botinglardan pul yechib bo'lmayapti-a? Nimaga unaqa bo'lyapti?
+Yo'q, hozir bugun tushgan-ku.
+Ha.
+O'shanga katta summa yechib olingan hozir.
+To'ldirroq misol uchun aka.
+o'n-o'n besh minutda ishlab qoladi.
+Ha, hozir katta. Endi valitel ko'p-ku, aka.
+bir million ikki yuz dan adashib bo'lishi kerak ekan bir xillarga. Juda ham katta summa yechib olishgan-da, aka. O'shaning uchun biz ham endi bilmaymiz-da bo'lishi.
+Endi odam xohlasa, hozir anaqa pul tushyaptimi, sizlar isana ishlaydi aka. Qanchalarda ishlaydi, Xudo xohlasa? Menga o'n-o'n besh minut ishlaydi. Bo'ldi. Xo'p.
+MEANING OK: __
+
+FILE: test9.mp3  (226.6s audio, 68.15s)
+HYP: Alo, assalomu alaykum.
+Vaalaykum assalom, o'zimga yaxshimisizlar?
+Ha, rahmat, eshitaman.
+Pampajinlar ko'rish, bir ikki ming besh yuz to'qson besh.
+Aha.
+Men bundan oldin ikkita zakaz oldim-da.
+Xo'p.
+Lekin bitta bo'yicha men ham oldim.
+Bittasini oldim, keyingisi bir yetti-sakkiz kilometr naryoqdan oldim-da, ikkalasini ikki tomonga olib bordim. Lekin pulini faqat bitta hisoblarida-da, yigirma sakkiz ming besh yuz hisoblarida qoladi. Yoki unaqa?
+Ha, hozir ko'rib beraman.
+Xo'p.
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]
+[no speech]A faqat yigirma sakkiz ming besh yuz ko'rsatyapti obshiy. Chunki mana bu bittasi o'n to'rt ming besh yuz bo'libdi, nargisi o'n uch ming besh yuz ham bo'lgan. Shuning uchun obshiy yigirma sakkiz ming bo'libdi.
+Ha.
+Ikkita shuni
+Ikkita shuni narxini yigirma sakkiz ming besh yuz bo'libdi-da.
+Birinchi olganimizda.
+Ha yo'q, ularniki bittasi o'n uch ming besh yuz, keyingisi o'n to'rt ming besh yuz bo'lgan ekan.
+Ha, mayli, bo'pti.
+Mana hozir endi yana ikkita zakaz berib, ikkita zakaz berdi, ikkita tochka.
+Aha.. Lekin bitta joydan olsam kerak, ikkita joyga olib borsam kerak. Uni degan narxini keyin ko'raman-da, Xudo xohlasa. Ha, ha, shunaqa. Borganingizdan keyin ko'rinadi. Keyin menga bir to'rt kundan burun faqat, nima deydi, oqilatish karta beryapti-da. Umuman qidirib-qidirib, yarim soat, qirq minutlarda zo'rg'a-zo'rg'a bitta-bitta nima beryapti-da, zakaz beryapti, u ham bo'lsa hammasi oplatniy karta beryapti. A nima oplatniy nalichka yo'q. Bunaqalar rosa ko'p-ku, lekin oplatniy nalichka. Faqat o'sha qidirib-qidirib, menga shu nima beryapti bolalar.
+Mana bu
+tarifa degan joy bo'ladi-yu, shu yerda nalichiy bilan karta yoniq turibdimi?
+O'shani topolmayapman-da.
+Mana bu profilingizga o'tsangiz, tarifni tegida nalichiy ili karta degan joy bo'ladi-da. Shu ikkalasi yoniq turgan bo'lishi kerak.
+Mana profilga kirdim.
+Mhm.
+Tarifingiz deganingizga boshlaymiz o'shani? Tarifingiz obshiy degani.
+Yo'q, shuni tegini qarasangiz, nalichi ili karta degan joyi bor.
+Hech nima yo'qda, hech nima yo'q.
+Minus birta.
+Ha, unda obnovit berib yuborishingiz kerak Yandex Proga.
+O'shani obnovit qilishni o'rgatuvdi, umuman u chiqmayapti-da update qilish.
+A yoki ofisga kelsangiz to'g'irlab beramiz-a?
+Aha.
+Hozir ketaverdim, hozir yana berib qoldi-da, o'shanga.
+O'shanga yana zakaz mana qolib ketdim. Hozir sizlardan oldingizga ketaverdim hozir.
+Ha, ha, shu update ber o'sha yerga o'tkazsangiz o'tadi.
+Mayli, agar yo'lim ichida o'taman-da.
+Mhm. Xo'p.
+Alo.
+Ha bo'ldi, kelavering.
+Alo, eshitilyaptimi?
+Alo.
+MEANING OK: __
+

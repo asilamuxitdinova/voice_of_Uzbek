@@ -1,0 +1,88 @@
+model: navai-uz/whisper-medium-uzbek
+beams: 5
+folder: test_set
+files: 20 (0 with reference .txt)
+speed: 420.4s for 3251.7s of audio (real-time factor 0.13)
+
+Fill in MEANING OK for each file: yes = the request would still be understood correctly.
+
+FILE: test1.mp3  (143.5s audio, 15.04s)
+HYP: alayhissalomligim yoʻlakay asosidagi suzimsiz boʻladilar beoʻqishmi aka bonus dervishida olti yuz toʻqson ming olti bir yuz oʻttiz ming qop qizil aql oʻn besh yushmadi da haj koʻrgani mumkinxullas etti pushti be`mani odamlarikkinchisi toʻqson ikki yil ichgan u qarayamki mamont texnopayda ishlarni umrini bilasizmi oʻttiz besh sakson toʻzingizga telefon soʻrab koʻring man bilan oʻn sekundan keyin ikki bilan toʻr bosib simulyator boʻlishdi
+MEANING OK: __
+
+FILE: test10.mp3  (79.4s audio, 7.55s)
+HYP: hali axborotligim salom aleykum okean aka manguzi oyga oʻzgartirmoqchi yana maoshlandi nima boʻldi ne naqsh boʻladi aka oʻshandimi xoʻp uch qirq toʻargʻa boshidan oqmi oqmas aqalligʻimi rang koʻq koʻk bor u biladek koʻp darrovmi koʻkimtirra yana svetli koʻk
+MEANING OK: __
+
+FILE: test11.mp3  (134.9s audio, 17.68s)
+HYP: yanur koʻk rangli chi yetti yalni oʻn birgacha berib oʻni koʻk rangli chi yetti yarim yil oʻn birgacha berilayotgan bonuslar haqidagi shu yigʻlagancha u bermayapti oʻshanda nega mangu shu zonada yurish aytmasman ha oʻsha olti ming toʻqqiz ming qirq togʻdim oltmish ming qoʻlsoq toʻpligini toʻxt roʻzadan qanaqaga oldim voy voy voy a maktab qoʻliga oldim qozimini oldingiz aka oʻgʻra zoladan oldim a koʻp zoʻradan oldim qorgan oltmish ikki ming boʻshatib qolgan toʻsha berishganday bir kalom bermadi yu ha byotaga hozir bonus qoʻshmayapti nimar berishadi ayol shuni yozib edik ku koʻrib berishsin ha ha men ikkita zakotlar shunday ha boʻldi hozir boraman
+MEANING OK: __
+
+FILE: test12.mp3  (52.2s audio, 2.94s)
+HYP: avvalo assalomu alaykum assalom deb oʻqqiz yuz bir ellik ikki oltmish yetdi
+MEANING OK: __
+
+FILE: test13.mp3  (120.8s audio, 19.78s)
+HYP: nima boʻlishib oldingmi oʻgʻliga qolishdi deruza va da da da shu yerga uchratishmabdi da rahmat deya qattiq deb kamladi programmasiga qush yengil kiritdi da hali mh parislar parametri bor u janobosti oldi metroga nashr qarga oldʻq yozib qoʻyish kerak dedi da yana qanaqa narsa roʻy karani topa oladi boinch qiling deb hamma qiz nasib yoʻqolib qopti bangi bitta qoʻshib yigitali yo boʻlmasam qochirgan boʻsha ota chiyilladi yozvoshsiz doʻsti qozi primoye maskov chekib yoygandiy gurzoy bilan dastlabkani soʻrishib yozamiz aka telefon qilamizni ana koʻradi iloji borasida oʻzi borasida boʻldishunaqaxoʻ oʻshib qoʻyavotdi
+MEANING OK: __
+
+FILE: test14.mp3  (233.7s audio, 27.55s)
+HYP: qoʻzgʻirliklarga qoʻnoq emasmi oʻiz boʻldiyoshini oʻzlaydigan boladanmisiz xolima qanaqasini tashlayman tinka beradi toʻqsa toʻkqizlik sayt a ha sayt oʻzi zarur ukam oʻzim ayoz boʻlaydi onamga o�rishga dedi hozir sayfiysi bir beradi bir toʻrt oltmish toʻqqiz uka etib telefon gʻoying boʻldi mashmashada ishdanlar berdi shunga shunaqa tez qilish kerak nima kerak oʻzi hali koʻchavermadi oʻsha tushuntiradi yoʻlgan da uchun kemasiz mumiydagi oʻsdiq beradi da u aʻzosi koʻtarolmay odam hurmatli deydi boʻlamay telegram yozuvrashev chunki bilasizmi boʻ oʻzi ham telefon ham telegramma oʻzimiz tafsilot va shaklat
+MEANING OK: __
+
+FILE: test15.mp3  (142.8s audio, 20.34s)
+HYP: allo assalomu alaykum assalom sallollik uchun ham moshigʻlarni qilishga qadar hozir dastlabki bilan xolos boʻldim kechadan buni negadir nimadir naqdlikka bermayapti faqatganda kuchliroq bilan naqd bilan naf bilan karta turibdi endi bir soʻz endi shunaqa boʻp qotgan boʻlishi mumkin da yana faqat kuchlarni bugun alohida boshladi oʻzaro plastiklar juda kam boʻldi va hozldi juda kam boʻlsa zohid oxiri qoʻrqoqlar hozir kuchayamiz faqat plastikka naqd orasiga aniqlayverdi bugun naqdor plastikka yiga qoʻldi yozishmaymon faqat naf berosti shuni tushuntir yozgina maroqda boʻlamankin yoʻgʻiy u yandek ishdan boʻlaydi da oʻzi faavob qanchalikdan qoʻlgalganman joʻraobidan birikib yeydi men u bilan yozishiga qarab yoki anglagʻmas edim
+MEANING OK: __
+
+FILE: test16.mp3  (108.6s audio, 11.25s)
+HYP: salom alaykum assalomu alaykum assalomu assalamu assalom uchun assalomu assalom uchun yassalom deyarli haqli ism bor qiladi ishning mavridi a a gvay yonma bunga qolishdan shartmi shartmi yaratganmi ha ha shart shart toki ha uni nega yig� beribsiz a bugun chiqadi deydi deyditexasardor qoldimi ravon oldimi i telefon raqam boʻldi boʻladi adibga oʻz sohibini biladi aka yozma telegramda shuni yoz oling yozor yozor yoki mana tifa deb yozardim boʻanani kardekaga olamanmi be`da soʻng e sardoraga oʻxshabdi aytamanmi
+MEANING OK: __
+
+FILE: test17.mp3  (110.4s audio, 15.61s)
+HYP: allo assalomu alaykum salom alaykum eshitaman faqat pastlabki veri oʻtishni koʻrib bering hozir atifo raqamiy tez oradami toʻxtam uch aha uchta sakkiz xoʻp oʻttiz yuz uch obyodaligim sizga boshqa tariflar ham qoʻshilgan ekan start qoqshilgan yoʻq piyodayam yaxshi koʻrsa oʻtayikmi faqat da taqdir va gʻoyatda umar zakazomaganim olti yuz taʻsir dastakani ahmehvorim hamma dastabki oʻtdi ya yoki da dastlabkani oʻchirib turib ishlab koʻrish boʻlib faqat sharq tuyogʻi qoʻydim bolalar ochilib qoʻydim ku
+MEANING OK: __
+
+FILE: test18.mp3  (58.7s audio, 4.92s)
+HYP: hadeb soʻramadim oʻtma azizni oʻynaysimdan chiqarib qoʻydim manmi qirq ikki ming oʻn sak tirikchaga davom edimi boʻladi boʻlib chiqadi bolvol aka rahmat
+MEANING OK: __
+
+FILE: test19.mp3  (165.6s audio, 23.94s)
+HYP: hozir yuz ellik ming yuzda oʻsha kartaga tushibdi da u kartalikling oʻzingiznikimi oʻzim nomaʻlummi oʻsha dedi aka kartaning toʻliq nomini boʻldi dedibizada bu maxfiy sir uni bizaga hech kim bermaydi u kaptaroʻsha klik va payme ilozi uligim boʻldi oʻshar klik klik qatnasi bormi klikkami bilasiz ulaganmiz shartingizda aʻblagani oʻshab tashodim yana narxda boʻladi oʻrgʻasizni biladi da boʻladimi boʻlasa bankka telefon qiling bank sizga kartnoma oʻylaysiz aytadi yoki bankka borasiz sharti yangi kartaarta ochadi deb pulingizni yakunlashveradiboʻtqa yangi kartochka jarjimlashtakabanksan oʻshani asakabank eshitgan shunaqa pulim bor uchun ham yangi kartonga oʻttiz bersiz yoki klikka ulab oʻziyuzib boshqa kartingizga klikdan tushirvoling qiladi kartki kerakmas
+MEANING OK: __
+
+FILE: test2.mp3  (171.4s audio, 29.45s)
+HYP: hali assalomu alaykum salom alaykum nari yoʻq eshitmadimi aka men ozib klintka oldiga keldim meni klint tolaga kelyapman shu klint qoʻygan pochtadan bir ayol kishi toʻxtayaptiradi men meni minayatim osing a minidir boʻozimda ketdim men oʻzi besh kilometrlardan keyin u meni chaqirgan kishi boshqa ekan endi oʻtilibon a anklet bilan gaplashib koʻning kutib turadimi morgunchi ya kutib turasizmi yotqiz qorasizmi soʻraban oʻzlari bilan kelishasiz ku naqadar hisobaydi yu atkaz qilishdan shuni atkaz boʻladi yo hozir qaytishga oʻ yaxshi boʻladimi onam a nima his yomon yo yo yoʻq emas xoʻjaning holi bir atlashtirilmaydi meni riteymni taʻsir qancha oʻyagisi har qarang bilan meni oʻtirgan opani aka oʻzi yoʻqmi yoʻllab yigʻlab yoʻl lokasbam buzmaganini boʻyoqim boʻlib askar tiqma aka oʻtmaganini aytaman
+MEANING OK: __
+
+FILE: test20.mp3  (44.6s audio, 1.01s)
+HYP: avval soʻshan chiqsam islohotdorim
+MEANING OK: __
+
+FILE: test3.mp3  (291.1s audio, 38.08s)
+HYP: avlodda oʻligim aʻlo tomonligim ishlamoq bu avlodda ixtiro qildim shu vaqtda sakrab qoldim ha ha ha algoritmaga oʻtishdim ha haalgoritmdagi ayrim vazir oʻrinbosarang sakkiz yigirma toʻqib xirillik oʻzi bugun pul yechgan boʻlsangiz pul yechgandan key muammo hozir zakazdasiz ku ya zakazlama kishi qiyin boʻlsa bir soʻrini pok yeyishdan choʻzilib ketadi varkamdan hazil bering a mambiyandeks pro telegrammasini yengilovurish ishga deb oladi va har kuni uchun oʻtkuzamanmi odatim oʻynab soʻrasanmi ayol lekin zakazdan muammo boʻl qolib turibsiz ketibdan olib sevgi bilan gapirayotgandek oʻzingizni bilan quvontiradigan paytim hech bir usta boʻlib koʻtarmadi da qaytish neidan nechchiga tashiydi oʻzi a u bola yettidan kechqurun ikkiga tushiydi haqida biladi keyin yana bitta muammo bortida hozir ahmoqni oʻn toʻn ketma ket oʻntoʻn besh tizakasi kitoban asosiy kuni boʻyi hammasi karta orqali bor edi nima nima boʻlsa nimaga yunaqa aholi oʻzi ikki uch kundan beri aholi shunaqa botdi toʻgʻzimni yandek soʻzlamoqda deb toʻ oʻtmayoshini lavozim ishlagan boshpaks mironda ishlaymanammo boʻlmaydi de zaka boʻyicha man naqd boʻlishi ham ayoki bu ishlarimizga kesish tugʻilaveramiz lekinman bu naqd bilan kartaga oʻtgʻoʻnda momo deb oʻylamashti boshqatdan oʻsha manban naqd ilik kortej joyiga kirib oʻtqizvorsiz boʻtib ketadimi ha ha oʻtmasa sizga dilni oʻgʻirlama qoʻzibmi xoʻpchi shu ogʻiringmi yo rahmi yo shajaning
+MEANING OK: __
+
+FILE: test4.mp3  (213.3s audio, 16.20s)
+HYP: tavbasi vovligi sogʻlik voqea asosida soʻzga charchash soʻno axlatga patent etish yoki de yo u qani toʻlov toʻlav turi u yallik soʻzi kontroliz qiladi biz butdan hech qanaqasiga ruch loy toʻgʻilaveramiz uni yallik toʻzi qiladi yo yo uni yillik vakolatda qoldirmasligi vazirlashiga birga soʻroz beramanyoki chimkentlik qulumetning gaplariga e`tibor bering aqoʻlidan ish kehnagan maʻraka buzaryomonlik oyoq ostidayoki chimkentlik qulumetning gaplariga e`tibor bering aosha usta qoʻlidan isordim bu bola oʻtkaziladi
+MEANING OK: __
+
+FILE: test5.mp3  (202.1s audio, 26.30s)
+HYP: hali osonlikumsiz anaqada ishlamayapsizmi moʻy ray soʻng bonusni ikki o boshli harakatga oʻtish kerakmi ipani oʻchirib gapirish kerak yoʻyini qilishkerakmi buyandekmi oʻzi beradi deb oʻylashmi a hozirma yozvoraman patechkaga koʻr berishadi boʻlsa yozvoraymizmi kutib yeymanmi ha yozvorama oʻzi javob kelsa esvoraymanuringmi har qiyin vaqt tez boʻlsa kutib tez yoʻlgi soʻm oltin soʻnlab yigʻlabzvordim yozvordingmi ha ha yozuvordim qoʻra qilasiz oʻzim xoʻp soʻrashmay qoldim undangga keladimi javobi uchun sizga iforaman yoki shu raqamizga telegram boʻlsa telegramdan tashlab qoʻyaman
+MEANING OK: __
+
+FILE: test6.mp3  (257.2s audio, 38.76s)
+HYP: alom assalomu alaykum alayhissalom men boya bitta klinika oʻtkazilganda boshqa yurtimda minib ketganman chunki bu koʻl berimda oʻtirha klinika uyiga borganman boshqa ayol kishini uraganda u ayol kichini opichapman u ayolchi toʻxtatib oldi da men menda u ayolchini opib ketdim bor agʻiz siga oboramanlikka toʻlsam keyin bu birinchi tilni tilbon qilyapti meni obketmay boshqonasi qolmaydi deb ha man bu ishtebatmandan sabzavot shaharchasiga oʻyaningizmi shirin bilan yigirma ikkilamay turmadi shunday ekan a bunligi hali asqar boʻlmagan shuni bilan atkaz qoʻyvering opam ancha boʻlsa oʻzini oʻtayotgandek oʻshanga ulayamimiz kerak iltimos asqar suhboring deb eʻtirozytingga taʻsir qilgan iloji yoʻq endi a boʻldi hozir qizgʻon oldi u nima boʻladi endi oʻn puli menga tushadimi hozir koʻraman ha bu endi bekor boʻildi yoʻyo puli tushmadi tushmadimii buni yoʻq hozir hozirgacha qasiman bir damas shunaqa nusxaotida shuni yozib olib gapirsaknima qilay mayli deb uni moʻljalikda toʻraym boshqani topib keturayman musiq tushunmaydigan odam akamda u bor ku umuman tushunyaptilar qayerda men manriga keldimda opalik toʻxtatamiyman dedi va kutaman dedichiqmasam narigi koʻraymi chiqmasami agar toʻxtab sari indamish roʻza agar sir sira tashlab yashash kerak boʻladi da boʻldi agar chiqsa tashiydimi xoʻp maʻlum bir amal
+MEANING OK: __
+
+FILE: test7.mp3  (441.8s audio, 60.02s)
+HYP: toʻqson toʻqqizli nol oʻn ikki yuz ellik yetmish besh toʻlqin oy toʻrt soat toʻroq qilishni gaplashdim shakl toʻgʻrimi nima boʻlishi komissiya boʻyicha soʻrt soʻqim qaytaraman uch yuz soʻm oʻziga oʻtib ketdi va buz buz eshitadimi iltimos qildi mana yana mana komissiya partnyori nima yana oʻtishlar nima kecha qarang soliq oʻn ikki ming sakkiz yuz yetmish soatda shular yigirma uch ming soatda nimaga nima shunday qilib tayinladim rahs farizi klubini bering sherzodmidi kim oʻzʻn gapirishogʻini aytamanmi bir foiz bilganmikin bir foiz olingan ov boʻris soqolalaring va choy puli oʻsalalaring ham biz nima uchun ishomiz uchun navoq shunda o´n sakkiz ming yetti yuz oldimi yo navoq bir yuzn ikki ming sakkiz yuz yetmish soʻmoldi xo bizani ikki yuz yigirma uch ming soʻqqiz yuz oʻm besh soʻmi oldi xoʻp qays xoʻp qaring xoq qaring boʻtib kuni meʻsoratga oʻn ikki ming olti yuz oʻttiz uch yuz soʻmga yaxshi boʻn besh soʻmga oʻldimi boshqa masalalar bilan ilvoqlashganim yoʻq ku boʻladi yoʻgʻilaydigan boʻlsang esinglar koʻplab oʻtib oʻgʻli biz kechasi kunduz ishlar ekanmizda bir foizlik oʻzingizni aldab qoʻllab olarkansan und omiymiz bu unisidan pulli yandex oladibugun oʻtganing koʻzim oʻsha noliyatli ishlar ovoz qiladi bir paytli bir paytligini olingdilar qaysiga tashlayman manga esa manga bir necha yozvoning qoʻli o�ishim mumkin oʻzi vaqqa kayinishni nima boʻlib oʻtdi va oʻqib berganiga qarab biroz nazar xudron emasman koʻrishingga emasman va podyezdga yozaman u dalil boʻlishiga emasmanurchdikmi nima qaytadi boʻlingbu qaysi dala bu yigʻishtirsalaring choy puliga oʻzi oʻtirsang abu nagora ishlamagan maʻqulchuzi daromadi ikki ming bir yuz sakson toʻgʻri ming olti yuzi sakson olti soʻm koʻring qipti yu mana yangi koʻrinib turibdi boʻlgan safarimizda bu pulni beringlar edim yigirma ming pular manga besh ta toʻrtta kredit oltita kreditga yetar obod kelib ichimga oʻshanda yetti da ogʻa nimaga hali qozi oʻzimga qoladi
+MEANING OK: __
+
+FILE: test8.mp3  (53.0s audio, 7.26s)
+HYP: alayhi salomu alaykum salomun alaykum oʻgʻrishtir yaxshi ishlov tilami axborot asosida oʻz toʻxtovsiz a xudoga soʻroq qariyam multidraytni butiladan pulga koʻrmayapti e nimaga yoʻlagʻi boʻvotti yo hozir bugun uchishga ku a shunday qotdi shunda yechvolingga hozir toʻldiroq soʻr mayli oʻn besh yuz ishlab qoladihozir naqad pulshurom sening ishli toping
+MEANING OK: __
+
+FILE: test9.mp3  (226.6s audio, 36.74s)
+HYP: ha rahmat ishlamoq ham tazimga koʻrinishdami besh toʻqson besh aham man bundan oldin bitta ikkita zakaz oldim da xoʻp lekin bitta vizirmanam oldim kattasini oldim keyingisi bir yuz sakkiz kilometr naryodan oldiribdi va eshitishni ikki tomonga obordi lekin buni yuqorqatib bitta hisoblardir yigirma sakkiz yillik hisoblarda qoladi lekin unaqa ayhoiat oʻrta bosqki manba bittasi oʻttiz yigirma sakkiz ming boʻpti ikkitasi narx joydan osam kerak ikkita joyga obortam kerak uni degan narxilatish kardi bervotdi umuman qidirib qidirib yarim soat qirq miltiyalarda zoʻrgʻa zoʻrigʻa bitta bitta nima deyvortadi zakkal bervortib yonboshida hammasi aflati kardi bervortdi naafiy nanishga yoʻq bunaqa yarasha koʻpgulik aflati nanishga faqat shirq qidirib yidirib menga shu nima bermas qolarshu ikkalasi yoniburgi oʻshani abnaviyat qilishni oʻrgatuvdi umuman chiqmayapti da abnavis qilish a yoki da ofisga kesib tugʻilaveramiz a ha ha shu abnavbiyat berib oʻsadiganiga oʻtadi ha agar yoʻn uchida oʻazza aka tomon oʻtib ketdi mol ustidan oldiga ketib qoldi oʻzi ha ha shu abnoyib berib oʻshakka oʻtiqsiz oʻtiradi ha agar yoʻn ichida oʻtamadi ha boʻldi pyure alo eshlovdim
+MEANING OK: __
+
