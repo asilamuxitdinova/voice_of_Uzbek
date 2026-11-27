@@ -4,9 +4,10 @@ kronk exposes an OpenAI-compatible API, so this works with any such server.
 Run it once per candidate model, then open the results file and score each answer 1-5.
 
 Usage:
-    python llm_baseline.py --base-url http://localhost:11435/v1
-    python llm_baseline.py --base-url http://localhost:11435/v1 --model google/gemma-4-12b-it-qat-q4_0
-(or set LLM_BASE_URL / LLM_MODEL environment variables)
+    python llm_baseline.py                                   # lists the models on kronk
+    python llm_baseline.py --model google/gemma-4-12b-it-qat-q4_0
+    python llm_baseline.py --model <alloma-id> --apst        # uzlm/alloma models
+(kronk default: http://localhost:11435/v1; override with --base-url or LLM_BASE_URL)
 """
 import argparse
 import os
@@ -20,6 +21,19 @@ DEFAULT_SYSTEM = (
     "qisqa va aniq javob bering. Javoblaringiz ovoz orqali o'qiladi, shuning uchun "
     "ro'yxat, jadval va maxsus belgilardan foydalanmang."
 )
+
+# uzlm/alloma models have Uzbek tokens spelled with "APST" instead of the apostrophe
+# (e.g. "oAPSTzbek"). Sending "APST" makes their tokenizer ~2x more efficient. Use --apst.
+APOSTROPHES = re.compile(r"[’‘‚‛ʻʼʽʾʿˈˊˋˌˍ'`´]")
+
+
+def to_apst(text: str) -> str:
+    return APOSTROPHES.sub("APST", text)
+
+
+def from_apst(text: str) -> str:
+    return text.replace("APST", "'")
+
 
 CYRILLIC = re.compile(r"[Ѐ-ӿ]")
 RUSSIAN_ONLY = re.compile(r"[ыщьЫЩЬ]")  # letters Uzbek Cyrillic basically never uses
@@ -56,7 +70,10 @@ def main():
     p.add_argument("--prompts", default="prompts_uz.txt")
     p.add_argument("--system", default=DEFAULT_SYSTEM)
     p.add_argument("--max-tokens", type=int, default=300)
+    p.add_argument("--apst", action="store_true",
+                   help="replace apostrophes with APST in the input (for uzlm/alloma models)")
     args = p.parse_args()
+    enc = to_apst if args.apst else (lambda s: s)
 
     base = args.base_url.rstrip("/")
     model = args.model or pick_model(base)
@@ -64,12 +81,12 @@ def main():
         prompts = [l.strip() for l in f if l.strip() and not l.startswith("#")]
 
     os.makedirs("results", exist_ok=True)
-    safe = re.sub(r"[^\w.-]", "_", model)
+    safe = re.sub(r"[^\w.-]", "_", model) + ("_apst" if args.apst else "")
     out_path = f"results/llm_{safe}.md"
     total_time = total_tokens = 0
 
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(f"# LLM baseline: {model}\n\n")
+        f.write(f"# LLM baseline: {model}{' (APST input)' if args.apst else ''}\n\n")
         f.write("Score each answer 1-5 (grammar / stays in Uzbek / useful).\n\n")
         for i, prompt in enumerate(prompts, 1):
             t0 = time.time()
@@ -78,8 +95,8 @@ def main():
                 json={
                     "model": model,
                     "messages": [
-                        {"role": "system", "content": args.system},
-                        {"role": "user", "content": prompt},
+                        {"role": "system", "content": enc(args.system)},
+                        {"role": "user", "content": enc(prompt)},
                     ],
                     "max_tokens": args.max_tokens,
                     "temperature": 0.3,
@@ -89,7 +106,7 @@ def main():
             dt = time.time() - t0
             r.raise_for_status()
             data = r.json()
-            answer = data["choices"][0]["message"]["content"].strip()
+            answer = from_apst(data["choices"][0]["message"]["content"].strip())
             ntok = (data.get("usage") or {}).get("completion_tokens", 0)
             total_time += dt
             total_tokens += ntok

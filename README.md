@@ -14,6 +14,10 @@ This repo currently covers **Phase 0 (setup)** and **Phase 1 (baseline)**. The b
 | `voice_pipeline.py` | End-to-end: your .wav question → text → LLM answer → spoken .wav, with timings |
 | `translit.py` | Uzbek Latin → Cyrillic converter (used by TTS) |
 | `prompts_uz.txt` | 20 Uzbek test prompts. Edit them to match your real use case |
+| `asr_compare.sh` | Runs `asr_baseline.py` on ready-made Uzbek Whisper fine-tunes and prints a summary |
+| `convert_alloma.sh` | Converts `uzlm/alloma-8B-Instruct` to a Q4_K_M GGUF and registers it in kronk |
+| `setup_sayro.sh` | Creates a separate `.venv-tts` for `uzlm/sayro-tts-1.7B` (Qwen3-TTS) |
+| `tts_sayro.py` | Generates Uzbek speech with sayro-tts, for comparison with MMS |
 
 All outputs go to `results/`. **All numbers, findings and decisions are summarized in [PROGRESS.md](PROGRESS.md).**
 
@@ -45,6 +49,12 @@ python asr_baseline.py
 The first run downloads Whisper (~1.6 GB) and the FLEURS Uzbek test audio (~520 MB). The result is a **WER %** (lower is better) and is saved to `results/asr_*.txt`.
 Optionally compare a smaller model: `python asr_baseline.py --model openai/whisper-small`
 
+**1.1b Ready-made Uzbek Whisper models.** Each one is ~1.5 GB. This runs all of them and prints a WER/CER summary:
+```bash
+bash asr_compare.sh
+```
+⚠️ The `navai-uz` models were trained with FLEURS data, so their score here may look better than real use. Also try each model on your own recording, for example `python asr_baseline.py --model navai-uz/whisper-medium-uzbek --audio question.m4a`.
+
 ### 1.2 LLM (kronk)
 1. Make sure kronk is running (`tmux attach -t kronk`). Candidates are already on the server: `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, and Qwen2.5-7B-Instruct.
 2. Run the script once per model:
@@ -57,6 +67,19 @@ Optionally compare a smaller model: `python asr_baseline.py --model openai/whisp
 
 The `flags` column automatically marks answers that slipped into Cyrillic, Russian, English, or markdown.
 
+**1.2b Uzbek-specific LLM: `uzlm/alloma-8B-Instruct`.** It's only published in Hugging Face format, so convert it first. This takes ~20–40 min and needs ~35 GB of free disk temporarily; only the ~5 GB GGUF is kept:
+```bash
+bash convert_alloma.sh
+```
+```bash
+kronk model index --local && kronk model list --local
+```
+Restart `kronk server start` in tmux if the model doesn't appear in `python llm_baseline.py`. Then test it **with `--apst`**: alloma's tokenizer spells Uzbek apostrophes as `APST`, and the script converts them back in the answers.
+```bash
+python llm_baseline.py --model <alloma-id-from-list> --apst
+```
+Running it once without `--apst` too shows how much the APST step matters.
+
 ### 1.3 TTS (text → speech)
 ```bash
 python tts_baseline.py
@@ -66,11 +89,25 @@ Listen to `results/tts_1.wav` … `tts_4.wav`. You can also try your own text:
 python tts_baseline.py --text "Salom, bugun qanday yordam kerak?"
 ```
 
+**1.3b Uzbek-specific TTS: `uzlm/sayro-tts-1.7B`.** The model is **gated**: open its Hugging Face page while logged in, request access, and read the license first, especially whether it allows commercial use. It runs in its own environment, because `qwen-tts` pins an older `transformers`:
+```bash
+bash setup_sayro.sh
+```
+```bash
+source .venv-tts/bin/activate && python tts_sayro.py
+```
+If it says the model needs a reference voice, record 5–15 s of clear Uzbek speech and run:
+```bash
+python tts_sayro.py --ref-audio ref.wav --ref-text "exact words you said"
+```
+Compare `results/sayro_*.wav` with the MMS files. Run `deactivate` afterwards to go back to the main `.venv`.
+
 ### 1.4 End-to-end
 Record a short Uzbek question (a phone voice memo is fine), copy it to the server, then:
 ```bash
 python voice_pipeline.py --audio question.wav --model <best-model>
 ```
+Options: `--asr-model navai-uz/whisper-medium-uzbek` to use an Uzbek Whisper, and `--apst` when the LLM is alloma.
 Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTAL`).
 
 ### ✅ Checkpoint 1: report back
@@ -93,3 +130,6 @@ Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTA
 - **FLEURS fails to download**: check `hf auth login` and internet access. Files are cached in `~/.cache/huggingface`, and the extracted audio goes to `data/`
 - **`Connection refused` in llm_baseline.py**: kronk isn't running, or the port in `--base-url` is wrong
 - **Out of GPU memory**: stop other processes (`nvidia-smi`), or use a smaller LLM quantization
+- **`convert_alloma.sh` says "pre-tokenizer was not recognized"**: the script's patch didn't apply, maybe because llama.cpp changed. Paste the output to Claude
+- **`setup_sayro.sh` fails installing `qwen-tts`**: probably Python 3.14. Install `uv` (`curl -LsSf https://astral.sh/uv/install.sh | sh`), then `rm -rf .venv-tts && bash setup_sayro.sh`
+- **`tts_sayro.py`: 401 / "gated repo"**: access to sayro-tts isn't approved yet, or `hf auth login` wasn't run inside `.venv-tts`

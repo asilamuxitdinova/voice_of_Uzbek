@@ -15,7 +15,7 @@ import requests
 import soundfile as sf
 
 from asr_baseline import load_asr, transcribe
-from llm_baseline import DEFAULT_SYSTEM, pick_model
+from llm_baseline import DEFAULT_SYSTEM, from_apst, pick_model, to_apst
 from tts_baseline import UzbekTTS
 
 
@@ -26,7 +26,9 @@ def main():
     p.add_argument("--asr-model", default="openai/whisper-large-v3-turbo")
     p.add_argument("--base-url", default=os.getenv("LLM_BASE_URL", "http://localhost:11435/v1"))
     p.add_argument("--model", default=os.getenv("LLM_MODEL"))
+    p.add_argument("--apst", action="store_true", help="APST input for uzlm/alloma models")
     args = p.parse_args()
+    enc = to_apst if args.apst else (lambda s: s)
 
     base = args.base_url.rstrip("/")
     model = args.model or pick_model(base)
@@ -49,8 +51,8 @@ def main():
         json={
             "model": model,
             "messages": [
-                {"role": "system", "content": DEFAULT_SYSTEM},
-                {"role": "user", "content": question},
+                {"role": "system", "content": enc(DEFAULT_SYSTEM)},
+                {"role": "user", "content": enc(question)},
             ],
             "max_tokens": 200,
             "temperature": 0.3,
@@ -58,7 +60,7 @@ def main():
         timeout=300,
     )
     r.raise_for_status()
-    answer = r.json()["choices"][0]["message"]["content"].strip()
+    answer = from_apst(r.json()["choices"][0]["message"]["content"].strip())
     t2 = time.time()
 
     wav, spoken = tts.synth(answer)

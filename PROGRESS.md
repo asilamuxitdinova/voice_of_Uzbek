@@ -69,7 +69,8 @@ Raw outputs stay in `results/`. This file is the summary.
 **Next:**
 - [x] Inspect the REF/HYP lines to find the failure type → Kazakh-style Cyrillic + ~5% loops
 - [x] Re-score with Cyrillic→Latin conversion → median CER 27%
-- [ ] (optional) Test alternatives as a Phase 2 starting point: Meta MMS (`uzb-script_latin` adapter), community Uzbek Whisper fine-tunes
+- [ ] Test ready-made Uzbek Whisper fine-tunes with `bash asr_compare.sh`: navai-uz medium/small, Abduqayum call-center medium
+- [ ] Also test the best one on your own recordings (FLEURS may be in navai-uz's training data)
 
 ### 1.2 LLM: Uzbek prompts via kronk
 
@@ -81,18 +82,37 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | | gemma-4-E4B_q4_0-it | | | | |
 | | gemma-4-26B_q4_0-it | | | | |
 | | Qwen2.5-7B-Instruct-Q4_K_M | | | | |
+| | uzlm/alloma-8B-Instruct Q4_K_M (`--apst`) | | | | |
+| | uzlm/alloma-8B-Instruct Q4_K_M (no APST) | | | | |
 
-### 1.3 TTS: facebook/mms-tts-uzb-script_cyrillic
+### 1.3 TTS
 
-| Date | Clarity (clear / robotic / hard to understand) | Speed (audio s / gen s) | Notes |
-|---|---|---|---|
-| | | | |
+| Date | Model | Clarity (clear / robotic / hard to understand) | Speed (audio s / gen s) | Notes |
+|---|---|---|---|---|
+| | facebook/mms-tts-uzb-script_cyrillic | | | |
+| | uzlm/sayro-tts-1.7B | | | Gated: access requested? License OK for our use? Built-in speaker or reference voice? |
 
 ### 1.4 End-to-end pipeline
 
 | Date | ASR model | LLM | ASR s | LLM s | TTS s | Total s | Notes |
 |---|---|---|---|---|---|---|---|
 | | | | | | | | Target: < 1.5 s total |
+
+---
+
+## Ready-made Uzbek models found on Hugging Face (2026-11-27)
+
+| Part | Model | Base | Size | License | Notes |
+|---|---|---|---|---|---|
+| LLM | `uzlm/alloma-8B-Instruct` | Llama-3.1-8B-Instruct | 16 GB bf16 | Llama 3.1 | Continual pretraining on 3.6B tokens (33% Uzbek) + SFT. Custom Uzbek tokenizer (1.7 tokens/word vs 3.5). Author benchmarks: best of the 8B Uzbek models on Uz→En translation. Recommends replacing `'` with `APST` in input. No official GGUF |
+| LLM | `kmamaroziqov/alloma-8b-q4` | alloma-8B | 4.9 GB | – | Third-party Q4_K_M GGUF, unverified. Can be tested in kronk directly |
+| LLM | `uzlm/alloma-3B-Instruct`, `-1B-` | Llama-3.2 | small | Llama 3.2 | Low-latency options |
+| TTS | `uzlm/sayro-tts-1.7B` | Qwen3-TTS-12Hz-1.7B | 3.8 GB + 0.7 GB | other (**gated**: request access and read the license) | Trained on Uzbek YouTube speech (IT, news, podcasts with Tashkent dialect). Ships `uzbek_normalizer.py`. Likely far better than MMS |
+| ASR | `navai-uz/whisper-medium-uzbek` | whisper-medium | ~1.5 GB | Apache-2.0 | Common Voice 22 + FLEURS + FeruzaSpeech. ⚠️ Trained on FLEURS, so the FLEURS test score may look better than real use |
+| ASR | `Abduqayum/whisper-uzbek-medium-callcenter` | whisper-medium | ~1.5 GB | Apache-2.0 | 780 h dataset, call-center domain |
+| ASR | `hostmepanda/whisper-large-v3-turbo-uzbek-ct2` | turbo | – | – | CTranslate2 format (faster-whisper), not transformers |
+
+**Plan change:** test these in Phase 1, and use the winners as the **starting point** for Phase 2/3 fine-tuning instead of the stock models.
 
 ---
 
@@ -105,6 +125,9 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-27 | Test uzlm alloma (LLM) and sayro (TTS) plus Uzbek Whisper fine-tunes in Phase 1 | Already Uzbek-trained; winners become the starting point for fine-tuning |
+| 2026-11-27 | Convert alloma to GGUF ourselves (`convert_alloma.sh`) instead of using the third-party GGUF | Its custom tokenizer needs a llama.cpp patch (unknown vocab hash → treat as Llama-3 `llama-bpe`), and we can't verify how the third-party file was made |
+| 2026-11-27 | sayro-tts runs in a separate `.venv-tts` | `qwen-tts` pins transformers==4.57.3; keeps the main venv stable |
 | 2026-11-26 | Server pushes results via an SSH deploy key (this repo only) | GitHub rejects passwords; a deploy key limits access if the cloud VM is compromised |
 
 ---
