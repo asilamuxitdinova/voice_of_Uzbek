@@ -1,12 +1,18 @@
-"""Step 1.1 - ASR baseline: how well does stock Whisper understand Uzbek?
+"""Step 1.1 - ASR evaluation: how well does a Whisper model understand Uzbek?
 
-Measures Word Error Rate (WER) on the Google FLEURS Uzbek test set.
+Three modes:
+    python asr_baseline.py --model M                    # WER on 100 FLEURS Uzbek test clips
+    python asr_baseline.py --model M --audio q.m4a      # transcribe one file (any format)
+    python asr_baseline.py --model M --audio-dir test_audios
+        # transcribe every audio file in the folder; if "name.txt" (what was actually said)
+        # sits next to "name.m4a", WER is computed too. Model is loaded only once.
 
-Usage:
-    python asr_baseline.py                       # 100 FLEURS samples, whisper-large-v3-turbo
-    python asr_baseline.py --n 300               # more samples = more reliable number
-    python asr_baseline.py --model openai/whisper-small
-    python asr_baseline.py --audio question.m4a      # transcribe your own file (any format)
+Options:
+    --beams 5     beam search (compares 5 candidates; usually more accurate, a bit slower)
+    --n 300       more FLEURS clips = more reliable number
+
+Two scores are reported: "basic" (the original) and "fair" (numbers as words,
+Cyrillic->Latin), see uz_text.py. Use the fair score from now on.
 """
 import argparse
 import os
@@ -16,6 +22,8 @@ import time
 import torch
 import jiwer
 from transformers import pipeline
+
+from uz_text import norm_basic, norm_fair
 
 
 def load_audio(path: str, sr: int = 16000):
@@ -50,13 +58,21 @@ def load_audio(path: str, sr: int = 16000):
     return np.frombuffer(raw, dtype=np.float32).copy(), sr
 
 
-def norm(text: str) -> str:
-    """Lowercase, unify the oʻ/gʻ apostrophes, drop punctuation."""
-    text = text.lower()
-    for a in ("ʻ", "’", "‘", "`", "ʼ", "´"):
-        text = text.replace(a, "'")
-    text = re.sub(r"[^\w\s']", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
+norm = norm_basic  # backwards compatibility
+
+AUDIO_EXTS = {".wav", ".mp3", ".m4a", ".ogg", ".oga", ".opus", ".flac", ".aac", ".amr", ".webm", ".mp4"}
+
+
+def scores(refs, hyps):
+    """(basic WER, fair WER, fair CER) in %, skipping empty references."""
+    pairs = [(r, h) for r, h in zip(refs, hyps) if norm_basic(r)]
+    if not pairs:
+        return None
+    rb = [norm_basic(r) for r, _ in pairs]
+    hb = [norm_basic(h) for _, h in pairs]
+    rf = [norm_fair(r) for r, _ in pairs]
+    hf = [norm_fair(h) for _, h in pairs]
+    return jiwer.wer(rb, hb) * 100, jiwer.wer(rf, hf) * 100, jiwer.cer(rf, hf) * 100
 
 
 def load_fleurs(split: str, n: int, lang: str = "uz_uz"):
@@ -103,60 +119,127 @@ def load_asr(model_name: str):
         model=model_name,
         dtype=torch.float16,
         device="cuda:0",
+        chunk_length_s=30,  # recordings longer than 30 s are split into chunks
     )
 
 
-def transcribe(asr, array, sr) -> str:
-    out = asr(
-        {"raw": array, "sampling_rate": sr},
-        generate_kwargs={"language": "uzbek", "task": "transcribe"},
-    )
+def transcribe(asr, array, sr, beams: int = 1) -> str:
+    gen = {"language": "uzbek", "task": "transcribe"}
+    if beams > 1:
+        gen["num_beams"] = beams
+    out = asr({"raw": array, "sampling_rate": sr}, generate_kwargs=gen)
     return out["text"].strip()
+
+
+def out_name(model: str, beams: int, suffix: str = "") -> str:
+    name = f"results/asr_{model.replace('/', '_')}"
+    if beams > 1:
+        name += f"_beam{beams}"
+    return name + (f"_{suffix}" if suffix else "") + ".txt"
+
+
+def run_fleurs(asr, args):
+    print("Loading FLEURS uz_uz test split (first run downloads ~520 MB) ...")
+    ds = load_fleurs("test", args.n)
+    refs, hyps = [], []
+    t0 = time.time()
+    for i, (wav_path, ref) in enumerate(ds, 1):
+        array, sr = load_audio(wav_path)
+        hyps.append(transcribe(asr, array, sr, args.beams))
+        refs.append(ref)
+        if i % 20 == 0:
+            print(f"  {i}/{len(ds)} done")
+    elapsed = time.time() - t0
+    wer_b, wer_f, cer_f = scores(refs, hyps)
+
+    out_path = out_name(args.model, args.beams)
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(f"model: {args.model}\nbeams: {args.beams}\nsamples: {len(ds)}\n")
+        f.write(f"WER: {wer_b:.1f}%\nWER (fair): {wer_f:.1f}%\nCER (fair): {cer_f:.1f}%\n")
+        f.write(f"avg seconds per sample: {elapsed / len(ds):.2f}\n\n")
+        for r, h in zip(refs, hyps):
+            f.write(f"REF: {norm_basic(r)}\nHYP: {norm_basic(h)}\n\n")
+
+    for r, h in list(zip(refs, hyps))[:5]:
+        print(f"\nREF: {norm_basic(r)}\nHYP: {norm_basic(h)}")
+    print(f"\nWER: {wer_b:.1f}%   WER (fair): {wer_f:.1f}%   CER (fair): {cer_f:.1f}%   "
+          f"({elapsed / len(ds):.2f}s per sample)")
+    print(f"Full results saved to {out_path}")
+
+
+def run_dir(asr, args):
+    folder = args.audio_dir.rstrip("/")
+    files = sorted(f for f in os.listdir(folder) if os.path.splitext(f)[1].lower() in AUDIO_EXTS)
+    if not files:
+        raise SystemExit(f"No audio files in {folder} (looked for {', '.join(sorted(AUDIO_EXTS))})")
+
+    rows, refs, hyps = [], [], []
+    total_audio = total_time = 0.0
+    for name in files:
+        path = os.path.join(folder, name)
+        txt = os.path.join(folder, os.path.splitext(name)[0] + ".txt")
+        ref = open(txt, encoding="utf-8").read().strip() if os.path.exists(txt) else None
+        array, sr = load_audio(path)
+        t0 = time.time()
+        hyp = transcribe(asr, array, sr, args.beams)
+        dt = time.time() - t0
+        dur = len(array) / sr
+        total_audio += dur
+        total_time += dt
+        file_wer = None
+        if ref:
+            refs.append(ref)
+            hyps.append(hyp)
+            file_wer = jiwer.wer(norm_fair(ref), norm_fair(hyp)) * 100
+        rows.append((name, dur, dt, ref, hyp, file_wer))
+        w = f"  WER {file_wer:.0f}%" if file_wer is not None else "  (no .txt)"
+        print(f"\n[{name}] {dur:.1f}s audio, {dt:.2f}s{w}\n  HYP: {hyp}" + (f"\n  REF: {ref}" if ref else ""))
+
+    s = scores(refs, hyps)
+    rtf = total_time / total_audio if total_audio else 0
+    out_path = out_name(args.model, args.beams, os.path.basename(folder))
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(f"model: {args.model}\nbeams: {args.beams}\nfolder: {folder}\n")
+        f.write(f"files: {len(files)} ({len(refs)} with reference .txt)\n")
+        if s:
+            f.write(f"WER: {s[0]:.1f}%\nWER (fair): {s[1]:.1f}%\nCER (fair): {s[2]:.1f}%\n")
+        f.write(f"speed: {total_time:.1f}s for {total_audio:.1f}s of audio (real-time factor {rtf:.2f})\n\n")
+        f.write("Fill in MEANING OK for each file: yes = the request would still be understood correctly.\n\n")
+        for name, dur, dt, ref, hyp, fw in rows:
+            f.write(f"FILE: {name}  ({dur:.1f}s audio, {dt:.2f}s)" + (f"  WER {fw:.0f}%" if fw is not None else "") + "\n")
+            if ref:
+                f.write(f"REF: {ref}\n")
+            f.write(f"HYP: {hyp}\nMEANING OK: __\n\n")
+
+    print("\n" + "=" * 60)
+    if s:
+        print(f"{len(refs)} files with reference: WER {s[0]:.1f}%   WER (fair) {s[1]:.1f}%   CER (fair) {s[2]:.1f}%")
+    else:
+        print("No reference .txt files found - add 'name.txt' with what was said next to each audio for WER.")
+    print(f"Speed: real-time factor {rtf:.2f} ({total_time:.1f}s for {total_audio:.1f}s of audio)")
+    print(f"Saved to {out_path} - open it and fill in MEANING OK for each file.")
 
 
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", default="openai/whisper-large-v3-turbo")
     p.add_argument("--n", type=int, default=100, help="number of FLEURS test samples")
-    p.add_argument("--audio", help="transcribe this audio file instead of running the benchmark")
+    p.add_argument("--audio", help="transcribe this one audio file")
+    p.add_argument("--audio-dir", help="transcribe (and score) every audio file in this folder")
+    p.add_argument("--beams", type=int, default=1, help="beam search width (1 = greedy, 5 = typical)")
     args = p.parse_args()
 
     print(f"Loading {args.model} ...")
     asr = load_asr(args.model)
+    os.makedirs("results", exist_ok=True)
 
     if args.audio:
         array, sr = load_audio(args.audio)
-        print("TEXT:", transcribe(asr, array, sr))
-        return
-
-    print("Loading FLEURS uz_uz test split (first run downloads ~520 MB) ...")
-    ds = load_fleurs("test", args.n)
-
-    refs, hyps = [], []
-    t0 = time.time()
-    for i, (wav_path, ref) in enumerate(ds, 1):
-        array, sr = load_audio(wav_path)
-        hyps.append(norm(transcribe(asr, array, sr)))
-        refs.append(norm(ref))
-        if i % 20 == 0:
-            print(f"  {i}/{len(ds)} done")
-    elapsed = time.time() - t0
-
-    wer = jiwer.wer(refs, hyps) * 100
-    cer = jiwer.cer(refs, hyps) * 100
-
-    os.makedirs("results", exist_ok=True)
-    out_path = f"results/asr_{args.model.replace('/', '_')}.txt"
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write(f"model: {args.model}\nsamples: {len(ds)}\nWER: {wer:.1f}%\nCER: {cer:.1f}%\n")
-        f.write(f"avg seconds per sample: {elapsed / len(ds):.2f}\n\n")
-        for r, h in zip(refs, hyps):
-            f.write(f"REF: {r}\nHYP: {h}\n\n")
-
-    for r, h in list(zip(refs, hyps))[:5]:
-        print(f"\nREF: {r}\nHYP: {h}")
-    print(f"\nWER: {wer:.1f}%   CER: {cer:.1f}%   ({elapsed / len(ds):.2f}s per sample)")
-    print(f"Full results saved to {out_path}")
+        print("TEXT:", transcribe(asr, array, sr, args.beams))
+    elif args.audio_dir:
+        run_dir(asr, args)
+    else:
+        run_fleurs(asr, args)
 
 
 if __name__ == "__main__":

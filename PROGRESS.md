@@ -70,7 +70,9 @@ Raw outputs stay in `results/`. This file is the summary.
 - [x] Inspect the REF/HYP lines to find the failure type → Kazakh-style Cyrillic + ~5% loops
 - [x] Re-score with Cyrillic→Latin conversion → median CER 27%
 - [x] Test ready-made Uzbek Whisper fine-tunes with `bash asr_compare.sh` → results below
-- [ ] Also test the best one on your own recordings (FLEURS may be in navai-uz's training data)
+- [x] Added fair scoring, `--beams`, and `--audio-dir` (own recordings + `.txt` references + MEANING OK column)
+- [ ] Test on own recordings: `bash asr_compare.sh 0 --audio-dir test_audios` (FLEURS may be in navai-uz's training data)
+- [ ] Try `--beams 5` on FLEURS and on own recordings
 
 ### 1.1b ASR: ready-made Uzbek Whisper fine-tunes (same 100 FLEURS test clips)
 
@@ -80,6 +82,17 @@ Raw outputs stay in `results/`. This file is the summary.
 | 2026-11-27 | navai-uz/whisper-small-uzbek | 17.0% | 5.4% | 14% | 21/100 | 1.11 s/sample | Nearly as good at ~2× the speed |
 | 2026-11-27 | Abduqayum/whisper-uzbek-medium-callcenter | 19.5% | 6.1% | 17% | 15/100 | 2.03 s/sample | **Not** trained on FLEURS, so this is an honest out-of-domain score. Trained on phone speech, while FLEURS is clean read speech |
 | 2026-11-26 | openai/whisper-large-v3-turbo (stock) | 147.3% | 103.2% | 89% (after translit) | – | 0.92 s/sample | Reference |
+
+**Fair re-scoring (2026-11-27)** of the same outputs with `uz_text.norm_fair`: numbers as words, Cyrillic→Latin, `km`→`kilometr`. FLEURS references write numbers as digits (`1963`), while the models say them as words (`ming to'qqiz yuz oltmish uch`), and basic scoring counted those as errors:
+
+| Model | WER (basic) | **WER (fair)** | CER (fair) |
+|---|---|---|---|
+| navai-uz/whisper-medium-uzbek | 14.1% | **11.3%** | 2.9% |
+| navai-uz/whisper-small-uzbek | 17.0% | **14.3%** | 3.6% |
+| Abduqayum/whisper-uzbek-medium-callcenter | 19.5% | **16.3%** | 4.0% |
+| openai/whisper-large-v3-turbo | 147.3% | 130.5% | 52.2% |
+
+→ About **3 points of the 14% were fake errors** caused by spelling conventions. **From now on, report WER (fair).**
 
 **What the remaining errors look like:**
 - No Cyrillic output and no hallucination loops in any of the three models.
@@ -145,6 +158,8 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-27 | Report **fair WER** (numbers as words, Cyrillic→Latin, unit abbreviations expanded) | Basic WER counted `1963` vs `ming to'qqiz yuz oltmish uch` as errors; ~3 points of the 14% were fake |
+| 2026-11-27 | Track **"meaning OK"** on own recordings next to WER | A wrong suffix rarely changes the request; a wrong number, name or negation does. This is what matters for the agent |
 | 2026-11-27 | ASR starting point: navai-uz/whisper-medium-uzbek (14.1% WER), with whisper-small (17.0%, 2× faster) as the low-latency option | Best FLEURS scores; final pick after testing on our own recordings |
 | 2026-11-27 | Test uzlm alloma (LLM) and sayro (TTS) plus Uzbek Whisper fine-tunes in Phase 1 | Already Uzbek-trained; winners become the starting point for fine-tuning |
 | 2026-11-27 | Convert alloma to GGUF ourselves (`convert_alloma.sh`) instead of using the third-party GGUF | Its custom tokenizer needs a llama.cpp patch (unknown vocab hash → treat as Llama-3 `llama-bpe`), and we can't verify how the third-party file was made |

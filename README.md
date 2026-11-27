@@ -12,7 +12,8 @@ This repo currently covers **Phase 0 (setup)** and **Phase 1 (baseline)**. The b
 | `llm_baseline.py` | Sends `prompts_uz.txt` to your kronk model and saves the answers for scoring |
 | `tts_baseline.py` | Generates Uzbek speech with Meta MMS (Latin text is converted to Cyrillic automatically) |
 | `voice_pipeline.py` | End-to-end: your .wav question → text → LLM answer → spoken .wav, with timings |
-| `translit.py` | Uzbek Latin → Cyrillic converter (used by TTS) |
+| `translit.py` | Uzbek Latin ↔ Cyrillic converter (used by TTS and scoring) |
+| `uz_text.py` | Text normalization for fair scoring: numbers → words, Cyrillic → Latin, `km` → `kilometr` |
 | `prompts_uz.txt` | 20 Uzbek test prompts. Edit them to match your real use case |
 | `asr_compare.sh` | Runs `asr_baseline.py` on ready-made Uzbek Whisper fine-tunes and prints a summary |
 | `convert_alloma.sh` | Converts `uzlm/alloma-8B-Instruct` to a Q4_K_M GGUF and registers it in kronk |
@@ -53,7 +54,30 @@ Optionally compare a smaller model: `python asr_baseline.py --model openai/whisp
 ```bash
 bash asr_compare.sh
 ```
-⚠️ The `navai-uz` models were trained with FLEURS data, so their score here may look better than real use. Also try each model on your own recording, for example `python asr_baseline.py --model navai-uz/whisper-medium-uzbek --audio question.m4a`.
+⚠️ The `navai-uz` models were trained with FLEURS data, so their score here may look better than real use.
+
+**1.1c Your own recordings (the honest test).** Put recordings in `test_audios/`. For each one, add a `.txt` file **with the same name** containing exactly what was said:
+```
+test_audios/
+  savol1.m4a
+  savol1.txt     <- "Ertaga Toshkentda havo qanday bo'ladi?"
+  savol2.m4a
+  savol2.txt
+```
+Then run (the model loads once for the whole folder):
+```bash
+python asr_baseline.py --model navai-uz/whisper-medium-uzbek --audio-dir test_audios
+```
+Or compare all models on your recordings:
+```bash
+bash asr_compare.sh 0 --audio-dir test_audios
+```
+Open the results file and fill in `MEANING OK: yes/no` for each recording: would the request still be understood correctly? That's the number that matters for the agent.
+
+**Scoring and options:**
+- Every run reports **WER (fair)** alongside the original WER. Fair scoring writes numbers as words (`15%` = `o'n besh foiz`), converts Cyrillic to Latin, and expands `km` → `kilometr`, so differences in spelling convention aren't counted as errors. Use the fair score from now on.
+- Add `--beams 5` to any command for beam search: usually more accurate, slightly slower. Results are saved under a separate `_beam5` name, so you can compare.
+- Recordings longer than 30 s are handled automatically.
 
 ### 1.2 LLM (kronk)
 1. Make sure kronk is running (`tmux attach -t kronk`). Candidates are already on the server: `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, and Qwen2.5-7B-Instruct.
