@@ -119,5 +119,5 @@ if [ "$DRY_RUN" != "1" ]; then
 fi
 echo "Open results/asr_*_${SET}.txt and fill in MEANING OK for each file."
 if [ "$n_txt" -eq 0 ]; then
-  echo "Tip: add test1.txt ... test20.txt (what was actually said) next to the mp3 files to get WER."
+  echo "Tip: for WER, add a .txt with the same name as each recording (what was actually said) in test_audios/."
 fi

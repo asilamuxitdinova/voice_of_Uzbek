@@ -76,7 +76,8 @@ Raw outputs stay in `results/`. This file is the summary.
 - [ ] Try `--beams 5` on FLEURS and on own recordings
 - [x] Added `ai-sage/GigaAM-Multilingual` (`large_ctc` 600M and `@ctc` 220M) to `asr_baseline.py` and `asr_compare.sh` (2026-11-27). Remote code reviewed and pinned (large_ctc `3905cd5`, ctc `2f8a571`). Audio over 25 s is split at quiet points (pyannote not needed)
 - [x] Run GigaAM on FLEURS → **winner**, see 1.1d
-- [ ] Run `Kotib/uzbek_stt_v1` on FLEURS and `test_set/` (added to `asr_compare.sh` and `run_test_set.sh`)
+- [x] Run `Kotib/uzbek_stt_v1` on FLEURS → **6.3% fair WER, best so far**
+- [ ] Run all 4 models on own voice messages (`PATTERN='audio_*' SET=my_voice bash run_test_set.sh`), then on `test_set/`
 - [ ] Run GigaAM on own recordings: `python asr_baseline.py --model ai-sage/GigaAM-Multilingual --audio-dir test_audios`
 - [ ] Add `.txt` references (what was actually said) to `test_audios/` so own-recording WER can be measured
 
@@ -84,11 +85,13 @@ Raw outputs stay in `results/`. This file is the summary.
 
 | Model | WER (basic) | **WER (fair)** | CER (fair) | Perfect sentences | Speed | License |
 |---|---|---|---|---|---|---|
-| 🏆 **ai-sage/GigaAM-Multilingual** (large_ctc, 600M) | 11.1% | **8.1%** | **1.4%** | 35/100 | **0.35 s/clip** | MIT |
+| 🏆 **Kotib/uzbek_stt_v1** (whisper-medium, 769M) | 9.3% | **6.3%** | **1.4%** | **48/100** | 2.01 s/clip (5 beams) | Apache-2.0 |
+| ai-sage/GigaAM-Multilingual (large_ctc, 600M) | 11.1% | 8.1% | 1.4% | 35/100 | **0.35 s/clip** | MIT |
 | navai-uz/whisper-medium-uzbek | 14.1% | 11.3%* | 2.9% | 30/100 | 2.04 s/clip | Apache-2.0 |
 
 \* navai's fair WER was recomputed from the saved, already-normalized lines, which loses a few ordinals like `15-yanvar`. On the same basis, GigaAM gets 8.6%, so the honest gap is **8.6% vs 11.3%**.
 
+- **Kotib (added 2026-11-27):** on the same basis (recomputed from the saved lines), **Kotib 6.6% vs GigaAM 8.6% vs navai 11.3%**. Median sentence WER 4%, and 48/100 sentences are perfect. Sentence by sentence vs GigaAM: Kotib better on **37**, GigaAM on **19**, and **44** ties. Errors: foreign names (`jeyms paget`→`james paket`), a few real misses (`tarkib topgan`→`tark etayotgan`, `o'liklar`→`o'riklari`). ⚠️ Its training data is "custom" 1,600 h, so we can't rule out that FLEURS train was in it. ⚠️ **~6× slower than GigaAM** (2.0 vs 0.35 s/clip, with 5 beams). Own recordings will decide.
 - Sentence by sentence: GigaAM is better on **42**, navai on **20**, and **38** are ties. The worst GigaAM sentence is 36% WER, vs 72% for navai.
 - **~6× faster** than navai-medium, though navai ran with 5-beam search (see the beam note below).
 - GigaAM wins even though navai was **trained on FLEURS** and GigaAM (as far as we know) wasn't.
@@ -254,7 +257,8 @@ Training datasets also have their own licenses (see the dataset table). A model 
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
-| 2026-11-27 | **GigaAM-Multilingual large_ctc is the ASR front-runner** (pending own-recording test) | Best FLEURS: 8.1% fair WER, 1.4% CER, 6× faster than navai-medium, MIT |
+| 2026-11-27 | ASR front-runners: **Kotib/uzbek_stt_v1** (best FLEURS, 6.3%) and **GigaAM** (8.1%, 6× faster). Final pick after own recordings | Accuracy vs speed trade-off; FLEURS alone isn't decisive |
+| 2026-11-27 | ~~GigaAM-Multilingual large_ctc is the ASR front-runner~~ (superseded by the line above) | Best FLEURS: 8.1% fair WER, 1.4% CER, 6× faster than navai-medium, MIT |
 | 2026-11-27 | Always pass `num_beams` to Whisper (default 5, `--beams 1` = greedy) | transformers silently defaulted to 5, so the "greedy" vs "beam5" comparison was invalid |
 | 2026-11-27 | Add GigaAM-Multilingual as an ASR candidate, with its remote code pinned to reviewed commits | MIT license, reported 7.3% FLEURS WER, CTC is fast. `trust_remote_code` runs repo code on our server, so pinning prevents unreviewed updates |
 | 2026-11-27 | Report **fair WER** (numbers as words, Cyrillic→Latin, unit abbreviations expanded) | Basic WER counted `1963` vs `ming to'qqiz yuz oltmish uch` as errors; ~3 points of the 14% were fake |
