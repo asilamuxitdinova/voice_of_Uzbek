@@ -1,0 +1,170 @@
+
+==================== Disk overview
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       193G  124G   70G  65% /
+
+==================== Biggest top-level folders on the disk (whole system, same disk only)
+124G	/
+111G	/home
+11G	/usr
+3.0G	/var
+5.5M	/etc
+32K	/snap
+16K	/root
+16K	/lost+found
+4.0K	/srv
+4.0K	/opt
+4.0K	/mnt
+4.0K	/media
+
+==================== Biggest folders in your home directory
+111G	/home/asila
+52G	/home/asila/models
+17G	/home/asila/.cache
+13G	/home/asila/comp_vision_project
+7.7G	/home/asila/voice_of_Uzbek
+7.3G	/home/asila/adaptive_mfa_project
+6.4G	/home/asila/go-json-tuner
+5.8G	/home/asila/.kronk
+2.3G	/home/asila/go
+232M	/home/asila/yzma-lib
+147M	/home/asila/.local
+84M	/home/asila/.unsloth
+6.9M	/home/asila/.nv
+3.7M	/home/asila/.triton
+296K	/home/asila/ask-demo
+264K	/home/asila/.config
+32K	/home/asila/snap
+12K	/home/asila/.ssh
+
+==================== Biggest folders two levels deep in home
+111G	/home/asila
+52G	/home/asila/models
+17G	/home/asila/.cache
+13G	/home/asila/comp_vision_project
+12G	/home/asila/.cache/huggingface
+7.7G	/home/asila/voice_of_Uzbek
+7.6G	/home/asila/voice_of_Uzbek/.venv
+7.3G	/home/asila/adaptive_mfa_project
+6.4G	/home/asila/go-json-tuner
+6.1G	/home/asila/go-json-tuner/.venv
+6.0G	/home/asila/comp_vision_project/.venv
+5.8G	/home/asila/adaptive_mfa_project/.venv
+5.8G	/home/asila/.kronk
+5.3G	/home/asila/.kronk/models
+4.1G	/home/asila/.cache/pip
+3.6G	/home/asila/comp_vision_project/data
+3.3G	/home/asila/comp_vision_project/outputs
+2.3G	/home/asila/go
+2.1G	/home/asila/go/pkg
+1.5G	/home/asila/adaptive_mfa_project/data
+1.3G	/home/asila/.cache/go-build
+262M	/home/asila/.kronk/libraries
+232M	/home/asila/yzma-lib
+165M	/home/asila/go-json-tuner/lora_adapter_7b
+160M	/home/asila/go/bin
+
+==================== Model files (*.gguf, *.safetensors, *.bin, *.pt, *.ckpt, *.onnx > 200 MB)
+    14.4 GB  2 links  /home/asila/models/gemma-4-26B_q4_0-it.gguf
+    14.4 GB  2 links  /home/asila/.kronk/models/google/gemma-4-26b-it/gemma-4-26B_q4_0-it.gguf
+     9.0 GB  1 links  /home/asila/models/Qwen2.5-Coder-14B-Instruct-Q4_K_M.gguf
+     7.0 GB  2 links  /home/asila/models/gemma-4-12b-it-qat-q4_0.gguf
+     7.0 GB  2 links  /home/asila/.kronk/models/google/gemma-4-12b-it/gemma-4-12b-it-qat-q4_0.gguf
+     5.2 GB  2 links  /home/asila/models/gemma-4-E4B_q4_0-it.gguf
+     5.2 GB  2 links  /home/asila/.kronk/models/google/gemma-4-e4b-it/gemma-4-E4B_q4_0-it.gguf
+     4.7 GB  1 links  /home/asila/models/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  1 links  /home/asila/.kronk/models/qwen/qwen2.5-coder-7b-instruct/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  2 links  /home/asila/models/Qwen2.5-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  2 links  /home/asila/.kronk/models/qwen/qwen2.5-7b-instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  1 links  /home/asila/models/qwen2.5-coder-7b-gojson-v1-q4_k_m.gguf
+     2.1 GB  1 links  /home/asila/models/qwen2.5-3b-instruct-q4_k_m.gguf
+     1.1 GB  1 links  /home/asila/models/qwen2.5-coder-1.5b-instruct-q4_k_m.gguf
+     1.1 GB  1 links  /home/asila/models/SmolLM2-1.7B-Instruct-Q4_K_M.gguf
+     1.0 GB  1 links  /home/asila/models/qwen2.5-coder-1.5b-gojson-v1-q4_k_m.gguf
+     1.0 GB  1 links  /home/asila/.kronk/models/asila/qwen2.5-coder-1.5b-gojson-v1/qwen2.5-coder-1.5b-gojson-v1-q4_k_m.gguf
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392_fold4/best.pt
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392_fold3/best.pt
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392_fold2/best.pt
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392_fold1/best.pt
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392_fold0/best.pt
+     0.3 GB  1 links  /home/asila/comp_vision_project/outputs/dinov2_vitb_392/best.pt
+("2 links" = hard-linked into kronk: deleting one name does NOT free space until both are gone)
+
+==================== Hugging Face cache (downloaded models and datasets)
+12G	/home/asila/.cache/huggingface/hub
+820K	/home/asila/.cache/huggingface/xet
+224K	/home/asila/.cache/huggingface/modules
+4.0K	/home/asila/.cache/huggingface/token
+4.0K	/home/asila/.cache/huggingface/stored_tokens
+4.0K	/home/asila/.cache/huggingface/datasets
+
+==================== Other caches
+12G	/home/asila/.cache/uv
+12G	/home/asila/.cache/huggingface
+4.1G	/home/asila/.cache/pip
+1.3G	/home/asila/.cache/go-build
+107M	/home/asila/.cache/torch
+44K	/home/asila/.cache/matplotlib
+4.0K	/home/asila/.cache/goimports
+0	/home/asila/.cache/motd.legal-displayed
+pip cache: /home/asila/.cache/pip (4.1G)
+uv cache: 12G
+
+==================== Python environments (.venv, conda)
+7.6G	/home/asila/voice_of_Uzbek/.venv
+6.1G	/home/asila/go-json-tuner/.venv
+6.0G	/home/asila/comp_vision_project/.venv
+5.8G	/home/asila/adaptive_mfa_project/.venv
+
+==================== Build folders and temporary work (llama.cpp builds, convert_work, Go/Rust/node caches)
+2.3G	/home/asila/go
+
+==================== kronk models
+35G	/home/asila/.kronk
+
+==================== This project
+7.6G	/home/asila/voice_of_Uzbek/.venv
+67M	/home/asila/voice_of_Uzbek/data
+13M	/home/asila/voice_of_Uzbek/test_set
+13M	/home/asila/voice_of_Uzbek/test_audios
+308K	/home/asila/voice_of_Uzbek/results
+24K	/home/asila/voice_of_Uzbek/PROGRESS.md
+20K	/home/asila/voice_of_Uzbek/__pycache__
+16K	/home/asila/voice_of_Uzbek/asr_baseline.py
+12K	/home/asila/voice_of_Uzbek/README.md
+8.0K	/home/asila/voice_of_Uzbek/tts_sayro.py
+8.0K	/home/asila/voice_of_Uzbek/run_test_set.sh
+8.0K	/home/asila/voice_of_Uzbek/llm_baseline.py
+4.0K	/home/asila/voice_of_Uzbek/voice_pipeline.py
+4.0K	/home/asila/voice_of_Uzbek/uz_text.py
+4.0K	/home/asila/voice_of_Uzbek/tts_baseline.py
+
+==================== System: Docker, apt cache, logs, snaps (needs sudo)
+1.4G	/var/lib/snapd
+193M	/var/log
+109M	/var/cache/apt
+36M	/tmp
+Archived and active journals take up 184.7M in the file system.
+
+==================== Big single files anywhere on the disk (> 1 GB)
+    14.4 GB  /home/asila/models/gemma-4-26B_q4_0-it.gguf
+    14.4 GB  /home/asila/.kronk/models/google/gemma-4-26b-it/gemma-4-26B_q4_0-it.gguf
+     9.0 GB  /home/asila/models/Qwen2.5-Coder-14B-Instruct-Q4_K_M.gguf
+     7.0 GB  /home/asila/models/gemma-4-12b-it-qat-q4_0.gguf
+     7.0 GB  /home/asila/.kronk/models/google/gemma-4-12b-it/gemma-4-12b-it-qat-q4_0.gguf
+     5.2 GB  /home/asila/models/gemma-4-E4B_q4_0-it.gguf
+     5.2 GB  /home/asila/.kronk/models/google/gemma-4-e4b-it/gemma-4-E4B_q4_0-it.gguf
+     4.7 GB  /home/asila/models/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  /home/asila/.kronk/models/qwen/qwen2.5-coder-7b-instruct/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  /home/asila/models/Qwen2.5-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  /home/asila/.kronk/models/qwen/qwen2.5-7b-instruct/Qwen2.5-7B-Instruct-Q4_K_M.gguf
+     4.7 GB  /home/asila/models/qwen2.5-coder-7b-gojson-v1-q4_k_m.gguf
+     3.1 GB  /home/asila/.cache/huggingface/hub/blobs/94/94de7965a7d82cd5197eb2806cc24d4ee94c75f2e246c9c04b8fbfabd50aaa4a
+     3.1 GB  /home/asila/.cache/huggingface/hub/blobs/34/34fa13140a924b0b090c06a8c1057117753af2c2062a73d8dda9ba3ff965acf0
+     2.3 GB  /home/asila/.cache/huggingface/hub/blobs/f1/f11073001fe85fe6e70d5c9d1f8b3af60f9f2eec422286d2d474e40e1f67c53b
+     2.1 GB  /home/asila/.kronk/badger/000004.vlog
+     2.1 GB  /home/asila/models/qwen2.5-3b-instruct-q4_k_m.gguf
+     1.6 GB  /home/asila/.cache/huggingface/hub/blobs/6d/6d3332ff3e0ecf1b73a32ee9e022197ae23790a5e18f44811a317def38eef4a6
+     1.1 GB  /home/asila/models/qwen2.5-coder-1.5b-instruct-q4_k_m.gguf
+
+Done. Nothing was deleted.
