@@ -50,7 +50,15 @@ python asr_baseline.py
 The first run downloads Whisper (~1.6 GB) and the FLEURS Uzbek test audio (~520 MB). The result is a **WER %** (lower is better) and is saved to `results/asr_*.txt`.
 Optionally compare a smaller model: `python asr_baseline.py --model openai/whisper-small`
 
-**1.1b Ready-made Uzbek Whisper models.** Each one is ~1.5 GB. This runs all of them and prints a WER/CER summary:
+**1.1b Ready-made Uzbek ASR models.** This runs all of them and prints a WER/CER summary. Models are 0.9–2.4 GB each:
+- **`ai-sage/GigaAM-Multilingual`**: a Conformer CTC model, MIT license. Its authors report 7.3% WER on FLEURS Uzbek. Add `@ctc` for the smaller 220M version (the default is `large_ctc`, 600M). It needs three extra packages (once): `pip install hydra-core omegaconf sentencepiece`
+- `navai-uz/whisper-medium-uzbek`, `navai-uz/whisper-small-uzbek`, `Abduqayum/whisper-uzbek-medium-callcenter`: Whisper fine-tunes
+
+To test GigaAM alone:
+```bash
+python asr_baseline.py --model ai-sage/GigaAM-Multilingual
+```
+
 ```bash
 bash asr_compare.sh
 ```
@@ -77,7 +85,9 @@ Open the results file and fill in `MEANING OK: yes/no` for each recording: would
 **Scoring and options:**
 - Every run reports **WER (fair)** alongside the original WER. Fair scoring writes numbers as words (`15%` = `o'n besh foiz`), converts Cyrillic to Latin, and expands `km` → `kilometr`, so differences in spelling convention aren't counted as errors. Use the fair score from now on.
 - Add `--beams 5` to any command for beam search: usually more accurate, slightly slower. Results are saved under a separate `_beam5` name, so you can compare.
-- Recordings longer than 30 s are handled automatically.
+- Recordings longer than 30 s are handled automatically. GigaAM's limit is 25 s, so longer audio is split at quiet moments.
+- GigaAM runs the model's own code from Hugging Face (`trust_remote_code`). The scripts pin it to the versions reviewed on 2026-11-27 (`GIGAAM_REVISIONS` in `asr_baseline.py`).
+- `--beams` only applies to Whisper models. GigaAM always uses greedy CTC decoding.
 
 ### 1.2 LLM (kronk)
 1. Make sure kronk is running (`tmux attach -t kronk`). Candidates are already on the server: `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, and Qwen2.5-7B-Instruct.
@@ -131,7 +141,7 @@ Record a short Uzbek question (a phone voice memo is fine), copy it to the serve
 ```bash
 python voice_pipeline.py --audio question.wav --model <best-model>
 ```
-Options: `--asr-model navai-uz/whisper-medium-uzbek` to use an Uzbek Whisper, and `--apst` when the LLM is alloma.
+Options: `--asr-model navai-uz/whisper-medium-uzbek` or `--asr-model ai-sage/GigaAM-Multilingual` to choose the ASR model, and `--apst` when the LLM is alloma.
 Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTAL`).
 
 ### ✅ Checkpoint 1: report back

@@ -73,6 +73,8 @@ Raw outputs stay in `results/`. This file is the summary.
 - [x] Added fair scoring, `--beams`, and `--audio-dir` (own recordings + `.txt` references + MEANING OK column)
 - [ ] Test on own recordings: `bash asr_compare.sh 0 --audio-dir test_audios` (FLEURS may be in navai-uz's training data)
 - [ ] Try `--beams 5` on FLEURS and on own recordings
+- [x] Added `ai-sage/GigaAM-Multilingual` (`large_ctc` 600M and `@ctc` 220M) to `asr_baseline.py` and `asr_compare.sh` (2026-11-27). Remote code reviewed and pinned (large_ctc `3905cd5`, ctc `2f8a571`). Audio over 25 s is split at quiet points (pyannote not needed)
+- [ ] Run GigaAM on FLEURS and on own recordings, compare with navai-medium (11.3% fair)
 
 ### 1.1b ASR: ready-made Uzbek Whisper fine-tunes (same 100 FLEURS test clips)
 
@@ -145,7 +147,38 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | ASR | `Abduqayum/whisper-uzbek-medium-callcenter` | whisper-medium | ~1.5 GB | Apache-2.0 | 780 h dataset, call-center domain |
 | ASR | `hostmepanda/whisper-large-v3-turbo-uzbek-ct2` | turbo | – | – | CTranslate2 format (faster-whisper), not transformers |
 
+| ASR | **`ai-sage/GigaAM-Multilingual`** (600M) | Conformer CTC, 70+ languages | – | **MIT**, not gated | **7.3% WER on FLEURS Uzbek** out of the box (their numbers: digits excluded, numbers→words), vs 11.3% fair for navai-medium. CTC = very fast. Strong candidate, see below (added 2026-11-27) |
+| ASR | `rustam1221/uzbek-asr-gigaam` | GigaAM-Multilingual + Uzbek fine-tune + KenLM | 600M / 220M | other (**gated**) | **8.1% WER on real spontaneous speech** (podcasts, interviews), while whisper-large-v3-turbo-uzbek gets 38.6% on the same test |
+
 **Plan change:** test these in Phase 1, and use the winners as the **starting point** for Phase 2/3 fine-tuning instead of the stock models.
+
+### Open Uzbek speech datasets (found 2026-11-27)
+
+| Dataset | Hours | License | Labels | Use for |
+|---|---|---|---|---|
+| `openlimi/uzbek-speech-1700h` | **1,634** (train 1,585 / val 23 / test 25) | mixed open (check sources) | crowd + automatic; ⚠️ **converted to the new Uzbek alphabet** (`text_orig` keeps the old one) | Biggest. Deduplicated, no test leakage |
+| `uzinfocom-edu-ai/uzbek-asr-curated-701h` | 701 | **Apache-2.0** | Common Voice + UzbekVoice + ISSAI USC + news YouTube… | Best licensed "all-in-one", 16 kHz WAV, old alphabet with ʻ |
+| `Abduqayum/Uzbek-STT-Dataset-780h` | 780 | other | ⚠️ **Gemini-generated** transcripts (mostly right) | Audiobooks, podcasts, IT talks |
+| `issai/Uzbek_Speech_Corpus` (USC) | 105 | **MIT** | Manual, checked by native speakers | Clean studio speech, 958 speakers |
+| Common Voice (e.g. `fsicoli/common_voice_22_0`, `uz`) | ~150+ | **CC0** | Crowd-verified | Read speech, many speakers |
+| `DavronSherbaev/uzbekvoice-filtered` | large | Apache-2.0 | Filtered UzbekVoice | Read speech |
+| `islomov/{news,it,podcasts_tashkent_dialect}_youtube_uzbek_speech_dataset` | 3 sets | **Apache-2.0** | YouTube | News, IT, Tashkent dialect |
+| `k2speech/FeruzaSpeech` | – | other (gated) | – | Single speaker (TTS too) |
+| `sarulab-speech/yodas2_sidon` / YODAS2 | – | CC-BY-3.0 | YouTube, automatic | Very large multilingual, contains Uzbek |
+
+**Evaluation sets:**
+| Dataset | What | Why it matters |
+|---|---|---|
+| `rustam1221/uzbek-asr-benchmark-spontaneous` | 311 clips, 2 h of **spontaneous** speech (podcasts, interviews, code-switching), human-verified | "Models score 2–3× better on FLEURS than on real conversation." This is the honest test for a voice agent |
+| `OvozifyLabs/asr_evaluate_set` | small eval set | Apache-2.0 |
+
+**Text data for the LLM (Phase 3):** `AsrorAsr/uzbek-customer-support-dialogs`: 990 support dialogs, 27 intents, Apache-2.0.
+
+**TTS data:** `firdavsus/TTS_dataset_single_speaker` (CC-BY-4.0, pre-tokenized audio, not raw wav), `MuzaffarSharofitdinov/uzbek-tts-*` (gated).
+
+⚠️ **New official Uzbek Latin alphabet (law of 21 Oct 2026):** `oʻ`→`ö`, `gʻ`→`ğ`, `sh`→`ş`, `ch`→`ç` (per the openlimi card). Our models, prompts and other datasets use the **old** alphabet. **Decision needed:** which alphabet the agent uses. Never mix both in one training set without converting.
+
+⚠️ **Overlap warning (from the benchmark authors):** the same YouTube recordings appear in several Uzbek datasets. Check for test/train overlap before trusting scores.
 
 ---
 
@@ -158,6 +191,7 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-27 | Add GigaAM-Multilingual as an ASR candidate, with its remote code pinned to reviewed commits | MIT license, reported 7.3% FLEURS WER, CTC is fast. `trust_remote_code` runs repo code on our server, so pinning prevents unreviewed updates |
 | 2026-11-27 | Report **fair WER** (numbers as words, Cyrillic→Latin, unit abbreviations expanded) | Basic WER counted `1963` vs `ming to'qqiz yuz oltmish uch` as errors; ~3 points of the 14% were fake |
 | 2026-11-27 | Track **"meaning OK"** on own recordings next to WER | A wrong suffix rarely changes the request; a wrong number, name or negation does. This is what matters for the agent |
 | 2026-11-27 | ASR starting point: navai-uz/whisper-medium-uzbek (14.1% WER), with whisper-small (17.0%, 2× faster) as the low-latency option | Best FLEURS scores; final pick after testing on our own recordings |

@@ -9,3 +9,6 @@ soundfile
 librosa
 huggingface_hub
 requests
+hydra-core        # GigaAM-Multilingual (its remote code imports these)
+omegaconf
+sentencepiece

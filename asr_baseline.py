@@ -113,7 +113,87 @@ def load_fleurs(split: str, n: int, lang: str = "uz_uz"):
     return samples
 
 
+# GigaAM-Multilingual (Conformer CTC, MIT). Pick the size with "@": the default is large_ctc (600M).
+#   ai-sage/GigaAM-Multilingual            -> large_ctc
+#   ai-sage/GigaAM-Multilingual@ctc        -> 220M (faster)
+# It runs the repo's own modeling_gigaam.py (trust_remote_code), so the code is pinned to the
+# commits that were reviewed on 2026-11-27. To use newer code, review it and update the hashes.
+GIGAAM_REVISIONS = {
+    "large_ctc": "3905cd51c3ed4e88c8edf33f3302969ba480a327",
+    "ctc": "2f8a57144e6ec3adfd32fe0484d9ea9913305bc8",
+}
+
+
+def split_long_audio(array, sr: int, max_s: float = 24.0, min_s: float = 12.0):
+    """Split audio into pieces <= max_s, cutting at the quietest 0.1 s window between min_s and max_s."""
+    import numpy as np
+
+    pieces, start, n = [], 0, len(array)
+    max_len, min_len, win = int(max_s * sr), int(min_s * sr), int(0.1 * sr)
+    while n - start > max_len:
+        region = array[start + min_len: start + max_len]
+        frames = len(region) // win
+        energy = (region[: frames * win].reshape(frames, win) ** 2).mean(axis=1)
+        cut = start + min_len + int(np.argmin(energy)) * win + win // 2
+        pieces.append(array[start:cut])
+        start = cut
+    pieces.append(array[start:])
+    return pieces
+
+
+class GigaAMASR:
+    """Wraps GigaAM so it can be used like the Whisper pipeline (array in, text out)."""
+
+    def __init__(self, model_name: str):
+        from transformers import AutoModel
+
+        repo, _, variant = model_name.partition("@")
+        variant = variant or "large_ctc"
+        revision = GIGAAM_REVISIONS.get(variant, variant)
+        if variant not in GIGAAM_REVISIONS:
+            print(f"WARNING: '{variant}' is not a reviewed revision - its remote code was not checked.")
+        # transformers scans the remote code for imports and refuses to load it if any is missing.
+        # pyannote is only referenced for type hints and the long-audio mode (which we replace with
+        # split_long_audio), so skip it in that check instead of installing a large dependency.
+        from unittest.mock import patch
+
+        import transformers.dynamic_module_utils as dmu
+
+        original_get_imports = dmu.get_imports
+
+        def get_imports_without_optional(filename):
+            return [m for m in original_get_imports(filename) if m != "pyannote"]
+
+        try:
+            with patch("transformers.dynamic_module_utils.get_imports", get_imports_without_optional):
+                self.model = AutoModel.from_pretrained(repo, revision=revision, trust_remote_code=True)
+        except ImportError as e:
+            raise SystemExit(f"{e}\nGigaAM needs: pip install hydra-core omegaconf sentencepiece")
+        self.model = self.model.to("cuda").eval()
+
+    def __call__(self, array, sr: int) -> str:
+        import tempfile
+
+        import soundfile as sf
+
+        texts = []
+        for piece in split_long_audio(array, sr):  # GigaAM refuses audio longer than 25 s
+            if len(piece) < sr // 10:
+                continue
+            with tempfile.NamedTemporaryFile(suffix=".wav") as tmp:
+                sf.write(tmp.name, piece, sr, subtype="PCM_16")
+                result = self.model.transcribe(tmp.name)
+            texts.append(getattr(result, "text", str(result)).strip())
+        return " ".join(t for t in texts if t)
+
+
+def is_gigaam(model_name: str) -> bool:
+    return "gigaam" in model_name.lower()
+
+
 def load_asr(model_name: str):
+    if is_gigaam(model_name):
+        return GigaAMASR(model_name)
     return pipeline(
         "automatic-speech-recognition",
         model=model_name,
@@ -124,6 +204,8 @@ def load_asr(model_name: str):
 
 
 def transcribe(asr, array, sr, beams: int = 1) -> str:
+    if isinstance(asr, GigaAMASR):
+        return asr(array, sr)  # CTC greedy decoding; --beams does not apply
     gen = {"language": "uzbek", "task": "transcribe"}
     if beams > 1:
         gen["num_beams"] = beams
@@ -132,8 +214,8 @@ def transcribe(asr, array, sr, beams: int = 1) -> str:
 
 
 def out_name(model: str, beams: int, suffix: str = "") -> str:
-    name = f"results/asr_{model.replace('/', '_')}"
-    if beams > 1:
+    name = f"results/asr_{re.sub(r'[/@]', '_', model)}"
+    if beams > 1 and not is_gigaam(model):
         name += f"_beam{beams}"
     return name + (f"_{suffix}" if suffix else "") + ".txt"
 
@@ -230,6 +312,9 @@ def main():
     args = p.parse_args()
 
     print(f"Loading {args.model} ...")
+    if args.beams > 1 and is_gigaam(args.model):
+        print("Note: GigaAM uses CTC greedy decoding - --beams is ignored.")
+        args.beams = 1
     asr = load_asr(args.model)
     os.makedirs("results", exist_ok=True)
 
