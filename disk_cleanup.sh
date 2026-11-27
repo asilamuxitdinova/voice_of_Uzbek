@@ -16,17 +16,23 @@ APPLY=0
 [ "$APPLY" = "1" ] && echo "== APPLYING changes" || echo "== DRY RUN (nothing is changed). Run with --yes to apply."
 
 size_of() { du -sb "$1" 2>/dev/null | cut -f1; }
+# Bytes that deleting would really free: files with only one name. uv hard-links its cache into
+# virtual environments, so those files have 2+ names and deleting the cache copy frees nothing.
+freeable_of() { find "$1" -type f -links 1 -printf '%s\n' 2>/dev/null | awk '{s+=$1} END{print s+0}'; }
+free_bytes() { df -B1 --output=avail "$HOME" | tail -1 | tr -dc '0-9'; }
 human() { numfmt --to=iec --suffix=B "${1:-0}" 2>/dev/null || echo "${1:-0} bytes"; }
 total=0
-df -h "$HOME" | tail -1 | awk '{print "Free before: " $4}'
+before=$(free_bytes)
+echo "Free before: $(human "$before")"
 
 echo
 echo "== 1. Caches"
 clean_cache() {  # name, folder, command to clean it
   local name="$1" dir="$2" cmd="$3"
   [ -d "$dir" ] || { echo "  $name: not present"; return; }
-  local b; b=$(size_of "$dir"); total=$((total + b))
-  echo "  $name: $(human "$b")  ($dir)"
+  local b f; b=$(size_of "$dir"); f=$(freeable_of "$dir"); total=$((total + f))
+  echo "  $name: $(human "$b") on disk, $(human "$f") really freeable  ($dir)"
+  [ "$f" -lt "$((b / 2))" ] && echo "    (most of it is shared with virtual environments via hard links - deleting won't free that part)"
   if [ "$APPLY" = "1" ]; then
     eval "$cmd" >/dev/null 2>&1 || rm -rf "${dir:?}"/*
   fi
@@ -63,8 +69,13 @@ done < <(find "$HOME/.kronk/models" -type f -name '*.gguf' -print0 2>/dev/null)
 
 echo
 if [ "$APPLY" = "1" ]; then
-  echo "== Freed about $(human "$total")"
-  df -h "$HOME" | tail -1 | awk '{print "Free after:  " $4}'
+  sync; after=$(free_bytes)
+  echo "== Estimated $(human "$total"); REAL change in free space: $(human $((after - before)))"
+  echo "Free after:  $(human "$after")"
+  if [ $((after - before)) -lt $((total / 2)) ]; then
+    echo "Less than expected? A running program may still hold a deleted file open (e.g. kronk with a model)."
+    echo "Check: sudo lsof +L1 | grep -i gguf   - restart that program to release the space."
+  fi
 else
   echo "== Would free about $(human "$total"). Run: bash disk_cleanup.sh --yes"
 fi
