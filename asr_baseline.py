@@ -8,7 +8,8 @@ Three modes:
         # sits next to "name.m4a", WER is computed too. Model is loaded only once.
 
 Options:
-    --beams 5     beam search (compares 5 candidates; usually more accurate, a bit slower)
+    --beams 1     greedy decoding for Whisper models (faster). Default is 5 beams, which is also
+                  what transformers uses when nothing is set, so all earlier results used 5
     --n 300       more FLEURS clips = more reliable number
 
 Two scores are reported: "basic" (the original) and "fair" (numbers as words,
@@ -203,19 +204,21 @@ def load_asr(model_name: str):
     )
 
 
-def transcribe(asr, array, sr, beams: int = 1) -> str:
+DEFAULT_BEAMS = 5  # what transformers uses by default; all Whisper results before 2026-11-27 used it
+
+
+def transcribe(asr, array, sr, beams: int = DEFAULT_BEAMS) -> str:
     if isinstance(asr, GigaAMASR):
         return asr(array, sr)  # CTC greedy decoding; --beams does not apply
-    gen = {"language": "uzbek", "task": "transcribe"}
-    if beams > 1:
-        gen["num_beams"] = beams
+    # Always pass num_beams: transformers' ASR pipeline silently defaults to 5 beams.
+    gen = {"language": "uzbek", "task": "transcribe", "num_beams": beams}
     out = asr({"raw": array, "sampling_rate": sr}, generate_kwargs=gen)
     return out["text"].strip()
 
 
 def out_name(model: str, beams: int, suffix: str = "") -> str:
     name = f"results/asr_{re.sub(r'[/@]', '_', model)}"
-    if beams > 1 and not is_gigaam(model):
+    if beams != DEFAULT_BEAMS and not is_gigaam(model):
         name += f"_beam{beams}"
     return name + (f"_{suffix}" if suffix else "") + ".txt"
 
@@ -308,12 +311,14 @@ def main():
     p.add_argument("--n", type=int, default=100, help="number of FLEURS test samples")
     p.add_argument("--audio", help="transcribe this one audio file")
     p.add_argument("--audio-dir", help="transcribe (and score) every audio file in this folder")
-    p.add_argument("--beams", type=int, default=1, help="beam search width (1 = greedy, 5 = typical)")
+    p.add_argument("--beams", type=int, default=DEFAULT_BEAMS,
+                   help="Whisper beam search width (default 5; 1 = greedy, faster)")
     args = p.parse_args()
 
     print(f"Loading {args.model} ...")
-    if args.beams > 1 and is_gigaam(args.model):
-        print("Note: GigaAM uses CTC greedy decoding - --beams is ignored.")
+    if is_gigaam(args.model):
+        if args.beams != DEFAULT_BEAMS:
+            print("Note: GigaAM uses CTC greedy decoding - --beams is ignored.")
         args.beams = 1
     asr = load_asr(args.model)
     os.makedirs("results", exist_ok=True)

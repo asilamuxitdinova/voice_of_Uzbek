@@ -74,7 +74,37 @@ Raw outputs stay in `results/`. This file is the summary.
 - [ ] Test on own recordings: `bash asr_compare.sh 0 --audio-dir test_audios` (FLEURS may be in navai-uz's training data)
 - [ ] Try `--beams 5` on FLEURS and on own recordings
 - [x] Added `ai-sage/GigaAM-Multilingual` (`large_ctc` 600M and `@ctc` 220M) to `asr_baseline.py` and `asr_compare.sh` (2026-11-27). Remote code reviewed and pinned (large_ctc `3905cd5`, ctc `2f8a571`). Audio over 25 s is split at quiet points (pyannote not needed)
-- [ ] Run GigaAM on FLEURS and on own recordings, compare with navai-medium (11.3% fair)
+- [x] Run GigaAM on FLEURS → **winner**, see 1.1d
+- [ ] Run GigaAM on own recordings: `python asr_baseline.py --model ai-sage/GigaAM-Multilingual --audio-dir test_audios`
+- [ ] Add `.txt` references (what was actually said) to `test_audios/` so own-recording WER can be measured
+
+### 1.1d ASR: GigaAM-Multilingual vs Whisper (FLEURS, same 100 clips, 2026-11-27)
+
+| Model | WER (basic) | **WER (fair)** | CER (fair) | Perfect sentences | Speed | License |
+|---|---|---|---|---|---|---|
+| 🏆 **ai-sage/GigaAM-Multilingual** (large_ctc, 600M) | 11.1% | **8.1%** | **1.4%** | 35/100 | **0.35 s/clip** | MIT |
+| navai-uz/whisper-medium-uzbek | 14.1% | 11.3%* | 2.9% | 30/100 | 2.04 s/clip | Apache-2.0 |
+
+\* navai's fair WER was recomputed from the saved, already-normalized lines, which loses a few ordinals like `15-yanvar`. On the same basis, GigaAM gets 8.6%, so the honest gap is **8.6% vs 11.3%**.
+
+- Sentence by sentence: GigaAM is better on **42**, navai on **20**, and **38** are ties. The worst GigaAM sentence is 36% WER, vs 72% for navai.
+- **~6× faster** than navai-medium, though navai ran with 5-beam search (see the beam note below).
+- GigaAM wins even though navai was **trained on FLEURS** and GigaAM (as far as we know) wasn't.
+- No Cyrillic in the output, even though GigaAM's alphabet includes Cyrillic letters.
+- Remaining errors: foreign names (`jeyms`→`jemes`, `t rex`→`terex`, `martelli`→`marteli`), joined/split compounds (`qora qayin`→`qoraqayin`, `o'rta yer`→`o'rtayer`, which are partly spelling conventions), a few suffixes.
+- Output is lowercase with no punctuation, while Whisper call-center adds punctuation. For an LLM this doesn't matter much.
+
+⚠️ **Beam-search finding:** transformers 5's ASR pipeline **silently uses `num_beams=5`** when nothing is passed. So *all* Whisper results above (FLEURS and own recordings) already used 5 beams, and the `--beams 5` runs on own recordings were identical to the normal runs. Fixed in `asr_baseline.py`: `num_beams` is now always passed, the default is 5 (keeps old numbers comparable), and **`--beams 1` = real greedy** (2.3× faster in a CPU test). The duplicate `*_beam5_test_audios.txt` files can be deleted.
+
+### 1.1e Own recordings (`test_audios/`, 7 conversational voice messages, 83 s, no references yet)
+
+No WER without `.txt` references. Qualitative comparison of the transcripts:
+- **Abduqayum call-center** gives the most coherent output on this conversational speech, with punctuation and capitalization (`Boraman, Xudo xohlasa. Borganda yana mazza qilib ishlaymiz.`).
+- **navai-medium** makes meaning-changing errors on casual speech: `Xudo xohlasa` → `xudo xoʻrlashdi`, `sogʻ boʻling` → `sogʻinmiz salomatni salqin`.
+- **navai-small** is worse still (`aqlni saqlantirilar`, `kinomalar`).
+- This matches the benchmark authors' warning: FLEURS (read speech) flatters models, and conversational speech is much harder.
+- Speed (real-time factor): small 0.10, medium 0.18, call-center 0.21.
+- GigaAM hasn't been run on these yet.
 
 ### 1.1b ASR: ready-made Uzbek Whisper fine-tunes (same 100 FLEURS test clips)
 
@@ -191,6 +221,8 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | 2026-11-26 | Store LoRA adapters on the Hugging Face Hub, not GitHub | GitHub's 100 MB file limit and history bloat; saves server disk |
 | 2026-11-26 | Use the Latin script internally; convert to Cyrillic only for MMS TTS | MMS Uzbek TTS reads Cyrillic only |
 | 2026-11-26 | ASR fine-tuning (Phase 2) is required | Stock Whisper WER 147%: writes Uzbek in Kazakh-style Cyrillic, plus ~5% hallucination loops |
+| 2026-11-27 | **GigaAM-Multilingual large_ctc is the ASR front-runner** (pending own-recording test) | Best FLEURS: 8.1% fair WER, 1.4% CER, 6× faster than navai-medium, MIT |
+| 2026-11-27 | Always pass `num_beams` to Whisper (default 5, `--beams 1` = greedy) | transformers silently defaulted to 5, so the "greedy" vs "beam5" comparison was invalid |
 | 2026-11-27 | Add GigaAM-Multilingual as an ASR candidate, with its remote code pinned to reviewed commits | MIT license, reported 7.3% FLEURS WER, CTC is fast. `trust_remote_code` runs repo code on our server, so pinning prevents unreviewed updates |
 | 2026-11-27 | Report **fair WER** (numbers as words, Cyrillic→Latin, unit abbreviations expanded) | Basic WER counted `1963` vs `ming to'qqiz yuz oltmish uch` as errors; ~3 points of the 14% were fake |
 | 2026-11-27 | Track **"meaning OK"** on own recordings next to WER | A wrong suffix rarely changes the request; a wrong number, name or negation does. This is what matters for the agent |

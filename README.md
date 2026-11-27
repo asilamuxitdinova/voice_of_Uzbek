@@ -15,6 +15,7 @@ This repo currently covers **Phase 0 (setup)** and **Phase 1 (baseline)**. The b
 | `translit.py` | Uzbek Latin ↔ Cyrillic converter (used by TTS and scoring) |
 | `uz_text.py` | Text normalization for fair scoring: numbers → words, Cyrillic → Latin, `km` → `kilometr` |
 | `prompts_uz.txt` | 20 Uzbek test prompts. Edit them to match your real use case |
+| `run_test_set.sh` | **Run on the laptop.** Uploads only `test_audios/test*` to the server, runs the ASR models on them, and copies the results back |
 | `asr_compare.sh` | Runs `asr_baseline.py` on ready-made Uzbek Whisper fine-tunes and prints a summary |
 | `convert_alloma.sh` | Converts `uzlm/alloma-8B-Instruct` to a Q4_K_M GGUF and registers it in kronk |
 | `setup_sayro.sh` | Creates a separate `.venv-tts` for `uzlm/sayro-tts-1.7B` (Qwen3-TTS) |
@@ -80,11 +81,17 @@ Or compare all models on your recordings:
 ```bash
 bash asr_compare.sh 0 --audio-dir test_audios
 ```
+**Shortcut from the laptop:** this uploads only the `test1…test20` recordings (and their `.txt` files) to a separate `test_set/` folder on the server, runs GigaAM, call-center and navai-medium on them, and copies the results back to `results/`. Push your code first.
+```bash
+bash run_test_set.sh
+```
+Name models to run only those, for example `bash run_test_set.sh ai-sage/GigaAM-Multilingual`. Use `DRY_RUN=1` to only print what it would do.
+
 Open the results file and fill in `MEANING OK: yes/no` for each recording: would the request still be understood correctly? That's the number that matters for the agent.
 
 **Scoring and options:**
 - Every run reports **WER (fair)** alongside the original WER. Fair scoring writes numbers as words (`15%` = `o'n besh foiz`), converts Cyrillic to Latin, and expands `km` → `kilometr`, so differences in spelling convention aren't counted as errors. Use the fair score from now on.
-- Add `--beams 5` to any command for beam search: usually more accurate, slightly slower. Results are saved under a separate `_beam5` name, so you can compare.
+- Whisper models use **5-beam search by default** (that's also what `transformers` does silently). Add `--beams 1` for greedy decoding: faster, sometimes slightly less accurate. Results are saved under a separate `_beam1` name, so you can compare.
 - Recordings longer than 30 s are handled automatically. GigaAM's limit is 25 s, so longer audio is split at quiet moments.
 - GigaAM runs the model's own code from Hugging Face (`trust_remote_code`). The scripts pin it to the versions reviewed on 2026-11-27 (`GIGAAM_REVISIONS` in `asr_baseline.py`).
 - `--beams` only applies to Whisper models. GigaAM always uses greedy CTC decoding.
