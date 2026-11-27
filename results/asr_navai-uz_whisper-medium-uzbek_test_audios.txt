@@ -1,0 +1,36 @@
+model: navai-uz/whisper-medium-uzbek
+beams: 1
+folder: test_audios
+files: 7 (0 with reference .txt)
+speed: 15.3s for 83.0s of audio (real-time factor 0.18)
+
+Fill in MEANING OK for each file: yes = the request would still be understood correctly.
+
+FILE: audio_2026-11-27_13-06-57.ogg  (16.3s audio, 3.10s)
+HYP: assalomu alaykum yaxshimisiz sogʻ oʻzi yaxshimi yaxshi yuribsizmi charchamay qiynalmay yaxshiliksizmi nima gaplar oʻzlarisiz da tinchlikmi
+MEANING OK: __
+
+FILE: audio_2026-11-27_13-29-09.ogg  (12.4s audio, 2.07s)
+HYP: chi hozir qilayotgan ishlarim yaxshi ketyapti keyin shu biroz bunaqa devonachi ishlar qilib nima qilib ishlasa agar yaxshi boʻladi
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-31.ogg  (5.5s audio, 0.86s)
+HYP: a maza qildi amalga tushilaman sohilning boʻyidir
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-35.ogg  (14.8s audio, 2.53s)
+HYP: yaxshi rahmat aytasizlar yaxshi yuribmiz sogʻinmiz salomatni salqin koʻramiz aylanayapmiz koʻrayapmiz oʻqishga boryapmiz yurdimiz sogʻindim sizlar
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-39.ogg  (3.7s audio, 1.00s)
+HYP: siz bilan uxlab gaplashib yurganlarimizga sogʻinaman
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-43.ogg  (11.1s audio, 2.04s)
+HYP: boraman xudo xoʻrlashdi borganda yana maza qilib ishlaymiz siz bilan mazah qilib gaplashishni bitirardim da sogʻinaman shekilli onam
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-50.ogg  (19.1s audio, 3.70s)
+HYP: yoʻl yoʻl boʻldi sila oʻshanga ana qabulda xijolatgur ul ikkalamizda oʻrtamizda boʻganiyam yaxshi bir tomondan topilmaganiyam xayrli boʻlgan ana qa shuncha vertisko qoʻyuring boshqa boladan soʻrab oʻtirmang
+MEANING OK: __
+

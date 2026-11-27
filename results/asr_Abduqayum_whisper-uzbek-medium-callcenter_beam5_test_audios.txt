@@ -1,0 +1,36 @@
+model: Abduqayum/whisper-uzbek-medium-callcenter
+beams: 5
+folder: test_audios
+files: 7 (0 with reference .txt)
+speed: 17.4s for 83.0s of audio (real-time factor 0.21)
+
+Fill in MEANING OK for each file: yes = the request would still be understood correctly.
+
+FILE: audio_2026-11-27_13-06-57.ogg  (16.3s audio, 3.49s)
+HYP: Assalomu alaykum, yaxshimisiz, sog'ingiz yaxshimi, yaxshi yuribsizmi? Charchamay, qiynalmay, yaxshi yuribsizmi? Nima gaplar o'zlaringizda, tinchlikmi?
+MEANING OK: __
+
+FILE: audio_2026-11-27_13-29-09.ogg  (12.4s audio, 2.30s)
+HYP: chi hozir qilayotgan ishlarim yaxshi ketyapti, keyin shu biroz mana bunaqa devonacha ishlar qilib, keyin nimalar qilib ishlasalar agar yaxshi bo'ladi.
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-31.ogg  (5.5s audio, 1.12s)
+HYP: Mazza qildim, olib yuribsizlarmi? Sog'liqning bo'yida.
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-35.ogg  (14.8s audio, 2.94s)
+HYP: Yaxshi rahmat, azizlar, yaxshi yurdimiz, sog' bo'ling, sog' bo'ling, sog' bo'ling, sog' bo'linglar. Aylanapmiz, ko'ryapmiz, o'qishga borayapmiz, yurdimiz. Sog'indim sizni.
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-39.ogg  (3.7s audio, 0.94s)
+HYP: siz bilan qurib, gaplashib, yurganlarimizni sog'inamiz.
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-43.ogg  (11.1s audio, 2.35s)
+HYP: Boraman, Xudo xohlasa. Borganda yana mazza qilib ishlaymiz. Siz bilan mazza qilib gaplashib, o'tirardim-da. Sog'indim shu kunlarni.
+MEANING OK: __
+
+FILE: audio_2026-11-27_14-02-50.ogg  (19.1s audio, 4.24s)
+HYP: Ha, yo'q, yo'q, bo'ldi, sizlar anaqa, o'shanga anaqa bo'ldi, xijolat bo'ldi. Bir ikkalamizni o'rtamizda bo'lgani ham yaxshi bir tomondan topilmagani ham xayrli bo'lgan. Anaqa, shuncha berdingiz-ku, qo'yavering, boshqa bolalardan so'rab o'tiramang.
+MEANING OK: __
+
