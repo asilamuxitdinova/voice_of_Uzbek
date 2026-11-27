@@ -34,6 +34,7 @@ else
     ai-sage/GigaAM-Multilingual
     Abduqayum/whisper-uzbek-medium-callcenter
     navai-uz/whisper-medium-uzbek
+    Kotib/uzbek_stt_v1
   )
 fi
 

@@ -53,7 +53,7 @@ Optionally compare a smaller model: `python asr_baseline.py --model openai/whisp
 
 **1.1b Ready-made Uzbek ASR models.** This runs all of them and prints a WER/CER summary. Models are 0.9–2.4 GB each:
 - **`ai-sage/GigaAM-Multilingual`**: a Conformer CTC model, MIT license. Its authors report 7.3% WER on FLEURS Uzbek. Add `@ctc` for the smaller 220M version (the default is `large_ctc`, 600M). It needs three extra packages (once): `pip install hydra-core omegaconf sentencepiece`
-- `navai-uz/whisper-medium-uzbek`, `navai-uz/whisper-small-uzbek`, `Abduqayum/whisper-uzbek-medium-callcenter`: Whisper fine-tunes
+- `Kotib/uzbek_stt_v1`, `navai-uz/whisper-medium-uzbek`, `navai-uz/whisper-small-uzbek`, `Abduqayum/whisper-uzbek-medium-callcenter`: Whisper fine-tunes
 
 To test GigaAM alone:
 ```bash
@@ -81,7 +81,7 @@ Or compare all models on your recordings:
 ```bash
 bash asr_compare.sh 0 --audio-dir test_audios
 ```
-**Shortcut from the laptop:** this uploads only the `test1…test20` recordings (and their `.txt` files) to a separate `test_set/` folder on the server, runs GigaAM, call-center and navai-medium on them, and copies the results back to `results/`. Push your code first.
+**Shortcut from the laptop:** this uploads only the `test1…test20` recordings (and their `.txt` files) to a separate `test_set/` folder on the server, runs GigaAM, call-center, navai-medium and Kotib on them, and copies the results back to `results/`. Push your code first.
 ```bash
 bash run_test_set.sh
 ```

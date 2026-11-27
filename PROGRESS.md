@@ -76,6 +76,7 @@ Raw outputs stay in `results/`. This file is the summary.
 - [ ] Try `--beams 5` on FLEURS and on own recordings
 - [x] Added `ai-sage/GigaAM-Multilingual` (`large_ctc` 600M and `@ctc` 220M) to `asr_baseline.py` and `asr_compare.sh` (2026-11-27). Remote code reviewed and pinned (large_ctc `3905cd5`, ctc `2f8a571`). Audio over 25 s is split at quiet points (pyannote not needed)
 - [x] Run GigaAM on FLEURS → **winner**, see 1.1d
+- [ ] Run `Kotib/uzbek_stt_v1` on FLEURS and `test_set/` (added to `asr_compare.sh` and `run_test_set.sh`)
 - [ ] Run GigaAM on own recordings: `python asr_baseline.py --model ai-sage/GigaAM-Multilingual --audio-dir test_audios`
 - [ ] Add `.txt` references (what was actually said) to `test_audios/` so own-recording WER can be measured
 
@@ -174,6 +175,7 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | LLM | `kmamaroziqov/alloma-8b-q4` | alloma-8B | 4.9 GB | – | Third-party Q4_K_M GGUF, unverified. Can be tested in kronk directly |
 | LLM | `uzlm/alloma-3B-Instruct`, `-1B-` | Llama-3.2 | small | Llama 3.2 | Low-latency options |
 | TTS | `uzlm/sayro-tts-1.7B` | Qwen3-TTS-12Hz-1.7B | 3.8 GB + 0.7 GB | other (**gated**: request access and read the license) | Trained on Uzbek YouTube speech (IT, news, podcasts with Tashkent dialect). Ships `uzbek_normalizer.py`. Likely far better than MMS |
+| ASR | `Kotib/uzbek_stt_v1` (Kotibai & Rubai) | whisper-medium | 3.1 GB | **Apache-2.0** | ~1,600 h, 3-stage curriculum (foundation 725 h → robustness 394 h → domain 474 h). Handles Russian loanwords in Latin (`brat`, `davay`). Their own score: 16.7% WER over 8 mixed test sets (clean 6–11%, noisy 12–24%, dialects 16–25%), not comparable to our FLEURS numbers. Added 2026-11-27 |
 | ASR | `navai-uz/whisper-medium-uzbek` | whisper-medium | ~1.5 GB | Apache-2.0 | Common Voice 22 + FLEURS + FeruzaSpeech. ⚠️ Trained on FLEURS, so the FLEURS test score may look better than real use |
 | ASR | `Abduqayum/whisper-uzbek-medium-callcenter` | whisper-medium | ~1.5 GB | Apache-2.0 | 780 h dataset, call-center domain |
 | ASR | `hostmepanda/whisper-large-v3-turbo-uzbek-ct2` | turbo | – | – | CTranslate2 format (faster-whisper), not transformers |
@@ -220,6 +222,26 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 ⚠️ **New official Uzbek Latin alphabet (law of 21 Oct 2026):** `oʻ`→`ö`, `gʻ`→`ğ`, `sh`→`ş`, `ch`→`ç` (per the openlimi card). Our models, prompts and other datasets use the **old** alphabet. **Decision needed:** which alphabet the agent uses. Never mix both in one training set without converting.
 
 ⚠️ **Overlap warning (from the benchmark authors):** the same YouTube recordings appear in several Uzbek datasets. Check for test/train overlap before trusting scores.
+
+---
+
+## Licenses of the models we use (checked on Hugging Face, 2026-11-27)
+
+All are free to download and run. There are no per-use fees; the only cost is the server. But "free" ≠ "any use allowed":
+
+| Model | License | Commercial use? |
+|---|---|---|
+| ai-sage/GigaAM-Multilingual | MIT | ✅ Yes |
+| openai/whisper-* | MIT | ✅ Yes |
+| navai-uz/whisper-*, Abduqayum call-center, Kotib/uzbek_stt_v1 | Apache-2.0 | ✅ Yes |
+| google/gemma-4-* (12B, E4B, 26B-A4B) | Apache-2.0 | ✅ Yes |
+| Qwen/Qwen2.5-7B-Instruct | Apache-2.0 | ✅ Yes |
+| uzlm/alloma-* | Llama 3.1 Community License | ✅ Yes, with conditions: "Built with Llama" attribution, acceptable-use policy, special license above 700M monthly users |
+| **facebook/mms-tts-uzb** | **CC-BY-NC-4.0** | ❌ **Non-commercial only.** Fine for testing, but it can't ship in a commercial product |
+| uzlm/sayro-tts-1.7B | other (gated) | ❓ Read its license before use |
+| rustam1221/uzbek-asr-gigaam | other (gated) | ❓ Read its license before use |
+
+Training datasets also have their own licenses (see the dataset table). A model fine-tuned on non-commercial data may inherit restrictions.
 
 ---
 

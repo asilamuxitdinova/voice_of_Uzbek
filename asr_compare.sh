@@ -19,6 +19,7 @@ MODELS=(
   ai-sage/GigaAM-Multilingual            # large_ctc, 600M (MIT)
   ai-sage/GigaAM-Multilingual@ctc        # 220M, faster
   navai-uz/whisper-medium-uzbek
+  Kotib/uzbek_stt_v1                     # whisper-medium, ~1,600 h, handles Russian loanwords
   Abduqayum/whisper-uzbek-medium-callcenter
   navai-uz/whisper-small-uzbek
 )
