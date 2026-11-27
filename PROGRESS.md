@@ -18,6 +18,7 @@ Raw outputs stay in `results/`. This file is the summary.
 | kronk model IDs | `google/gemma-4-12b-it-qat-q4_0`, `google/gemma-4-E4B_q4_0-it`, `google/gemma-4-26B_q4_0-it`, Qwen2.5-7B (exact ID: check `/v1/models`) |
 | Models registered in kronk | via hard links (`ln`) from `~/models` into `~/.kronk/models/...`, so no extra disk space is used |
 | Repo on server | `~/voice_of_Uzbek` |
+| Disk (2026-11-27) | 193 GB total, 124 GB used, **70 GB free**. Not enough for the ~66 GB+ Phase 2 training data plus checkpoints, so ask for more or train on a compressed subset |
 
 **GGUF models already on the server (`~/models`):**
 
@@ -187,7 +188,7 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 | Dataset | Hours | License | Labels | Use for |
 |---|---|---|---|---|
 | `openlimi/uzbek-speech-1700h` | **1,634** (train 1,585 / val 23 / test 25) | mixed open (check sources) | crowd + automatic; ⚠️ **converted to the new Uzbek alphabet** (`text_orig` keeps the old one) | Biggest. Deduplicated, no test leakage |
-| `uzinfocom-edu-ai/uzbek-asr-curated-701h` | 701 | **Apache-2.0** | Common Voice + UzbekVoice + ISSAI USC + news YouTube… | Best licensed "all-in-one", 16 kHz WAV, old alphabet with ʻ |
+| `uzinfocom-edu-ai/uzbek-asr-curated-701h` | 701 | Apache-2.0 | Common Voice + UzbekVoice + ISSAI USC + islomov news/IT/podcasts | ❌ **Audio not uploaded (checked 2026-11-27):** only `audios/00` exists (~0.2 GB), shards 01–99 are 404, though the commit says "166 GB". Unusable as published, so rebuild it from the original sources below |
 | `Abduqayum/Uzbek-STT-Dataset-780h` | 780 | other | ⚠️ **Gemini-generated** transcripts (mostly right) | Audiobooks, podcasts, IT talks |
 | `issai/Uzbek_Speech_Corpus` (USC) | 105 | **MIT** | Manual, checked by native speakers | Clean studio speech, 958 speakers |
 | Common Voice (e.g. `fsicoli/common_voice_22_0`, `uz`) | ~150+ | **CC0** | Crowd-verified | Read speech, many speakers |
@@ -205,6 +206,16 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 **Text data for the LLM (Phase 3):** `AsrorAsr/uzbek-customer-support-dialogs`: 990 support dialogs, 27 intents, Apache-2.0.
 
 **TTS data:** `firdavsus/TTS_dataset_single_speaker` (CC-BY-4.0, pre-tokenized audio, not raw wav), `MuzaffarSharofitdinov/uzbek-tts-*` (gated).
+
+**Storage size of the usable sources** (checked 2026-11-27): ISSAI USC 9.5 GB · islomov news 15.9 GB · islomov IT 15.8 GB · islomov podcasts 11.1 GB · uzbekvoice-filtered 14.1 GB (≈ 66 GB, ~540 h together, without Common Voice) · openlimi 1634 h = 118.6 GB.
+
+### Phase 2 plan: fine-tune GigaAM-Multilingual (2026-11-27)
+- Official MIT training code: `salute-developers/GigaAM` → `train_utils/train.py`. It continues training a finished CTC model from TSV manifests (`path`, `duration`, `transcription_raw`), with `--raw_text`, `--precision bf16` and `--activation_checkpointing`.
+- Prior evidence: `rustam1221/uzbek-asr-gigaam` fine-tuned the same model and got 14.4% → **10.4%** WER on spontaneous speech (→ 8.1% with KenLM).
+- Data: rebuild the 701 h mix from the originals (USC, islomov ×3, uzbekvoice-filtered, Common Voice uz). Text must match GigaAM's 71-character alphabet: lowercase, `ʻ`→`'`, numbers as words (`uz_text.py`), no ö/ğ/ş/ç.
+- Keep out of training: FLEURS (our test), `test_set/`, and the spontaneous benchmark's source rows. Check YouTube overlap.
+- Risks: forgetting Russian (code-switching), so use a low LR or mix in some Russian. GigaAM probably already saw Common Voice uz, so expect the biggest gains on conversational/news speech.
+- Cheaper add-on: a KenLM n-gram LM with CTC beam search (pyctcdecode), worth ~1–2 points without GPU training.
 
 ⚠️ **New official Uzbek Latin alphabet (law of 21 Oct 2026):** `oʻ`→`ö`, `gʻ`→`ğ`, `sh`→`ş`, `ch`→`ç` (per the openlimi card). Our models, prompts and other datasets use the **old** alphabet. **Decision needed:** which alphabet the agent uses. Never mix both in one training set without converting.
 
