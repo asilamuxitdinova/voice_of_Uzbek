@@ -16,6 +16,8 @@ This repo currently covers **Phase 0 (setup)** and **Phase 1 (baseline)**. The b
 | `uz_text.py` | Text normalization for fair scoring: numbers → words, Cyrillic → Latin, `km` → `kilometr` |
 | `prompts_uz.txt` | 20 Uzbek test prompts. Edit them to match your real use case |
 | `run_test_set.sh` | **Run on the laptop.** Uploads only `test_audios/test*` to the server, runs the ASR models on them, and copies the results back |
+| `prepare_data.py` | Phase 2: builds the GigaAM training set (FLAC + TSV manifests) from open Uzbek datasets |
+| `setup_gigaam_train.sh` / `train_gigaam.py` | Phase 2: installs the official GigaAM trainer and fine-tunes GigaAM |
 | `asr_compare.sh` | Runs `asr_baseline.py` on ready-made Uzbek Whisper fine-tunes and prints a summary |
 | `convert_alloma.sh` | Converts `uzlm/alloma-8B-Instruct` to a Q4_K_M GGUF and registers it in kronk |
 | `setup_sayro.sh` | Creates a separate `.venv-tts` for `uzlm/sayro-tts-1.7B` (Qwen3-TTS) |
@@ -160,10 +162,60 @@ Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTA
 
 ---
 
-## Next phases (scripts will be added after Checkpoint 1)
-2. Fine-tune Whisper on Uzbek speech (Common Voice, FLEURS train, ISSAI USC, your own recordings)
+## Phase 2: Fine-tune GigaAM on Uzbek speech
+
+All commands run **on the server**, in `~/voice_of_Uzbek` with `.venv` active. Long steps belong inside `tmux`, so an SSH disconnect doesn't kill them.
+
+### 2.1 Setup (once)
+```bash
+bash setup_gigaam_train.sh
+```
+This clones the official GigaAM training code (MIT) at a reviewed commit into `third_party/GigaAM` and installs Lightning, TensorBoard and editdistance. It must end with `OK: gigaam ... | CUDA True | bf16 True`.
+
+### 2.2 Build the dataset (~1–3 hours, ~37 GB)
+```bash
+tmux new -s prep
+```
+```bash
+python prepare_data.py
+```
+- Downloads **one parquet file at a time**, converts the clips to 16 kHz mono FLAC (0.059 GB per hour of audio), cleans the transcripts into GigaAM's alphabet (lowercase, `'` apostrophe, numbers as words, no Cyrillic), and deletes each download before fetching the next.
+- Sources: ISSAI USC (via `murodbek/uzbek-speech-corpus`), islomov news / IT / podcasts, uzbekvoice-filtered. All have commercial-friendly licenses. Default caps come to about 620 h. Change them with `--max-hours uzbekvoice=100 news=50`.
+- **Resumable:** if it stops (disconnect, or the disk guard `--min-free-gb 25`), run the same command again and it continues where it stopped.
+- Output: `data/gigaam_uz/train.tsv`, `val.tsv` (~1% held out) and `test_usc.tsv` (USC's official test split).
+- FLEURS, `test_audios/` and `test_set/` are **never** used for training.
+
+### 2.3 Trial run first (~10–20 min)
+```bash
+python train_gigaam.py --trial
+```
+100 steps, with validation at step 50. It shows **whether batch size 8 × 30 s clips fits in 24 GB** and how fast the training steps are. Send the output to Claude to pick the number of steps for the real run.
+If it fails with *CUDA out of memory*: `python train_gigaam.py --trial --batch-size 4 --accumulate 8`.
+
+### 2.4 Real run
+```bash
+tmux new -s train
+```
+```bash
+python train_gigaam.py --max-steps 6000
+```
+- Validates and saves a checkpoint every 1000 steps. Only the best 2 are kept, at ~2.4 GB each (weights only).
+- Defaults: GigaAM `multilingual_large_ctc` (600M), bf16, activation checkpointing, LR 2e-5 (low, to adapt to Uzbek without forgetting Russian loanwords), effective batch 32.
+- Watch progress in the log, or with TensorBoard: `tensorboard --logdir checkpoints`, then on the laptop `ssh -L 6006:localhost:6006 kronk` and open http://localhost:6006.
+- Continue a stopped run: `python train_gigaam.py --max-steps 6000 --resume checkpoints/models/<exp>/<file>.ckpt`. Weights only, so the optimizer restarts.
+
+### 2.5 Evaluate the fine-tuned model
+```bash
+python asr_baseline.py --model checkpoints/models/<exp>/<best>.ckpt
+```
+```bash
+python asr_baseline.py --model checkpoints/models/<exp>/<best>.ckpt --audio-dir test_set
+```
+Same FLEURS / fair-WER scoring as the baseline, so the result compares directly with GigaAM (8.1%) and Kotib (6.3%).
+
+## Next phases
 3. QLoRA fine-tune the best LLM on domain dialogs → GGUF → kronk
-4. Fine-tune TTS on a single Uzbek speaker
+4. TTS: a commercially usable Uzbek voice (MMS is non-commercial)
 5. Real-time agent: VAD, streaming, and a phone/Telegram/web channel
 
 ## Troubleshooting
@@ -173,4 +225,6 @@ Listen to `results/answer.wav` and note the timing line (`ASR | LLM | TTS | TOTA
 - **Out of GPU memory**: stop other processes (`nvidia-smi`), or use a smaller LLM quantization
 - **`convert_alloma.sh` says "pre-tokenizer was not recognized"**: the script's patch didn't apply, maybe because llama.cpp changed. Paste the output to Claude
 - **`setup_sayro.sh` fails installing `qwen-tts`**: probably Python 3.14. Install `uv` (`curl -LsSf https://astral.sh/uv/install.sh | sh`), then `rm -rf .venv-tts && bash setup_sayro.sh`
+- **`train_gigaam.py`: "CUDA out of memory"**: halve `--batch-size` and double `--accumulate`, which keeps the same effective batch
+- **`prepare_data.py` stopped with "only N GB free"**: free space (see `disk_report.sh`) or lower the caps, then rerun the same command. It resumes
 - **`tts_sayro.py`: 401 / "gated repo"**: access to sayro-tts isn't approved yet, or `hf auth login` wasn't run inside `.venv-tts`

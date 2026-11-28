@@ -15,3 +15,7 @@ checkpoints/
 *.wav
 *.mp3
 *.ogg
+
+# Phase 2 training
+third_party/
+checkpoints/

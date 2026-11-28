@@ -3,6 +3,7 @@
 Three modes:
     python asr_baseline.py --model M                    # WER on 100 FLEURS Uzbek test clips
     python asr_baseline.py --model M --audio q.m4a      # transcribe one file (any format)
+    python asr_baseline.py --model checkpoints/<exp>/<file>.ckpt   # a fine-tuned GigaAM (Phase 2)
     python asr_baseline.py --model M --audio-dir test_audios
         # transcribe every audio file in the folder; if "name.txt" (what was actually said)
         # sits next to "name.m4a", WER is computed too. Model is loaded only once.
@@ -148,6 +149,13 @@ class GigaAMASR:
     def __init__(self, model_name: str):
         from transformers import AutoModel
 
+        checkpoint = None
+        if model_name.endswith(".ckpt"):  # our own fine-tuned weights (train_gigaam.py)
+            checkpoint = self._read_checkpoint(model_name)
+            base = checkpoint["base"]
+            print(f"Fine-tuned checkpoint on top of GigaAM {base}: {model_name}")
+            model_name = f"ai-sage/GigaAM-Multilingual@{base}"
+
         repo, _, variant = model_name.partition("@")
         variant = variant or "large_ctc"
         revision = GIGAAM_REVISIONS.get(variant, variant)
@@ -170,7 +178,27 @@ class GigaAMASR:
                 self.model = AutoModel.from_pretrained(repo, revision=revision, trust_remote_code=True)
         except ImportError as e:
             raise SystemExit(f"{e}\nGigaAM needs: pip install hydra-core omegaconf sentencepiece")
-        self.model = self.model.to("cuda").eval()
+        if checkpoint is not None:
+            inner = self.model.model  # the actual GigaAM network inside the HF wrapper
+            missing, unexpected = inner.load_state_dict(checkpoint["state_dict"], strict=False)
+            missing = [k for k in missing if not k.startswith("decoding")]
+            if missing:
+                raise SystemExit(f"Checkpoint doesn't fit the model: {len(missing)} missing weights, "
+                                 f"e.g. {missing[:3]}")
+            print(f"Loaded {len(checkpoint['state_dict'])} tensors"
+                  + (f" ({len(unexpected)} unused, e.g. {unexpected[:2]})" if unexpected else ""))
+        self.model = self.model.to("cuda" if torch.cuda.is_available() else "cpu").eval()
+
+    @staticmethod
+    def _read_checkpoint(path: str) -> dict:
+        """Lightning .ckpt from train_gigaam.py -> {"base": "large_ctc"|"ctc", "state_dict": ...}."""
+        if not os.path.isfile(path):
+            raise SystemExit(f"Checkpoint not found: {path}")
+        ckpt = torch.load(path, map_location="cpu", weights_only=False)  # our own file
+        hp = ckpt.get("hyper_parameters", {})
+        name = str(hp.get("model_name") or (hp.get("model_cfg") or {}).get("model_name") or path)
+        base = "large_ctc" if "large" in name else "ctc"
+        return {"base": base, "state_dict": ckpt["state_dict"]}
 
     def __call__(self, array, sr: int) -> str:
         import tempfile
@@ -217,7 +245,10 @@ def transcribe(asr, array, sr, beams: int = DEFAULT_BEAMS) -> str:
 
 
 def out_name(model: str, beams: int, suffix: str = "") -> str:
-    name = f"results/asr_{re.sub(r'[/@]', '_', model)}"
+    if model.endswith(".ckpt"):  # fine-tuned: results/asr_ft_<experiment>_<checkpoint>.txt
+        exp = os.path.basename(os.path.dirname(os.path.abspath(model)))
+        model = f"ft_{exp}_{os.path.basename(model)[:-5]}"
+    name = f"results/asr_{re.sub(r'[/@=]', '_', model)}"
     if beams != DEFAULT_BEAMS and not is_gigaam(model):
         name += f"_beam{beams}"
     return name + (f"_{suffix}" if suffix else "") + ".txt"

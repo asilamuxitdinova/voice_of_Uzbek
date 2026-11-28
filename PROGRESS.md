@@ -226,6 +226,26 @@ Score = average of the 1–5 manual scores over 20 prompts in `prompts_uz.txt`.
 - Risks: forgetting Russian (code-switching), so use a low LR or mix in some Russian. GigaAM probably already saw Common Voice uz, so expect the biggest gains on conversational/news speech.
 - Cheaper add-on: a KenLM n-gram LM with CTC beam search (pyctcdecode), worth ~1–2 points without GPU training.
 
+### Phase 2 build status (2026-11-28)
+
+Scripts written and **tested end to end on CPU** with the 220M model (setup → data prep → 2 training steps → checkpoint → evaluation). GPU speed and memory are still unknown, and the `--trial` run on the server measures them.
+
+| Piece | What it does | Tested |
+|---|---|---|
+| `prepare_data.py` | One parquet at a time → 16 kHz mono FLAC + `train/val/test_usc.tsv`. Transcripts cleaned to GigaAM's alphabet (numbers→words, Cyrillic skipped). Resumable, disk guard | ✅ 3 sources × 40 rows, then 2 × 150 rows. FLAC = **0.059 GB per audio hour** → ~620 h ≈ **37 GB** |
+| `setup_gigaam_train.sh` | Official GigaAM repo (MIT) at commit `e9bbf2e`, installed `--no-deps` (it pins onnx versions that may lack Python 3.14 wheels), plus Lightning/editdistance/tensorboard | ✅ Python 3.14 |
+| `train_gigaam.py` | Wraps official `train_utils/train.py`: bf16, activation checkpointing, weights-only checkpoints (2.4 GB, best 2), LR 2e-5, effective batch 32, max 30 s, `--trial` | ✅ 2 steps: val loss 0.190 → 0.164 |
+| `asr_baseline.py --model <ckpt>` | Loads fine-tuned weights into the reviewed HF GigaAM model | ✅ 552/552 tensors, loaded == checkpoint |
+
+**Problems found and fixed while testing:**
+- **78% of the YouTube clips are 20–30 s long.** The trainer's default 20 s limit would have dropped them, so prep and training both use 30 s now.
+- **The official loader reads non-WAV files with one `ffmpeg` process per clip, every epoch**, which is too slow for ~400k clips. The launcher swaps in a direct `soundfile` FLAC reader.
+- **Crash after validation:** GigaAM's rotary-position buffer grows during validation under `torch.inference_mode`, and the next training step then fails (*"Inference tensors cannot be saved for backward"*). This could also have crashed a long GPU run at any validation check. The launcher runs validation with `inference_mode=False` (no_grad).
+- **The trainer's text cleaner keeps digits, but GigaAM's alphabet has none.** Numbers would silently vanish from targets, so prep converts them to words first.
+- Harmless warning "418 modules in eval mode at the start of training": the official module calls `self.train()` at every training stretch.
+
+**Next on the server:** `bash setup_gigaam_train.sh` → `python prepare_data.py` (in tmux) → `python train_gigaam.py --trial` → send the output.
+
 ⚠️ **New official Uzbek Latin alphabet (law of 21 Oct 2026):** `oʻ`→`ö`, `gʻ`→`ğ`, `sh`→`ş`, `ch`→`ç` (per the openlimi card). Our models, prompts and other datasets use the **old** alphabet. **Decision needed:** which alphabet the agent uses. Never mix both in one training set without converting.
 
 ⚠️ **Overlap warning (from the benchmark authors):** the same YouTube recordings appear in several Uzbek datasets. Check for test/train overlap before trusting scores.
