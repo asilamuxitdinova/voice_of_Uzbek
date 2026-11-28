@@ -98,6 +98,13 @@ def main():
     if args.trial:
         args.max_steps, args.val_every, args.val_batches = 100, 50, 20
 
+    # Python 3.14 changed the Linux default for new processes from "fork" to "forkserver", which has
+    # to pickle the dataset for each DataLoader worker - and GigaAM's dataset holds lambdas that
+    # can't be pickled ("Can't pickle local object AudioDataset._make_encoder.<locals>.<lambda>").
+    # "fork" (the default before 3.14) copies the process instead, so nothing needs pickling.
+    import multiprocessing
+    multiprocessing.set_start_method("fork", force=True)
+
     sys.path.insert(0, os.path.join(GIGAAM_DIR, "train_utils"))
     patch_fast_audio_loading()
     patch_validation_mode()
